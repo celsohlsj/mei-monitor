@@ -3,581 +3,868 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="MEI.v2 ENSO Monitor — Índice Multivariado ENSO · NOAA PSL · IPAM/UFMA">
-<meta property="og:title" content="MEI.v2 ENSO Monitor · IPAM/UFMA">
-<meta property="og:description" content="Monitoramento do El Niño/La Niña via MEI.v2 Multivariado — NOAA PSL">
-<title>MEI.v2 · ENSO Monitor · IPAM/UFMA</title>
+<meta name="description" content="Monitor de Fogo Amazônia · YbYrá-BR · CNPq 401741/2023-0">
+<title>YbYrá-BR · Fogo & Clima Amazônia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#03080e;--panel:#070e18;--border:#0f2030;
-  --el-super:#ffd700;--el-strong:#ff6a00;--el:#ff3d00;
-  --la:#1c8fff;--neutral:#6a8ca8;--accent:#e8b84b;
-  --text:#bcd4e6;--dim:#2e4a60;--green:#3ddc84;
-  --font-mono:'Space Mono','Courier New',monospace;
-  --font-sans:'Syne','Arial Black',sans-serif;
+  --ink:#0d1117;--ink2:#131d2b;--ink3:#1a2535;
+  --smoke:#edeae2;--paper:#f7f4ee;
+  --ember:#d94f1e;--ember2:#f07030;--gold:#c8930a;--gold2:#e8b84b;
+  --leaf:#1f6e40;--leaf2:#3dac68;
+  --sky:#1558a8;--sky2:#5fa8e8;
+  --mist:#7a8fa8;--wire:rgba(255,255,255,.07);
+  --mono:'DM Mono','Courier New',monospace;
+  --serif:'Fraunces',Georgia,serif;
 }
-html,body{min-height:100%;background:var(--bg);color:var(--text);
-  font-family:var(--font-mono);font-size:13px}
-::-webkit-scrollbar{width:4px;height:4px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--smoke);font-family:var(--mono);font-size:13px;line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  opacity:.55}
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:#253040;border-radius:2px}
+@keyframes fadein{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.4}}
+@keyframes flicker{0%,100%{opacity:1}50%{opacity:.55}}
+@keyframes sweep{from{transform:translateY(-100%)}to{transform:translateY(120%)}}
+.fi{animation:fadein .55s ease both}
+.fi2{animation:fadein .55s .1s ease both}
+.fi3{animation:fadein .55s .2s ease both}
+a{color:var(--gold2);text-decoration:none}a:hover{text-decoration:underline}
 
-/* Header */
-.hdr{background:var(--panel);border-bottom:1px solid var(--border);
-  padding:16px 20px 12px}
-.hdr-inner{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;
-  justify-content:space-between;flex-wrap:wrap;gap:10px}
-.h1{font-family:var(--font-sans);font-size:clamp(1.3rem,3vw,2rem);
-  font-weight:800;letter-spacing:-.02em;color:#fff}
-.h1 span{color:var(--accent)}
-.h-sub{font-size:9px;color:var(--dim);letter-spacing:.13em;
-  text-transform:uppercase;margin-top:5px}
-.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;
-  border-radius:3px;font-size:10px;font-weight:700;letter-spacing:.07em;
-  font-family:var(--font-mono)}
-.dot{width:6px;height:6px;border-radius:50%;animation:pulse 1.8s infinite}
+/* NAV */
+nav{position:sticky;top:0;z-index:100;height:50px;
+  background:rgba(13,17,23,.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(200,147,10,.15);
+  display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+.n-brand{font-family:var(--serif);font-style:italic;font-size:1.1rem;font-weight:700;color:#fff}
+.n-brand em{color:var(--gold2);font-style:normal}
+.n-links{display:flex;gap:18px;align-items:center}
+.n-links a{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);transition:color .2s}
+.n-links a:hover{color:var(--smoke);text-decoration:none}
+.n-live{width:7px;height:7px;border-radius:50%;background:var(--ember);animation:flicker 2s infinite}
 
-/* Body */
-.body{max-width:1100px;margin:0 auto;padding:16px}
+/* HERO */
+.hero{max-width:1140px;margin:0 auto;padding:72px 24px 52px;
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+@media(max-width:720px){.hero{grid-template-columns:1fr;padding:36px 16px}}
+.h-eye{font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);
+  margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.h-eye::before{content:'';width:20px;height:1px;background:var(--gold2)}
+h1{font-family:var(--serif);font-size:clamp(2.2rem,5vw,3.5rem);
+  font-weight:900;line-height:1.05;letter-spacing:-.025em;color:#fff;margin-bottom:18px}
+h1 .hl{color:var(--ember2)}h1 .hl2{color:var(--gold2)}
+.h-desc{font-size:11.5px;color:var(--mist);line-height:1.85;max-width:440px;margin-bottom:24px}
+.badges{display:flex;gap:7px;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:2px;
+  font-size:8px;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
+.b-e{background:rgba(217,79,30,.12);border:1px solid rgba(217,79,30,.35);color:var(--ember2)}
+.b-g{background:rgba(200,147,10,.1);border:1px solid rgba(200,147,10,.35);color:var(--gold2)}
+.b-l{background:rgba(31,110,64,.12);border:1px solid rgba(31,110,64,.35);color:var(--leaf2)}
+.b-s{background:rgba(21,88,168,.12);border:1px solid rgba(21,88,168,.35);color:var(--sky2)}
 
-/* Cards */
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));
-  gap:10px;margin-bottom:14px}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:4px;
-  padding:13px 15px;position:relative;overflow:hidden}
-.card-top{position:absolute;top:0;left:0;right:0;height:2px}
-.card-lbl{font-size:9px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--dim);margin-bottom:6px}
-.card-val{font-family:var(--font-sans);font-size:1.65rem;font-weight:800;line-height:1}
-.card-sub{font-size:10px;color:var(--dim);margin-top:5px;line-height:1.5;white-space:pre-line}
+/* Hero status card */
+.hcard{background:var(--ink2);border:1px solid rgba(200,147,10,.18);border-radius:7px;
+  padding:26px;position:relative;overflow:hidden}
+.hcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--ember),var(--gold2),var(--leaf2))}
+.hcard::after{content:'';position:absolute;left:0;width:100%;height:1px;
+  background:linear-gradient(transparent,rgba(200,147,10,.1),transparent);
+  animation:sweep 4s linear infinite;pointer-events:none}
+.hc-label{font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--mist);
+  margin-bottom:18px;display:flex;align-items:center;justify-content:space-between}
+.hc-live{display:flex;align-items:center;gap:5px;font-size:7.5px}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--ember);animation:pulse 1.8s infinite}
+.hc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.hci-lbl{font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);margin-bottom:4px}
+.hci-val{font-family:var(--serif);font-size:1.8rem;font-weight:700;line-height:1;color:#fff}
+.hci-val.e{color:var(--ember2)}.hci-val.g{color:var(--gold2)}.hci-val.s{color:var(--sky2)}
+.hci-sub{font-size:8.5px;color:var(--mist);margin-top:3px}
+
+/* Sections */
+.sec{max-width:1140px;margin:0 auto;padding:36px 24px}
+@media(max-width:720px){.sec{padding:20px 14px}}
+.sec-hdr{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;
+  margin-bottom:22px;padding-bottom:11px;border-bottom:1px solid var(--wire)}
+.sec-title{font-family:var(--serif);font-style:italic;font-size:1.35rem;font-weight:700;
+  color:#fff;letter-spacing:-.015em}
+.sec-meta{font-size:8.5px;color:var(--mist);letter-spacing:.1em;text-transform:uppercase}
+hr.div{border:none;height:1px;background:linear-gradient(90deg,transparent,rgba(200,147,10,.25),transparent);margin:36px 0}
+
+/* Stat row */
+.srow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:24px}
+.scard{background:var(--ink2);border:1px solid var(--wire);border-radius:4px;
+  padding:14px;position:relative;overflow:hidden;transition:border-color .2s,transform .18s}
+.scard:hover{border-color:rgba(200,147,10,.28);transform:translateY(-2px)}
+.scard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--ember),transparent);opacity:0;transition:opacity .3s}
+.scard:hover::after{opacity:.5}
+.sc-lbl{font-size:7.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--mist);margin-bottom:7px}
+.sc-val{font-family:var(--serif);font-size:1.75rem;font-weight:700;line-height:1;color:#fff}
+.sc-val.e{color:var(--ember2)}.sc-val.g{color:var(--gold2)}.sc-val.s{color:var(--sky2)}.sc-val.l{color:var(--leaf2)}
+.sc-sub{font-size:8.5px;color:var(--mist);margin-top:4px;line-height:1.4}
+
+/* Chart cards */
+.cc{background:var(--ink2);border:1px solid var(--wire);border-radius:6px;
+  padding:20px;margin-bottom:18px;position:relative}
+.cc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--ember),var(--gold2));border-radius:6px 6px 0 0}
+.ct{font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mist);
+  margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tag{font-size:7.5px;padding:2px 7px;border-radius:2px;font-family:var(--mono);font-weight:400}
+.te{background:rgba(217,79,30,.1);border:1px solid rgba(217,79,30,.28);color:var(--ember2)}
+.tg{background:rgba(200,147,10,.1);border:1px solid rgba(200,147,10,.28);color:var(--gold2)}
+.ts{background:rgba(21,88,168,.1);border:1px solid rgba(21,88,168,.28);color:var(--sky2)}
+.tl{background:rgba(31,110,64,.1);border:1px solid rgba(31,110,64,.28);color:var(--leaf2)}
+.cw{position:relative;height:260px}
+.cw.tall{height:310px}
+
+/* Grid */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:720px){.g2{grid-template-columns:1fr}}
 
 /* Tabs */
-.tabs{border-bottom:1px solid var(--border);display:flex;
-  gap:0;margin-bottom:16px;overflow-x:auto}
-.tab{padding:7px 14px;background:none;border:none;
-  border-bottom:2px solid transparent;color:var(--dim);
-  font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;
-  text-transform:uppercase;cursor:pointer;transition:all .15s;margin-bottom:-1px}
-.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-
-/* Panels */
-.panel{background:var(--panel);border:1px solid var(--border);
-  border-radius:4px;padding:14px 16px;margin-bottom:12px}
-.sec-title{font-size:9px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--dim);margin-bottom:10px;font-weight:700;
-  display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-
-/* Chart */
-.chart-wrap{position:relative;height:260px;margin-bottom:8px}
-
-/* Legend */
-.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
-.leg-item{display:flex;align-items:center;gap:6px;font-size:9px;color:var(--dim)}
-.leg-dot{width:9px;height:9px;border-radius:50%}
+.tabs{display:flex;border-bottom:1px solid var(--wire);margin-bottom:18px;overflow-x:auto;gap:0}
+.tb{padding:7px 14px;background:none;border:none;border-bottom:2px solid transparent;
+  color:var(--mist);font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;transition:all .15s;margin-bottom:-1px;white-space:nowrap}
+.tb:hover{color:var(--smoke)}.tb.active{color:var(--gold2);border-bottom-color:var(--gold2)}
+.tp{display:none}.tp.active{display:block}
 
 /* Table */
-.tbl-wrap{overflow-y:auto;max-height:420px}
-table{width:100%;border-collapse:collapse;font-size:11px}
-th{padding:6px 8px;color:var(--dim);font-size:9px;letter-spacing:.1em;
-  text-transform:uppercase;border-bottom:1px solid var(--border);
-  text-align:left;position:sticky;top:0;background:var(--panel)}
-td{padding:5px 8px;border-bottom:1px solid #0f203022}
-tr:nth-child(even) td{background:#0f203020}
+.tw{overflow:auto;max-height:350px}
+table{width:100%;border-collapse:collapse;font-size:10.5px}
+th{padding:6px 9px;text-align:left;color:var(--mist);font-size:7.5px;letter-spacing:.1em;
+  text-transform:uppercase;border-bottom:1px solid var(--wire);position:sticky;top:0;background:var(--ink2)}
+td{padding:5px 9px;border-bottom:1px solid rgba(255,255,255,.03)}
+tr:hover td{background:rgba(255,255,255,.02)}
 
-/* Grid 2 */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:600px){.g2{grid-template-columns:1fr}}
+/* Legend */
+.leg{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
+.li{display:flex;align-items:center;gap:5px;font-size:8.5px;color:var(--mist)}
+.ld{width:8px;height:8px;border-radius:50%}
 
-/* Rank bar */
-.rank-row{display:flex;align-items:center;gap:8px;
-  padding:5px 0;border-bottom:1px solid #0f203025}
-.rank-bar-wrap{flex:1;height:5px;background:var(--border);
-  border-radius:3px;overflow:hidden}
-.rank-bar{height:100%;border-radius:3px;transition:width .5s ease}
+/* Controls */
+.ctrls{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.cbtn{padding:6px 13px;background:var(--ink2);border:1px solid rgba(255,255,255,.1);
+  border-radius:3px;color:var(--mist);font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;
+  cursor:pointer;transition:all .18s;text-transform:uppercase}
+.cbtn:hover{border-color:var(--gold2);color:var(--smoke)}
+.cbtn.p{background:var(--ember);border-color:var(--ember);color:#fff;font-weight:500}
+.cbtn.p:hover{background:var(--ember2);border-color:var(--ember2)}
+.cbtn:disabled{opacity:.4;cursor:not-allowed}
+select.cbtn{cursor:pointer}
 
-/* Model grid */
-.model-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.param-lbl{font-size:9px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--dim);margin-bottom:3px}
-.param-val{font-family:var(--font-sans);font-size:1.05rem;font-weight:800}
+/* Log */
+.log{background:rgba(0,0,0,.3);border:1px solid var(--wire);border-radius:3px;
+  padding:9px 13px;height:75px;overflow-y:auto;font-size:9.5px;font-family:var(--mono);margin-bottom:14px}
+.lok{color:var(--leaf2)}.lwarn{color:var(--ember2)}.lerr{color:#ff4444}.ldim{color:var(--mist)}
 
-/* Info box */
-.info{font-size:10px;color:var(--dim);line-height:1.7;
-  border-top:1px solid var(--border);padding-top:10px;margin-top:10px}
+/* Formula */
+.formula{font-family:var(--mono);font-size:10px;color:var(--gold2);
+  padding:10px 14px;background:rgba(0,0,0,.3);border-radius:3px;
+  border-left:2px solid var(--gold2);margin-bottom:10px;line-height:1.8}
 
 /* Footer */
-footer{font-size:9px;color:var(--dim);letter-spacing:.1em;
-  text-transform:uppercase;text-align:center;
-  border-top:1px solid var(--border);padding-top:12px;margin-top:16px}
-
-/* Tab content */
-.tab-pane{display:none}
-.tab-pane.active{display:block}
-
-/* Updated badge */
-.upd{font-size:9px;color:var(--dim);margin-top:4px}
+footer{border-top:1px solid var(--wire);padding:26px 24px;
+  max-width:1140px;margin:0 auto;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:18px}
+.fb{font-family:var(--serif);font-style:italic;font-size:1.05rem;font-weight:700;color:var(--smoke)}
+.fb em{color:var(--gold2);font-style:normal}
+.fm{font-size:8.5px;color:var(--mist);line-height:1.9}
+.fm a{color:var(--mist)}
 </style>
 </head>
 <body>
 
-<div class="hdr">
-  <div class="hdr-inner">
-    <div>
-      <h1 class="h1">MEI<span>.v2</span> ENSO Monitor</h1>
-      <p class="h-sub">
-        Multivariate ENSO Index v2 · NOAA Physical Sciences Laboratory ·
-        JRA-3Q Reanalysis · Wolter &amp; Timlin (1993–2011)
-      </p>
-      <p class="upd">Dados: 2026-05-01 18:29 UTC · Pipeline Python/IPAM/UFMA</p>
+<nav>
+  <div class="n-brand"><em>YbYrá</em>-BR</div>
+  <div class="n-links">
+    <a href="#fogo">Fogo</a><a href="#clima">Clima</a>
+    <a href="#afci">AFCI</a><a href="#dados">Dados</a>
+    <div class="n-live"></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero fi">
+  <div>
+    <div class="h-eye">YbYrá-BR · CNPq 401741/2023-0</div>
+    <h1>Fogo &<br><span class="hl">Clima</span><br><span class="hl2">Amazônia</span></h1>
+    <p class="h-desc">Monitor integrado de focos de queimadas e índices climáticos oceânicos para a Amazônia Brasileira. Dados oficiais INPE/BDQueimadas + MEI.v2 · AMO · PDO (NOAA).</p>
+    <div class="badges">
+      <span class="badge b-e">INPE BDQueimadas</span>
+      <span class="badge b-s">NOAA PSL</span>
+      <span class="badge b-l">Amazônia</span>
+      <span class="badge b-g">CNPq 401741/2023-0</span>
     </div>
-    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
-      <span class="badge" style="background:#1c8fff18;border:1px solid #1c8fff50;color:#1c8fff">
-        <span class="dot" style="background:#1c8fff"></span>
-        NOAA PSL · Dado Oficial
-      </span>
-      <span class="badge" style="background:#1c8fff18;border:1px solid #1c8fff50;color:#1c8fff">
-        La Niña · MEI -0.679
-      </span>
-      <span class="badge" style="background:#3ddc8418;border:1px solid #3ddc8450;color:#3ddc84">
-        ✓ Aprovada
-      </span>
+  </div>
+  <div class="hcard fi2">
+    <div class="hc-label">
+      Estado do Monitor
+      <span class="hc-live"><span id="heroDate">—</span><span class="live-dot"></span></span>
+    </div>
+    <div class="hc-grid">
+      <div><div class="hci-lbl">Focos 2025</div>
+        <div class="hci-val e" id="h2025">—</div>
+        <div class="hci-sub">Total anual INPE</div></div>
+      <div><div class="hci-lbl">vs Média histórica</div>
+        <div class="hci-val g" id="hvsmed">—</div>
+        <div class="hci-sub">Desvio percentual</div></div>
+      <div><div class="hci-lbl">Ano recorde</div>
+        <div class="hci-val e" id="hrec">—</div>
+        <div class="hci-sub">Máximo histórico</div></div>
+      <div><div class="hci-lbl">Anos na série</div>
+        <div class="hci-val s" id="hyrs">—</div>
+        <div class="hci-sub">1998 – 2026</div></div>
     </div>
   </div>
 </div>
 
-<div class="body">
+<hr class="div">
 
-<!-- STATUS CARDS -->
-<div class="cards">
-  <div class="card">
-    <div class="card-top" style="background:#1c8fff"></div>
-    <div class="card-lbl">Fase Atual (MEI)</div>
-    <div class="card-val" style="color:#1c8fff">La</div>
-    <div class="card-sub">Nov-Dez 2024\nMEI = -0.679</div>
+<!-- FOCOS -->
+<div class="sec fi3" id="fogo">
+  <div class="sec-hdr">
+    <h2 class="sec-title">Focos de Queimadas — Amazônia</h2>
+    <span class="sec-meta">INPE / BDQueimadas · TerraB rasilis · 1998–2026</span>
   </div>
-  <div class="card">
-    <div class="card-top" style="background:#1c8fff"></div>
-    <div class="card-lbl">Último MEI.v2</div>
-    <div class="card-val" style="color:#1c8fff">-0.679</div>
-    <div class="card-sub">Nov-Dez 2024\n5 vars: SLP SST U V OLR</div>
+  <div class="srow">
+    <div class="scard"><div class="sc-lbl">Ano recorde</div><div class="sc-val e" id="smaxY">—</div><div class="sc-sub" id="smaxV">—</div></div>
+    <div class="scard"><div class="sc-lbl">Menor ano</div><div class="sc-val s" id="sminY">—</div><div class="sc-sub" id="sminV">—</div></div>
+    <div class="scard"><div class="sc-lbl">Média histórica</div><div class="sc-val g" id="smean">—</div><div class="sc-sub">focos/ano</div></div>
+    <div class="scard"><div class="sc-lbl">Pico sazonal</div><div class="sc-val e" id="speak">—</div><div class="sc-sub" id="speakV">—</div></div>
+    <div class="scard"><div class="sc-lbl">2024</div><div class="sc-val g" id="s2024">—</div><div class="sc-sub">Total anual</div></div>
+    <div class="scard"><div class="sc-lbl">2026 parcial</div><div class="sc-val" id="s2026" style="color:var(--mist)">—</div><div class="sc-sub">Jan–Abr 2026</div></div>
   </div>
-  <div class="card">
-    <div class="card-top" style="background:#6a8ca8"></div>
-    <div class="card-lbl">Previsão AR +6 bi-meses</div>
-    <div class="card-val" style="color:#6a8ca8">-0.235</div>
-    <div class="card-sub">Neutro\nIC95%: [-1.864, 1.394]</div>
-  </div>
-  <div class="card">
-    <div class="card-top" style="background:#6a8ca8"></div>
-    <div class="card-lbl">Previsão AR +12 bi-meses</div>
-    <div class="card-val" style="color:#6a8ca8">-0.125</div>
-    <div class="card-sub">Neutro\nModelo AR(2)</div>
-  </div>
-  <div class="card">
-    <div class="card-top" style="background:var(--green)"></div>
-    <div class="card-lbl">Registros</div>
-    <div class="card-val" style="color:var(--green)">552</div>
-    <div class="card-sub">1979–2024\n✓ Aprovada</div>
-  </div>
-</div>
 
-<!-- TABS -->
-<div class="tabs">
-  <button class="tab active" onclick="showTab('serie',this)">Série Histórica</button>
-  <button class="tab" onclick="showTab('tabela',this)">Tabela</button>
-  <button class="tab" onclick="showTab('ranking',this)">Ranking</button>
-  <button class="tab" onclick="showTab('modelo',this)">Modelo AR(2)</button>
-  <button class="tab" onclick="showTab('sobre',this)">Sobre</button>
-</div>
-
-<!-- SÉRIE -->
-<div id="tab-serie" class="tab-pane active">
-  <div class="panel">
-    <div class="sec-title">
-      MEI.v2 · Série Histórica Bi-mensal
-      <span class="badge" style="background:var(--accent)18;border:1px solid var(--accent)50;color:var(--accent)">NOAA PSL</span>
-      <span class="badge" style="background:#1c8fff18;border:1px solid #1c8fff50;color:#1c8fff">+ Previsão AR</span>
-      <select id="yearSel" onchange="redrawChart()"
-        style="margin-left:auto;background:var(--panel);border:1px solid var(--border);
-          border-radius:3px;color:var(--text);font-family:var(--font-mono);
-          font-size:10px;padding:4px 8px;cursor:pointer">
-        <option value="all">Todo período (1979–)</option>
-        <option value="30">Últimos 30 anos</option>
-        <option value="20" selected>Últimos 20 anos</option>
-        <option value="10">Últimos 10 anos</option>
-      </select>
-    </div>
-    <div class="chart-wrap"><canvas id="mainChart"></canvas></div>
-    <div class="legend">
-      <div class="leg-item"><div class="leg-dot" style="background:var(--el)"></div>El Niño (≥+0.5)</div>
-      <div class="leg-item"><div class="leg-dot" style="background:var(--el-super)"></div>Super El Niño (≥+2.0)</div>
-      <div class="leg-item"><div class="leg-dot" style="background:var(--la)"></div>La Niña (≤−0.5)</div>
-      <div class="leg-item"><div class="leg-dot" style="background:var(--neutral)"></div>Neutro</div>
-      <div class="leg-item"><div class="leg-dot" style="background:var(--accent)"></div>Previsão AR</div>
-    </div>
+  <div class="tabs">
+    <button class="tb active" onclick="showTab('anual',this)">Série Anual</button>
+    <button class="tb" onclick="showTab('mensal',this)">Sazonalidade</button>
+    <button class="tb" onclick="showTab('heatmap',this)">Mapa de Calor</button>
+    <button class="tb" onclick="showTab('tabela',this)">Tabela</button>
   </div>
-</div>
 
-<!-- TABELA -->
-<div id="tab-tabela" class="tab-pane">
-  <div class="panel">
-    <div class="sec-title">Últimos 48 bi-meses observados</div>
-    <div class="tbl-wrap">
-      <table id="obsTable">
-        <thead><tr>
-          <th>Bi-mês</th><th>Temporada</th><th>Ano</th>
-          <th>MEI</th><th>Fase</th><th>Intensidade</th>
-        </tr></thead>
-        <tbody id="obsBody"></tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- RANKING -->
-<div id="tab-ranking" class="tab-pane">
-  <div class="g2">
-    <div class="panel">
-      <div class="sec-title" style="color:var(--el)">🌡 Top El Niño — MEI.v2</div>
-      <div id="topEl"></div>
-    </div>
-    <div class="panel">
-      <div class="sec-title" style="color:var(--la)">❄ Top La Niña — MEI.v2</div>
-      <div id="topLa"></div>
-    </div>
-  </div>
-</div>
-
-<!-- MODELO -->
-<div id="tab-modelo" class="tab-pane">
-  <div class="g2">
-    <div class="panel">
-      <div class="sec-title">Parâmetros AR(2)</div>
-      <div class="model-grid" id="modelParams"></div>
-      <div class="info">
-        Ordem selecionada por AIC. Coeficientes estimados pelas equações de
-        Yule-Walker. Intervalo de confiança 95% com expansão proporcional ao
-        horizonte (×0.10 por passo).
-      </div>
-    </div>
-    <div class="panel">
-      <div class="sec-title">Previsão — Próximos 24 bi-meses</div>
-      <div class="tbl-wrap" style="max-height:360px">
-        <table>
-          <thead><tr>
-            <th>Passo</th><th>MEI</th><th>Lo (IC95%)</th>
-            <th>Hi (IC95%)</th><th>Fase</th>
-          </tr></thead>
-          <tbody id="fcBody"></tbody>
-        </table>
+  <div id="tab-anual" class="tp active">
+    <div class="cc">
+      <div class="ct">Total anual de focos (1998–2026) <span class="tag te">INPE</span><span class="tag tg">linha = média</span></div>
+      <div class="cw tall"><canvas id="cAnual"></canvas></div>
+      <div class="leg">
+        <div class="li"><div class="ld" style="background:var(--ember)"></div>Acima da média</div>
+        <div class="li"><div class="ld" style="background:var(--sky2)"></div>Abaixo da média</div>
+        <div class="li"><div class="ld" style="background:rgba(200,147,10,.5)"></div>2026 (parcial)</div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- SOBRE -->
-<div id="tab-sobre" class="tab-pane">
-  <div class="panel">
-    <div class="sec-title">Sobre o MEI.v2</div>
-    <div class="info" style="font-size:11px;color:var(--text)">
-      <p style="margin-bottom:10px">
-        O <strong>Multivariate ENSO Index v2 (MEI.v2)</strong> é a série temporal
-        do primeiro EOF combinado de cinco variáveis sobre o Pacífico Tropical
-        (30°S–30°N, 100°E–70°W): pressão ao nível do mar (SLP), temperatura
-        da superfície do mar (SST), vento zonal (U), vento meridional (V) e
-        radiação de onda longa emergente (OLR).
-      </p>
-      <p style="margin-bottom:10px">
-        Por integrar variáveis oceânicas e atmosféricas simultaneamente, o MEI é
-        considerado o índice ENSO mais abrangente. Valores positivos indicam
-        El Niño; negativos indicam La Niña. Limiares convencionais: ±0.5 (fraco),
-        ±1.0 (moderado), ±1.5 (forte), ±2.0 (super).
-      </p>
-      <p style="margin-bottom:10px">
-        <strong>Fonte de dados:</strong>
-        <a href="https://psl.noaa.gov/enso/mei/" target="_blank">NOAA Physical Sciences Laboratory</a>
-        — atualizado mensalmente até o dia 10. Série JRA-3Q desde 2024 (r=0.999 com JRA-55).
-      </p>
-      <p style="margin-bottom:10px">
-        <strong>Pipeline:</strong> Python (NumPy, Pandas, Requests) + GitHub Actions.
-        Fetch automático diário → validação → modelo AR(p) via Yule-Walker →
-        exportação JSON → rebuild do HTML estático.
-      </p>
-      <p>
-        <strong>Referências:</strong><br>
-        Wolter &amp; Timlin (1993) · Wolter &amp; Timlin (1998) · Wolter &amp; Timlin (2011) ·
-        Zhang et al. (2019)
-      </p>
+  <div id="tab-mensal" class="tp">
+    <div class="cc">
+      <div class="ct">Perfil sazonal — média ± σ por mês <span class="tag te">INPE</span></div>
+      <div class="cw"><canvas id="cMensal"></canvas></div>
     </div>
-    <div class="info" style="margin-top:12px">
-      <strong>Validação:</strong>
-      Erros: 0 · Avisos: 0
-      
+  </div>
+
+  <div id="tab-heatmap" class="tp">
+    <div class="cc">
+      <div class="ct">Mapa de calor — intensidade mensal por ano <span class="tag te">Escala relativa</span></div>
+      <div id="heatDiv" style="overflow-x:auto;padding:6px 0"></div>
     </div>
-    <div class="info" style="margin-top:12px">
-      <strong>Estatísticas:</strong>
-      n=552 · μ=-0.0657 · σ=1.0332 ·
-      min=-2.655 · max=2.9 ·
-      skew=0.3602 · kurt=-0.142
+  </div>
+
+  <div id="tab-tabela" class="tp">
+    <div class="cc">
+      <div class="ct">Série histórica completa — focos mensais</div>
+      <div class="tw"><table><thead><tr id="tHead"></tr></thead><tbody id="tBody"></tbody></table></div>
     </div>
   </div>
 </div>
 
-<!-- FOOTER -->
+<hr class="div">
+
+<!-- CLIMA -->
+<div class="sec" id="clima">
+  <div class="sec-hdr">
+    <h2 class="sec-title">Índices Climáticos Oceânicos</h2>
+    <span class="sec-meta">NOAA PSL · MEI.v2 · AMO · PDO</span>
+  </div>
+  <div class="ctrls">
+    <button class="cbtn p" onclick="fetchClimate()" id="btnFetch">⟳ Buscar MEI.v2 · AMO · PDO</button>
+    <select class="cbtn" id="yrSel" onchange="redrawClimate()">
+      <option value="all">Todo período (1979–)</option>
+      <option value="30">Últimos 30 anos</option>
+      <option value="20" selected>Últimos 20 anos</option>
+      <option value="10">Últimos 10 anos</option>
+    </select>
+  </div>
+  <div class="log" id="logBox"><span class="ldim">› Carregue os índices climáticos para ativar o cálculo do AFCI.</span></div>
+  <div class="cc">
+    <div class="ct">MEI.v2 · AMO · PDO <span class="tag ts">NOAA PSL</span><span class="tag tg" id="tagAfci" style="display:none">+ AFCI</span></div>
+    <div class="cw tall"><canvas id="cClimate"></canvas></div>
+    <div class="leg">
+      <div class="li"><div class="ld" style="background:#e8b84b"></div>MEI.v2 (ENSO)</div>
+      <div class="li"><div class="ld" style="background:#3dac68"></div>AMO</div>
+      <div class="li"><div class="ld" style="background:#5fa8e8"></div>PDO</div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- AFCI -->
+<div class="sec" id="afci">
+  <div class="sec-hdr">
+    <h2 class="sec-title">Amazon Fire-Climate Index</h2>
+    <span class="sec-meta">AFCI · MEI·AMO·PDO × Focos INPE</span>
+  </div>
+  <div class="srow">
+    <div class="scard"><div class="sc-lbl">AFCI atual</div><div class="sc-val" id="acur" style="color:var(--mist)">—</div><div class="sc-sub" id="acurS">—</div></div>
+    <div class="scard"><div class="sc-lbl">Risco</div><div class="sc-val g" id="arisk">—</div><div class="sc-sub">3 meses suavizado</div></div>
+    <div class="scard"><div class="sc-lbl">Previsão +6m</div><div class="sc-val" id="afc6" style="color:var(--mist)">—</div><div class="sc-sub">Modelo AR(2)</div></div>
+    <div class="scard"><div class="sc-lbl">Corr. AFCI × INPE</div><div class="sc-val s" id="acorr">—</div><div class="sc-sub" id="acorrS">Pearson r</div></div>
+  </div>
+  <div class="g2">
+    <div class="cc">
+      <div class="ct">AFCI — série + previsão AR(2) <span class="tag tg">lag=1m</span></div>
+      <div class="cw"><canvas id="cAFCI"></canvas></div>
+    </div>
+    <div class="cc">
+      <div class="ct">AFCI × Focos INPE <span class="tag te">Scatter</span></div>
+      <div class="cw"><canvas id="cScatter"></canvas></div>
+    </div>
+  </div>
+  <div class="cc">
+    <div class="ct">Sazonalidade — AFCI médio vs Focos INPE médios</div>
+    <div class="cw"><canvas id="cSeas"></canvas></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- DADOS -->
+<div class="sec" id="dados">
+  <div class="sec-hdr">
+    <h2 class="sec-title">Dados & Metodologia</h2>
+    <span class="sec-meta">Transparência · Reprodutibilidade</span>
+  </div>
+  <div class="g2">
+    <div class="cc">
+      <div class="ct">Fontes de dados</div>
+      <div style="font-size:11px;color:var(--mist);line-height:2.1">
+        <div>🔥 <strong style="color:var(--smoke)">Focos INPE</strong> — BDQueimadas / TerraB rasilis<br>
+          <span style="font-size:8.5px;opacity:.65">terrabrasilis.dpi.inpe.br/queimadas · 1998–2026</span></div><br>
+        <div>🌊 <strong style="color:var(--smoke)">MEI.v2</strong> — NOAA PSL · JRA-3Q · 1979–presente<br>
+          <span style="font-size:8.5px;opacity:.65">psl.noaa.gov/enso/mei · Wolter & Timlin (2011)</span></div><br>
+        <div>🌡️ <strong style="color:var(--smoke)">AMO</strong> — NOAA PSL · Kaplan SST · 1856–presente<br>
+          <span style="font-size:8.5px;opacity:.65">Enfield et al. (2001) Geophys. Res. Lett.</span></div><br>
+        <div>🌏 <strong style="color:var(--smoke)">PDO</strong> — NOAA PSL · ERSST V5 · 1900–presente<br>
+          <span style="font-size:8.5px;opacity:.65">Mantua et al. (1997) Bull. Amer. Meteor. Soc.</span></div>
+      </div>
+    </div>
+    <div class="cc">
+      <div class="ct">Metodologia AFCI</div>
+      <div class="formula">AFCI(t) = 0.50·Z[MEI(t−1)]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ 0.30·Z[AMO(t−1)]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ 0.20·Z[PDO(t−1)]</div>
+      <div style="font-size:10.5px;color:var(--mist);line-height:1.9">
+        <div>Z[·] = padronização (Z-score, μ=0, σ=1)</div>
+        <div>lag = 1 mês · Suavização: média móvel 3 meses</div><br>
+        <div><strong style="color:var(--smoke)">Referência base:</strong><br>
+          Aragão et al. (2018) <em>Nat. Commun.</em> 9:536<br>
+          <a href="https://doi.org/10.1038/s41467-017-02771-y" target="_blank" style="font-size:9px">DOI: 10.1038/s41467-017-02771-y</a></div><br>
+        <div style="font-size:9px;padding:5px 9px;background:rgba(200,147,10,.07);border:1px solid rgba(200,147,10,.18);border-radius:2px">
+          Projeto YbYrá-BR · CNPq Processo 401741/2023-0</div>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+    <button class="cbtn" onclick="dlCSV()">↓ CSV (INPE + AFCI)</button>
+    <button class="cbtn" onclick="dlJSON()">↓ JSON completo</button>
+    <a href="https://terrabrasilis.dpi.inpe.br/queimadas/situacao-atual/" target="_blank">
+      <button class="cbtn">↗ BDQueimadas INPE</button></a>
+    <a href="https://psl.noaa.gov/enso/mei/" target="_blank">
+      <button class="cbtn">↗ NOAA MEI.v2</button></a>
+  </div>
+</div>
+
 <footer>
-  Fonte:
-  <a href="https://psl.noaa.gov/enso/mei/" target="_blank">NOAA PSL — MEI.v2 (JRA-3Q)</a>
-  · Wolter &amp; Timlin (1993, 1998, 2011) ·
-  Região: 30°S–30°N · Variáveis: SLP SST U V OLR
-  <br>
-  Pipeline Python · GitHub Actions · Desenvolvido para IPAM / UFMA ·
-  <a href="https://github.com/celsohlsj" target="_blank">Celso H. L. Silva-Junior</a>
-  · 2026-05-01 18:29 UTC
+  <div>
+    <div class="fb"><em>YbYrá</em>-BR</div>
+    <div class="fm" style="margin-top:5px">Monitor de Vegetação Secundária e Fogo · Amazônia<br>CNPq Processo 401741/2023-0</div>
+  </div>
+  <div class="fm" style="text-align:right">
+    Focos: <a href="https://terrabrasilis.dpi.inpe.br/queimadas/" target="_blank">INPE BDQueimadas</a><br>
+    Clima: <a href="https://psl.noaa.gov/enso/mei/" target="_blank">NOAA PSL</a><br>
+    Ref: <a href="https://doi.org/10.1038/s41467-017-02771-y" target="_blank">Aragão et al. (2018)</a>
+  </div>
 </footer>
 
-</div><!-- /body -->
-
 <script>
-// ── Data injected from Python ─────────────────────────────────────────────
-const OBS      = [{"year": 1979, "season": "DJ", "season_full": "Dez-Jan", "mei": 0.0, "phase": "Neutro", "tier": "neutral"}, {"year": 1979, "season": "JF", "season_full": "Jan-Fev", "mei": 0.0, "phase": "Neutro", "tier": "neutral"}, {"year": 1979, "season": "FM", "season_full": "Fev-Mar", "mei": 1.052, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1979, "season": "MA", "season_full": "Mar-Abr", "mei": 0.923, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1979, "season": "AM", "season_full": "Abr-Mai", "mei": 1.341, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1979, "season": "MJ", "season_full": "Mai-Jun", "mei": 2.347, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1979, "season": "JJ", "season_full": "Jun-Jul", "mei": 2.84, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1979, "season": "JA", "season_full": "Jul-Ago", "mei": 1.615, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 1979, "season": "AS", "season_full": "Ago-Set", "mei": 2.043, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1979, "season": "SO", "season_full": "Set-Out", "mei": 1.48, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1979, "season": "ON", "season_full": "Out-Nov", "mei": 1.207, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1979, "season": "ND", "season_full": "Nov-Dez", "mei": 1.251, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1980, "season": "DJ", "season_full": "Dez-Jan", "mei": 1.08, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1980, "season": "JF", "season_full": "Jan-Fev", "mei": 1.757, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 1980, "season": "FM", "season_full": "Fev-Mar", "mei": 1.758, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 1980, "season": "MA", "season_full": "Mar-Abr", "mei": 1.479, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1980, "season": "AM", "season_full": "Abr-Mai", "mei": 1.49, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1980, "season": "MJ", "season_full": "Mai-Jun", "mei": 1.389, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1980, "season": "JJ", "season_full": "Jun-Jul", "mei": 2.018, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1980, "season": "JA", "season_full": "Jul-Ago", "mei": 1.397, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1980, "season": "AS", "season_full": "Ago-Set", "mei": 1.398, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1980, "season": "SO", "season_full": "Set-Out", "mei": 0.609, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1980, "season": "ON", "season_full": "Out-Nov", "mei": -0.917, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1980, "season": "ND", "season_full": "Nov-Dez", "mei": -0.115, "phase": "Neutro", "tier": "neutral"}, {"year": 1981, "season": "DJ", "season_full": "Dez-Jan", "mei": 0.303, "phase": "Neutro", "tier": "neutral"}, {"year": 1981, "season": "JF", "season_full": "Jan-Fev", "mei": -0.263, "phase": "Neutro", "tier": "neutral"}, {"year": 1981, "season": "FM", "season_full": "Fev-Mar", "mei": 1.228, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1981, "season": "MA", "season_full": "Mar-Abr", "mei": -0.108, "phase": "Neutro", "tier": "neutral"}, {"year": 1981, "season": "AM", "season_full": "Abr-Mai", "mei": 0.141, "phase": "Neutro", "tier": "neutral"}, {"year": 1981, "season": "MJ", "season_full": "Mai-Jun", "mei": -0.036, "phase": "Neutro", "tier": "neutral"}, {"year": 1981, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.912, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1981, "season": "JA", "season_full": "Jul-Ago", "mei": 1.464, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1981, "season": "AS", "season_full": "Ago-Set", "mei": 1.181, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1981, "season": "SO", "season_full": "Set-Out", "mei": 1.212, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1981, "season": "ON", "season_full": "Out-Nov", "mei": 0.436, "phase": "Neutro", "tier": "neutral"}, {"year": 1981, "season": "ND", "season_full": "Nov-Dez", "mei": -0.716, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1982, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.608, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1982, "season": "JF", "season_full": "Jan-Fev", "mei": -0.409, "phase": "Neutro", "tier": "neutral"}, {"year": 1982, "season": "FM", "season_full": "Fev-Mar", "mei": 0.377, "phase": "Neutro", "tier": "neutral"}, {"year": 1982, "season": "MA", "season_full": "Mar-Abr", "mei": 0.901, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1982, "season": "AM", "season_full": "Abr-Mai", "mei": 0.411, "phase": "Neutro", "tier": "neutral"}, {"year": 1982, "season": "MJ", "season_full": "Mai-Jun", "mei": 0.222, "phase": "Neutro", "tier": "neutral"}, {"year": 1982, "season": "JJ", "season_full": "Jun-Jul", "mei": -0.42, "phase": "Neutro", "tier": "neutral"}, {"year": 1982, "season": "JA", "season_full": "Jul-Ago", "mei": -1.086, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1982, "season": "AS", "season_full": "Ago-Set", "mei": -1.787, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1982, "season": "SO", "season_full": "Set-Out", "mei": -0.161, "phase": "Neutro", "tier": "neutral"}, {"year": 1982, "season": "ON", "season_full": "Out-Nov", "mei": -0.677, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1982, "season": "ND", "season_full": "Nov-Dez", "mei": -0.725, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1983, "season": "DJ", "season_full": "Dez-Jan", "mei": -1.32, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1983, "season": "JF", "season_full": "Jan-Fev", "mei": -0.503, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1983, "season": "FM", "season_full": "Fev-Mar", "mei": -1.488, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1983, "season": "MA", "season_full": "Mar-Abr", "mei": -1.169, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1983, "season": "AM", "season_full": "Abr-Mai", "mei": -1.517, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1983, "season": "MJ", "season_full": "Mai-Jun", "mei": -0.931, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1983, "season": "JJ", "season_full": "Jun-Jul", "mei": -1.137, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1983, "season": "JA", "season_full": "Jul-Ago", "mei": -1.583, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1983, "season": "AS", "season_full": "Ago-Set", "mei": -1.216, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1983, "season": "SO", "season_full": "Set-Out", "mei": -0.773, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1983, "season": "ON", "season_full": "Out-Nov", "mei": -0.645, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1983, "season": "ND", "season_full": "Nov-Dez", "mei": -0.355, "phase": "Neutro", "tier": "neutral"}, {"year": 1984, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.706, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1984, "season": "JF", "season_full": "Jan-Fev", "mei": -0.728, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1984, "season": "FM", "season_full": "Fev-Mar", "mei": -0.98, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1984, "season": "MA", "season_full": "Mar-Abr", "mei": -0.961, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1984, "season": "AM", "season_full": "Abr-Mai", "mei": -1.257, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1984, "season": "MJ", "season_full": "Mai-Jun", "mei": -1.99, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1984, "season": "JJ", "season_full": "Jun-Jul", "mei": -1.376, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1984, "season": "JA", "season_full": "Jul-Ago", "mei": -1.433, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1984, "season": "AS", "season_full": "Ago-Set", "mei": -2.11, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1984, "season": "SO", "season_full": "Set-Out", "mei": -1.311, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1984, "season": "ON", "season_full": "Out-Nov", "mei": -1.709, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1984, "season": "ND", "season_full": "Nov-Dez", "mei": -1.277, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1985, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.651, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1985, "season": "JF", "season_full": "Jan-Fev", "mei": -0.538, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1985, "season": "FM", "season_full": "Fev-Mar", "mei": 0.232, "phase": "Neutro", "tier": "neutral"}, {"year": 1985, "season": "MA", "season_full": "Mar-Abr", "mei": -0.666, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1985, "season": "AM", "season_full": "Abr-Mai", "mei": -0.158, "phase": "Neutro", "tier": "neutral"}, {"year": 1985, "season": "MJ", "season_full": "Mai-Jun", "mei": -0.611, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1985, "season": "JJ", "season_full": "Jun-Jul", "mei": -0.94, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1985, "season": "JA", "season_full": "Jul-Ago", "mei": -1.048, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1985, "season": "AS", "season_full": "Ago-Set", "mei": -1.008, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1985, "season": "SO", "season_full": "Set-Out", "mei": -0.779, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1985, "season": "ON", "season_full": "Out-Nov", "mei": -1.353, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1985, "season": "ND", "season_full": "Nov-Dez", "mei": -0.459, "phase": "Neutro", "tier": "neutral"}, {"year": 1986, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.223, "phase": "Neutro", "tier": "neutral"}, {"year": 1986, "season": "JF", "season_full": "Jan-Fev", "mei": -1.13, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1986, "season": "FM", "season_full": "Fev-Mar", "mei": 0.119, "phase": "Neutro", "tier": "neutral"}, {"year": 1986, "season": "MA", "season_full": "Mar-Abr", "mei": 1.039, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1986, "season": "AM", "season_full": "Abr-Mai", "mei": 1.396, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1986, "season": "MJ", "season_full": "Mai-Jun", "mei": 0.956, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1986, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.192, "phase": "Neutro", "tier": "neutral"}, {"year": 1986, "season": "JA", "season_full": "Jul-Ago", "mei": 0.897, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1986, "season": "AS", "season_full": "Ago-Set", "mei": 0.372, "phase": "Neutro", "tier": "neutral"}, {"year": 1986, "season": "SO", "season_full": "Set-Out", "mei": 1.105, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1986, "season": "ON", "season_full": "Out-Nov", "mei": 0.898, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1986, "season": "ND", "season_full": "Nov-Dez", "mei": 1.332, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1987, "season": "DJ", "season_full": "Dez-Jan", "mei": 1.213, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1987, "season": "JF", "season_full": "Jan-Fev", "mei": 1.41, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1987, "season": "FM", "season_full": "Fev-Mar", "mei": 1.105, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1987, "season": "MA", "season_full": "Mar-Abr", "mei": 1.995, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 1987, "season": "AM", "season_full": "Abr-Mai", "mei": 1.538, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 1987, "season": "MJ", "season_full": "Mai-Jun", "mei": 1.539, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 1987, "season": "JJ", "season_full": "Jun-Jul", "mei": 2.354, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1987, "season": "JA", "season_full": "Jul-Ago", "mei": 0.957, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1987, "season": "AS", "season_full": "Ago-Set", "mei": 0.217, "phase": "Neutro", "tier": "neutral"}, {"year": 1987, "season": "SO", "season_full": "Set-Out", "mei": 0.863, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1987, "season": "ON", "season_full": "Out-Nov", "mei": -0.106, "phase": "Neutro", "tier": "neutral"}, {"year": 1987, "season": "ND", "season_full": "Nov-Dez", "mei": 1.22, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1988, "season": "DJ", "season_full": "Dez-Jan", "mei": 0.53, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1988, "season": "JF", "season_full": "Jan-Fev", "mei": 0.082, "phase": "Neutro", "tier": "neutral"}, {"year": 1988, "season": "FM", "season_full": "Fev-Mar", "mei": 1.28, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1988, "season": "MA", "season_full": "Mar-Abr", "mei": 1.727, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 1988, "season": "AM", "season_full": "Abr-Mai", "mei": 2.428, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1988, "season": "MJ", "season_full": "Mai-Jun", "mei": 2.378, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1988, "season": "JJ", "season_full": "Jun-Jul", "mei": 1.396, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1988, "season": "JA", "season_full": "Jul-Ago", "mei": 2.403, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1988, "season": "AS", "season_full": "Ago-Set", "mei": 1.612, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 1988, "season": "SO", "season_full": "Set-Out", "mei": 1.887, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 1988, "season": "ON", "season_full": "Out-Nov", "mei": 2.033, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1988, "season": "ND", "season_full": "Nov-Dez", "mei": 1.512, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 1989, "season": "DJ", "season_full": "Dez-Jan", "mei": 1.654, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 1989, "season": "JF", "season_full": "Jan-Fev", "mei": 1.852, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 1989, "season": "FM", "season_full": "Fev-Mar", "mei": 1.676, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 1989, "season": "MA", "season_full": "Mar-Abr", "mei": 0.712, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1989, "season": "AM", "season_full": "Abr-Mai", "mei": 0.892, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1989, "season": "MJ", "season_full": "Mai-Jun", "mei": 1.478, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1989, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.68, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1989, "season": "JA", "season_full": "Jul-Ago", "mei": 0.574, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1989, "season": "AS", "season_full": "Ago-Set", "mei": 0.216, "phase": "Neutro", "tier": "neutral"}, {"year": 1989, "season": "SO", "season_full": "Set-Out", "mei": 1.329, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1989, "season": "ON", "season_full": "Out-Nov", "mei": 1.297, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1989, "season": "ND", "season_full": "Nov-Dez", "mei": 1.286, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1990, "season": "DJ", "season_full": "Dez-Jan", "mei": 0.571, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1990, "season": "JF", "season_full": "Jan-Fev", "mei": 0.886, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1990, "season": "FM", "season_full": "Fev-Mar", "mei": 0.259, "phase": "Neutro", "tier": "neutral"}, {"year": 1990, "season": "MA", "season_full": "Mar-Abr", "mei": 0.32, "phase": "Neutro", "tier": "neutral"}, {"year": 1990, "season": "AM", "season_full": "Abr-Mai", "mei": -0.132, "phase": "Neutro", "tier": "neutral"}, {"year": 1990, "season": "MJ", "season_full": "Mai-Jun", "mei": 0.366, "phase": "Neutro", "tier": "neutral"}, {"year": 1990, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.562, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1990, "season": "JA", "season_full": "Jul-Ago", "mei": 0.296, "phase": "Neutro", "tier": "neutral"}, {"year": 1990, "season": "AS", "season_full": "Ago-Set", "mei": 0.513, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1990, "season": "SO", "season_full": "Set-Out", "mei": -0.274, "phase": "Neutro", "tier": "neutral"}, {"year": 1990, "season": "ON", "season_full": "Out-Nov", "mei": -0.991, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1990, "season": "ND", "season_full": "Nov-Dez", "mei": -0.423, "phase": "Neutro", "tier": "neutral"}, {"year": 1991, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.324, "phase": "Neutro", "tier": "neutral"}, {"year": 1991, "season": "JF", "season_full": "Jan-Fev", "mei": 0.105, "phase": "Neutro", "tier": "neutral"}, {"year": 1991, "season": "FM", "season_full": "Fev-Mar", "mei": 1.441, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1991, "season": "MA", "season_full": "Mar-Abr", "mei": 1.515, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 1991, "season": "AM", "season_full": "Abr-Mai", "mei": 0.657, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1991, "season": "MJ", "season_full": "Mai-Jun", "mei": 1.32, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1991, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.172, "phase": "Neutro", "tier": "neutral"}, {"year": 1991, "season": "JA", "season_full": "Jul-Ago", "mei": 0.034, "phase": "Neutro", "tier": "neutral"}, {"year": 1991, "season": "AS", "season_full": "Ago-Set", "mei": 0.008, "phase": "Neutro", "tier": "neutral"}, {"year": 1991, "season": "SO", "season_full": "Set-Out", "mei": 1.032, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1991, "season": "ON", "season_full": "Out-Nov", "mei": 0.228, "phase": "Neutro", "tier": "neutral"}, {"year": 1991, "season": "ND", "season_full": "Nov-Dez", "mei": -0.19, "phase": "Neutro", "tier": "neutral"}, {"year": 1992, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.148, "phase": "Neutro", "tier": "neutral"}, {"year": 1992, "season": "JF", "season_full": "Jan-Fev", "mei": -0.521, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1992, "season": "FM", "season_full": "Fev-Mar", "mei": 0.311, "phase": "Neutro", "tier": "neutral"}, {"year": 1992, "season": "MA", "season_full": "Mar-Abr", "mei": -0.52, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1992, "season": "AM", "season_full": "Abr-Mai", "mei": -0.976, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1992, "season": "MJ", "season_full": "Mai-Jun", "mei": -0.973, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1992, "season": "JJ", "season_full": "Jun-Jul", "mei": -1.076, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1992, "season": "JA", "season_full": "Jul-Ago", "mei": 0.305, "phase": "Neutro", "tier": "neutral"}, {"year": 1992, "season": "AS", "season_full": "Ago-Set", "mei": 0.603, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1992, "season": "SO", "season_full": "Set-Out", "mei": 0.49, "phase": "Neutro", "tier": "neutral"}, {"year": 1992, "season": "ON", "season_full": "Out-Nov", "mei": -0.322, "phase": "Neutro", "tier": "neutral"}, {"year": 1992, "season": "ND", "season_full": "Nov-Dez", "mei": 0.368, "phase": "Neutro", "tier": "neutral"}, {"year": 1993, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.406, "phase": "Neutro", "tier": "neutral"}, {"year": 1993, "season": "JF", "season_full": "Jan-Fev", "mei": -1.13, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1993, "season": "FM", "season_full": "Fev-Mar", "mei": -0.087, "phase": "Neutro", "tier": "neutral"}, {"year": 1993, "season": "MA", "season_full": "Mar-Abr", "mei": -0.037, "phase": "Neutro", "tier": "neutral"}, {"year": 1993, "season": "AM", "season_full": "Abr-Mai", "mei": 0.512, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1993, "season": "MJ", "season_full": "Mai-Jun", "mei": 0.518, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1993, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.924, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1993, "season": "JA", "season_full": "Jul-Ago", "mei": 0.29, "phase": "Neutro", "tier": "neutral"}, {"year": 1993, "season": "AS", "season_full": "Ago-Set", "mei": -0.29, "phase": "Neutro", "tier": "neutral"}, {"year": 1993, "season": "SO", "season_full": "Set-Out", "mei": 0.262, "phase": "Neutro", "tier": "neutral"}, {"year": 1993, "season": "ON", "season_full": "Out-Nov", "mei": -0.352, "phase": "Neutro", "tier": "neutral"}, {"year": 1993, "season": "ND", "season_full": "Nov-Dez", "mei": -0.601, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1994, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.715, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1994, "season": "JF", "season_full": "Jan-Fev", "mei": -0.545, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1994, "season": "FM", "season_full": "Fev-Mar", "mei": -0.672, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1994, "season": "MA", "season_full": "Mar-Abr", "mei": -1.339, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1994, "season": "AM", "season_full": "Abr-Mai", "mei": -1.355, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1994, "season": "MJ", "season_full": "Mai-Jun", "mei": -2.408, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1994, "season": "JJ", "season_full": "Jun-Jul", "mei": -1.395, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1994, "season": "JA", "season_full": "Jul-Ago", "mei": -2.224, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1994, "season": "AS", "season_full": "Ago-Set", "mei": -2.313, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1994, "season": "SO", "season_full": "Set-Out", "mei": -1.806, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1994, "season": "ON", "season_full": "Out-Nov", "mei": -1.962, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1994, "season": "ND", "season_full": "Nov-Dez", "mei": -0.626, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1995, "season": "DJ", "season_full": "Dez-Jan", "mei": -1.472, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1995, "season": "JF", "season_full": "Jan-Fev", "mei": -0.892, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1995, "season": "FM", "season_full": "Fev-Mar", "mei": -0.824, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1995, "season": "MA", "season_full": "Mar-Abr", "mei": -1.366, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1995, "season": "AM", "season_full": "Abr-Mai", "mei": -0.699, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1995, "season": "MJ", "season_full": "Mai-Jun", "mei": -0.762, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1995, "season": "JJ", "season_full": "Jun-Jul", "mei": -0.14, "phase": "Neutro", "tier": "neutral"}, {"year": 1995, "season": "JA", "season_full": "Jul-Ago", "mei": 0.286, "phase": "Neutro", "tier": "neutral"}, {"year": 1995, "season": "AS", "season_full": "Ago-Set", "mei": 1.455, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1995, "season": "SO", "season_full": "Set-Out", "mei": 1.786, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 1995, "season": "ON", "season_full": "Out-Nov", "mei": 1.159, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1995, "season": "ND", "season_full": "Nov-Dez", "mei": 0.878, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1996, "season": "DJ", "season_full": "Dez-Jan", "mei": 1.401, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1996, "season": "JF", "season_full": "Jan-Fev", "mei": 1.433, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1996, "season": "FM", "season_full": "Fev-Mar", "mei": 1.523, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 1996, "season": "MA", "season_full": "Mar-Abr", "mei": 0.241, "phase": "Neutro", "tier": "neutral"}, {"year": 1996, "season": "AM", "season_full": "Abr-Mai", "mei": 0.37, "phase": "Neutro", "tier": "neutral"}, {"year": 1996, "season": "MJ", "season_full": "Mai-Jun", "mei": -0.163, "phase": "Neutro", "tier": "neutral"}, {"year": 1996, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.116, "phase": "Neutro", "tier": "neutral"}, {"year": 1996, "season": "JA", "season_full": "Jul-Ago", "mei": -0.007, "phase": "Neutro", "tier": "neutral"}, {"year": 1996, "season": "AS", "season_full": "Ago-Set", "mei": 0.556, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1996, "season": "SO", "season_full": "Set-Out", "mei": 0.549, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1996, "season": "ON", "season_full": "Out-Nov", "mei": 0.909, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1996, "season": "ND", "season_full": "Nov-Dez", "mei": 0.395, "phase": "Neutro", "tier": "neutral"}, {"year": 1997, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.17, "phase": "Neutro", "tier": "neutral"}, {"year": 1997, "season": "JF", "season_full": "Jan-Fev", "mei": -0.296, "phase": "Neutro", "tier": "neutral"}, {"year": 1997, "season": "FM", "season_full": "Fev-Mar", "mei": -0.228, "phase": "Neutro", "tier": "neutral"}, {"year": 1997, "season": "MA", "season_full": "Mar-Abr", "mei": 0.034, "phase": "Neutro", "tier": "neutral"}, {"year": 1997, "season": "AM", "season_full": "Abr-Mai", "mei": 1.335, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1997, "season": "MJ", "season_full": "Mai-Jun", "mei": 0.848, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 1997, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.181, "phase": "Neutro", "tier": "neutral"}, {"year": 1997, "season": "JA", "season_full": "Jul-Ago", "mei": 2.5, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1997, "season": "AS", "season_full": "Ago-Set", "mei": 2.8, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1997, "season": "SO", "season_full": "Set-Out", "mei": 2.9, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1997, "season": "ON", "season_full": "Out-Nov", "mei": -0.857, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1997, "season": "ND", "season_full": "Nov-Dez", "mei": 2.6, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1998, "season": "DJ", "season_full": "Dez-Jan", "mei": 2.4, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1998, "season": "JF", "season_full": "Jan-Fev", "mei": -0.169, "phase": "Neutro", "tier": "neutral"}, {"year": 1998, "season": "FM", "season_full": "Fev-Mar", "mei": -0.52, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1998, "season": "MA", "season_full": "Mar-Abr", "mei": -0.505, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1998, "season": "AM", "season_full": "Abr-Mai", "mei": -1.256, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1998, "season": "MJ", "season_full": "Mai-Jun", "mei": -1.186, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1998, "season": "JJ", "season_full": "Jun-Jul", "mei": -1.283, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1998, "season": "JA", "season_full": "Jul-Ago", "mei": -0.764, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1998, "season": "AS", "season_full": "Ago-Set", "mei": -1.379, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1998, "season": "SO", "season_full": "Set-Out", "mei": -0.545, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1998, "season": "ON", "season_full": "Out-Nov", "mei": 0.33, "phase": "Neutro", "tier": "neutral"}, {"year": 1998, "season": "ND", "season_full": "Nov-Dez", "mei": -1.101, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1999, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.412, "phase": "Neutro", "tier": "neutral"}, {"year": 1999, "season": "JF", "season_full": "Jan-Fev", "mei": -0.029, "phase": "Neutro", "tier": "neutral"}, {"year": 1999, "season": "FM", "season_full": "Fev-Mar", "mei": -0.461, "phase": "Neutro", "tier": "neutral"}, {"year": 1999, "season": "MA", "season_full": "Mar-Abr", "mei": -0.541, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1999, "season": "AM", "season_full": "Abr-Mai", "mei": -0.5, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1999, "season": "MJ", "season_full": "Mai-Jun", "mei": -0.584, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1999, "season": "JJ", "season_full": "Jun-Jul", "mei": -0.639, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 1999, "season": "JA", "season_full": "Jul-Ago", "mei": -1.502, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1999, "season": "AS", "season_full": "Ago-Set", "mei": -0.385, "phase": "Neutro", "tier": "neutral"}, {"year": 1999, "season": "SO", "season_full": "Set-Out", "mei": 0.168, "phase": "Neutro", "tier": "neutral"}, {"year": 1999, "season": "ON", "season_full": "Out-Nov", "mei": -0.434, "phase": "Neutro", "tier": "neutral"}, {"year": 1999, "season": "ND", "season_full": "Nov-Dez", "mei": -1.131, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2000, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.49, "phase": "Neutro", "tier": "neutral"}, {"year": 2000, "season": "JF", "season_full": "Jan-Fev", "mei": -0.831, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2000, "season": "FM", "season_full": "Fev-Mar", "mei": -0.529, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2000, "season": "MA", "season_full": "Mar-Abr", "mei": -0.659, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2000, "season": "AM", "season_full": "Abr-Mai", "mei": -0.095, "phase": "Neutro", "tier": "neutral"}, {"year": 2000, "season": "MJ", "season_full": "Mai-Jun", "mei": 0.254, "phase": "Neutro", "tier": "neutral"}, {"year": 2000, "season": "JJ", "season_full": "Jun-Jul", "mei": -0.282, "phase": "Neutro", "tier": "neutral"}, {"year": 2000, "season": "JA", "season_full": "Jul-Ago", "mei": -0.97, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2000, "season": "AS", "season_full": "Ago-Set", "mei": -1.617, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2000, "season": "SO", "season_full": "Set-Out", "mei": -0.833, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2000, "season": "ON", "season_full": "Out-Nov", "mei": -1.493, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2000, "season": "ND", "season_full": "Nov-Dez", "mei": -1.398, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2001, "season": "DJ", "season_full": "Dez-Jan", "mei": -1.488, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2001, "season": "JF", "season_full": "Jan-Fev", "mei": -1.208, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2001, "season": "FM", "season_full": "Fev-Mar", "mei": -2.163, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2001, "season": "MA", "season_full": "Mar-Abr", "mei": -1.475, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2001, "season": "AM", "season_full": "Abr-Mai", "mei": -0.971, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2001, "season": "MJ", "season_full": "Mai-Jun", "mei": -0.799, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2001, "season": "JJ", "season_full": "Jun-Jul", "mei": -0.851, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2001, "season": "JA", "season_full": "Jul-Ago", "mei": -0.615, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2001, "season": "AS", "season_full": "Ago-Set", "mei": -0.289, "phase": "Neutro", "tier": "neutral"}, {"year": 2001, "season": "SO", "season_full": "Set-Out", "mei": -1.934, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2001, "season": "ON", "season_full": "Out-Nov", "mei": -0.134, "phase": "Neutro", "tier": "neutral"}, {"year": 2001, "season": "ND", "season_full": "Nov-Dez", "mei": -0.144, "phase": "Neutro", "tier": "neutral"}, {"year": 2002, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.503, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2002, "season": "JF", "season_full": "Jan-Fev", "mei": -0.582, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2002, "season": "FM", "season_full": "Fev-Mar", "mei": -0.159, "phase": "Neutro", "tier": "neutral"}, {"year": 2002, "season": "MA", "season_full": "Mar-Abr", "mei": -0.26, "phase": "Neutro", "tier": "neutral"}, {"year": 2002, "season": "AM", "season_full": "Abr-Mai", "mei": -1.404, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2002, "season": "MJ", "season_full": "Mai-Jun", "mei": 0.28, "phase": "Neutro", "tier": "neutral"}, {"year": 2002, "season": "JJ", "season_full": "Jun-Jul", "mei": -0.095, "phase": "Neutro", "tier": "neutral"}, {"year": 2002, "season": "JA", "season_full": "Jul-Ago", "mei": 0.589, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2002, "season": "AS", "season_full": "Ago-Set", "mei": -0.044, "phase": "Neutro", "tier": "neutral"}, {"year": 2002, "season": "SO", "season_full": "Set-Out", "mei": 0.976, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2002, "season": "ON", "season_full": "Out-Nov", "mei": 0.798, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2002, "season": "ND", "season_full": "Nov-Dez", "mei": 1.029, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2003, "season": "DJ", "season_full": "Dez-Jan", "mei": 0.165, "phase": "Neutro", "tier": "neutral"}, {"year": 2003, "season": "JF", "season_full": "Jan-Fev", "mei": 0.984, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2003, "season": "FM", "season_full": "Fev-Mar", "mei": 1.076, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2003, "season": "MA", "season_full": "Mar-Abr", "mei": 1.623, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 2003, "season": "AM", "season_full": "Abr-Mai", "mei": 0.842, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2003, "season": "MJ", "season_full": "Mai-Jun", "mei": 0.504, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2003, "season": "JJ", "season_full": "Jun-Jul", "mei": 1.828, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 2003, "season": "JA", "season_full": "Jul-Ago", "mei": 0.631, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2003, "season": "AS", "season_full": "Ago-Set", "mei": 0.604, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2003, "season": "SO", "season_full": "Set-Out", "mei": 1.165, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2003, "season": "ON", "season_full": "Out-Nov", "mei": 0.906, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2003, "season": "ND", "season_full": "Nov-Dez", "mei": 1.111, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2004, "season": "DJ", "season_full": "Dez-Jan", "mei": 0.62, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2004, "season": "JF", "season_full": "Jan-Fev", "mei": 0.79, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2004, "season": "FM", "season_full": "Fev-Mar", "mei": -0.172, "phase": "Neutro", "tier": "neutral"}, {"year": 2004, "season": "MA", "season_full": "Mar-Abr", "mei": 0.995, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2004, "season": "AM", "season_full": "Abr-Mai", "mei": 0.551, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2004, "season": "MJ", "season_full": "Mai-Jun", "mei": 0.102, "phase": "Neutro", "tier": "neutral"}, {"year": 2004, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.546, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2004, "season": "JA", "season_full": "Jul-Ago", "mei": 0.095, "phase": "Neutro", "tier": "neutral"}, {"year": 2004, "season": "AS", "season_full": "Ago-Set", "mei": -0.652, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2004, "season": "SO", "season_full": "Set-Out", "mei": -1.213, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2004, "season": "ON", "season_full": "Out-Nov", "mei": -0.472, "phase": "Neutro", "tier": "neutral"}, {"year": 2004, "season": "ND", "season_full": "Nov-Dez", "mei": -0.584, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2005, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.53, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2005, "season": "JF", "season_full": "Jan-Fev", "mei": 0.211, "phase": "Neutro", "tier": "neutral"}, {"year": 2005, "season": "FM", "season_full": "Fev-Mar", "mei": -0.615, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2005, "season": "MA", "season_full": "Mar-Abr", "mei": -0.804, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2005, "season": "AM", "season_full": "Abr-Mai", "mei": -0.844, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2005, "season": "MJ", "season_full": "Mai-Jun", "mei": -0.613, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2005, "season": "JJ", "season_full": "Jun-Jul", "mei": -0.55, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2005, "season": "JA", "season_full": "Jul-Ago", "mei": -0.621, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2005, "season": "AS", "season_full": "Ago-Set", "mei": -0.523, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2005, "season": "SO", "season_full": "Set-Out", "mei": -0.497, "phase": "Neutro", "tier": "neutral"}, {"year": 2005, "season": "ON", "season_full": "Out-Nov", "mei": -0.831, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2005, "season": "ND", "season_full": "Nov-Dez", "mei": -1.099, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2006, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.675, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2006, "season": "JF", "season_full": "Jan-Fev", "mei": -1.135, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2006, "season": "FM", "season_full": "Fev-Mar", "mei": -1.53, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2006, "season": "MA", "season_full": "Mar-Abr", "mei": -1.351, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2006, "season": "AM", "season_full": "Abr-Mai", "mei": -1.201, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2006, "season": "MJ", "season_full": "Mai-Jun", "mei": 0.362, "phase": "Neutro", "tier": "neutral"}, {"year": 2006, "season": "JJ", "season_full": "Jun-Jul", "mei": -0.365, "phase": "Neutro", "tier": "neutral"}, {"year": 2006, "season": "JA", "season_full": "Jul-Ago", "mei": 0.38, "phase": "Neutro", "tier": "neutral"}, {"year": 2006, "season": "AS", "season_full": "Ago-Set", "mei": 0.638, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2006, "season": "SO", "season_full": "Set-Out", "mei": -0.238, "phase": "Neutro", "tier": "neutral"}, {"year": 2006, "season": "ON", "season_full": "Out-Nov", "mei": 0.402, "phase": "Neutro", "tier": "neutral"}, {"year": 2006, "season": "ND", "season_full": "Nov-Dez", "mei": -0.48, "phase": "Neutro", "tier": "neutral"}, {"year": 2007, "season": "DJ", "season_full": "Dez-Jan", "mei": -1.838, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2007, "season": "JF", "season_full": "Jan-Fev", "mei": -0.905, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2007, "season": "FM", "season_full": "Fev-Mar", "mei": -1.911, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2007, "season": "MA", "season_full": "Mar-Abr", "mei": -1.109, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2007, "season": "AM", "season_full": "Abr-Mai", "mei": -1.415, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2007, "season": "MJ", "season_full": "Mai-Jun", "mei": -0.097, "phase": "Neutro", "tier": "neutral"}, {"year": 2007, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.362, "phase": "Neutro", "tier": "neutral"}, {"year": 2007, "season": "JA", "season_full": "Jul-Ago", "mei": -0.05, "phase": "Neutro", "tier": "neutral"}, {"year": 2007, "season": "AS", "season_full": "Ago-Set", "mei": -0.388, "phase": "Neutro", "tier": "neutral"}, {"year": 2007, "season": "SO", "season_full": "Set-Out", "mei": -0.984, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2007, "season": "ON", "season_full": "Out-Nov", "mei": -0.961, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2007, "season": "ND", "season_full": "Nov-Dez", "mei": -0.939, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2008, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.972, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2008, "season": "JF", "season_full": "Jan-Fev", "mei": -0.679, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2008, "season": "FM", "season_full": "Fev-Mar", "mei": -0.242, "phase": "Neutro", "tier": "neutral"}, {"year": 2008, "season": "MA", "season_full": "Mar-Abr", "mei": -0.051, "phase": "Neutro", "tier": "neutral"}, {"year": 2008, "season": "AM", "season_full": "Abr-Mai", "mei": -0.525, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2008, "season": "MJ", "season_full": "Mai-Jun", "mei": -1.207, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2008, "season": "JJ", "season_full": "Jun-Jul", "mei": -0.049, "phase": "Neutro", "tier": "neutral"}, {"year": 2008, "season": "JA", "season_full": "Jul-Ago", "mei": -0.624, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2008, "season": "AS", "season_full": "Ago-Set", "mei": -0.802, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2008, "season": "SO", "season_full": "Set-Out", "mei": -0.926, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2008, "season": "ON", "season_full": "Out-Nov", "mei": -1.821, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2008, "season": "ND", "season_full": "Nov-Dez", "mei": -1.608, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2009, "season": "DJ", "season_full": "Dez-Jan", "mei": -1.604, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2009, "season": "JF", "season_full": "Jan-Fev", "mei": -0.914, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2009, "season": "FM", "season_full": "Fev-Mar", "mei": -0.418, "phase": "Neutro", "tier": "neutral"}, {"year": 2009, "season": "MA", "season_full": "Mar-Abr", "mei": -0.407, "phase": "Neutro", "tier": "neutral"}, {"year": 2009, "season": "AM", "season_full": "Abr-Mai", "mei": 0.229, "phase": "Neutro", "tier": "neutral"}, {"year": 2009, "season": "MJ", "season_full": "Mai-Jun", "mei": 0.29, "phase": "Neutro", "tier": "neutral"}, {"year": 2009, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.214, "phase": "Neutro", "tier": "neutral"}, {"year": 2009, "season": "JA", "season_full": "Jul-Ago", "mei": 0.278, "phase": "Neutro", "tier": "neutral"}, {"year": 2009, "season": "AS", "season_full": "Ago-Set", "mei": 0.099, "phase": "Neutro", "tier": "neutral"}, {"year": 2009, "season": "SO", "season_full": "Set-Out", "mei": -0.129, "phase": "Neutro", "tier": "neutral"}, {"year": 2009, "season": "ON", "season_full": "Out-Nov", "mei": -0.229, "phase": "Neutro", "tier": "neutral"}, {"year": 2009, "season": "ND", "season_full": "Nov-Dez", "mei": -0.841, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2010, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.414, "phase": "Neutro", "tier": "neutral"}, {"year": 2010, "season": "JF", "season_full": "Jan-Fev", "mei": -0.987, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2010, "season": "FM", "season_full": "Fev-Mar", "mei": -0.202, "phase": "Neutro", "tier": "neutral"}, {"year": 2010, "season": "MA", "season_full": "Mar-Abr", "mei": -0.428, "phase": "Neutro", "tier": "neutral"}, {"year": 2010, "season": "AM", "season_full": "Abr-Mai", "mei": -0.279, "phase": "Neutro", "tier": "neutral"}, {"year": 2010, "season": "MJ", "season_full": "Mai-Jun", "mei": 0.049, "phase": "Neutro", "tier": "neutral"}, {"year": 2010, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.374, "phase": "Neutro", "tier": "neutral"}, {"year": 2010, "season": "JA", "season_full": "Jul-Ago", "mei": -0.687, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2010, "season": "AS", "season_full": "Ago-Set", "mei": -0.514, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2010, "season": "SO", "season_full": "Set-Out", "mei": 0.088, "phase": "Neutro", "tier": "neutral"}, {"year": 2010, "season": "ON", "season_full": "Out-Nov", "mei": -1.033, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2010, "season": "ND", "season_full": "Nov-Dez", "mei": -0.427, "phase": "Neutro", "tier": "neutral"}, {"year": 2011, "season": "DJ", "season_full": "Dez-Jan", "mei": -1.778, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2011, "season": "JF", "season_full": "Jan-Fev", "mei": -1.829, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2011, "season": "FM", "season_full": "Fev-Mar", "mei": -1.433, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2011, "season": "MA", "season_full": "Mar-Abr", "mei": -2.194, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2011, "season": "AM", "season_full": "Abr-Mai", "mei": -2.229, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2011, "season": "MJ", "season_full": "Mai-Jun", "mei": -2.655, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2011, "season": "JJ", "season_full": "Jun-Jul", "mei": -1.077, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2011, "season": "JA", "season_full": "Jul-Ago", "mei": -1.001, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2011, "season": "AS", "season_full": "Ago-Set", "mei": -0.474, "phase": "Neutro", "tier": "neutral"}, {"year": 2011, "season": "SO", "season_full": "Set-Out", "mei": -0.591, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2011, "season": "ON", "season_full": "Out-Nov", "mei": -0.666, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2011, "season": "ND", "season_full": "Nov-Dez", "mei": -1.486, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2012, "season": "DJ", "season_full": "Dez-Jan", "mei": -1.24, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2012, "season": "JF", "season_full": "Jan-Fev", "mei": -1.483, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2012, "season": "FM", "season_full": "Fev-Mar", "mei": -0.638, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2012, "season": "MA", "season_full": "Mar-Abr", "mei": 0.043, "phase": "Neutro", "tier": "neutral"}, {"year": 2012, "season": "AM", "season_full": "Abr-Mai", "mei": 0.807, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2012, "season": "MJ", "season_full": "Mai-Jun", "mei": 1.04, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2012, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.44, "phase": "Neutro", "tier": "neutral"}, {"year": 2012, "season": "JA", "season_full": "Jul-Ago", "mei": -0.224, "phase": "Neutro", "tier": "neutral"}, {"year": 2012, "season": "AS", "season_full": "Ago-Set", "mei": 0.378, "phase": "Neutro", "tier": "neutral"}, {"year": 2012, "season": "SO", "season_full": "Set-Out", "mei": 0.425, "phase": "Neutro", "tier": "neutral"}, {"year": 2012, "season": "ON", "season_full": "Out-Nov", "mei": -0.722, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2012, "season": "ND", "season_full": "Nov-Dez", "mei": -0.194, "phase": "Neutro", "tier": "neutral"}, {"year": 2013, "season": "DJ", "season_full": "Dez-Jan", "mei": 0.252, "phase": "Neutro", "tier": "neutral"}, {"year": 2013, "season": "JF", "season_full": "Jan-Fev", "mei": 0.17, "phase": "Neutro", "tier": "neutral"}, {"year": 2013, "season": "FM", "season_full": "Fev-Mar", "mei": 0.038, "phase": "Neutro", "tier": "neutral"}, {"year": 2013, "season": "MA", "season_full": "Mar-Abr", "mei": -0.432, "phase": "Neutro", "tier": "neutral"}, {"year": 2013, "season": "AM", "season_full": "Abr-Mai", "mei": -1.138, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2013, "season": "MJ", "season_full": "Mai-Jun", "mei": -0.327, "phase": "Neutro", "tier": "neutral"}, {"year": 2013, "season": "JJ", "season_full": "Jun-Jul", "mei": -0.568, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2013, "season": "JA", "season_full": "Jul-Ago", "mei": -0.557, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2013, "season": "AS", "season_full": "Ago-Set", "mei": 0.586, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2013, "season": "SO", "season_full": "Set-Out", "mei": 0.706, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2013, "season": "ON", "season_full": "Out-Nov", "mei": 0.768, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2013, "season": "ND", "season_full": "Nov-Dez", "mei": 0.69, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2014, "season": "DJ", "season_full": "Dez-Jan", "mei": 1.47, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2014, "season": "JF", "season_full": "Jan-Fev", "mei": 2.085, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 2014, "season": "FM", "season_full": "Fev-Mar", "mei": 2.13, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 2014, "season": "MA", "season_full": "Mar-Abr", "mei": 2.044, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 2014, "season": "AM", "season_full": "Abr-Mai", "mei": 0.399, "phase": "Neutro", "tier": "neutral"}, {"year": 2014, "season": "MJ", "season_full": "Mai-Jun", "mei": 0.64, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2014, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.398, "phase": "Neutro", "tier": "neutral"}, {"year": 2014, "season": "JA", "season_full": "Jul-Ago", "mei": 0.411, "phase": "Neutro", "tier": "neutral"}, {"year": 2014, "season": "AS", "season_full": "Ago-Set", "mei": 0.889, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2014, "season": "SO", "season_full": "Set-Out", "mei": -0.994, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2014, "season": "ON", "season_full": "Out-Nov", "mei": -0.853, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2014, "season": "ND", "season_full": "Nov-Dez", "mei": -0.542, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2015, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.759, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2015, "season": "JF", "season_full": "Jan-Fev", "mei": -1.42, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2015, "season": "FM", "season_full": "Fev-Mar", "mei": -0.518, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2015, "season": "MA", "season_full": "Mar-Abr", "mei": -0.385, "phase": "Neutro", "tier": "neutral"}, {"year": 2015, "season": "AM", "season_full": "Abr-Mai", "mei": -0.907, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2015, "season": "MJ", "season_full": "Mai-Jun", "mei": -0.46, "phase": "Neutro", "tier": "neutral"}, {"year": 2015, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.055, "phase": "Neutro", "tier": "neutral"}, {"year": 2015, "season": "JA", "season_full": "Jul-Ago", "mei": -0.03, "phase": "Neutro", "tier": "neutral"}, {"year": 2015, "season": "AS", "season_full": "Ago-Set", "mei": 0.466, "phase": "Neutro", "tier": "neutral"}, {"year": 2015, "season": "SO", "season_full": "Set-Out", "mei": 2.5, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 2015, "season": "ON", "season_full": "Out-Nov", "mei": 0.059, "phase": "Neutro", "tier": "neutral"}, {"year": 2015, "season": "ND", "season_full": "Nov-Dez", "mei": 2.6, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 2016, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.433, "phase": "Neutro", "tier": "neutral"}, {"year": 2016, "season": "JF", "season_full": "Jan-Fev", "mei": -0.256, "phase": "Neutro", "tier": "neutral"}, {"year": 2016, "season": "FM", "season_full": "Fev-Mar", "mei": 0.291, "phase": "Neutro", "tier": "neutral"}, {"year": 2016, "season": "MA", "season_full": "Mar-Abr", "mei": 0.082, "phase": "Neutro", "tier": "neutral"}, {"year": 2016, "season": "AM", "season_full": "Abr-Mai", "mei": 0.37, "phase": "Neutro", "tier": "neutral"}, {"year": 2016, "season": "MJ", "season_full": "Mai-Jun", "mei": -0.323, "phase": "Neutro", "tier": "neutral"}, {"year": 2016, "season": "JJ", "season_full": "Jun-Jul", "mei": -0.621, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2016, "season": "JA", "season_full": "Jul-Ago", "mei": -0.518, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2016, "season": "AS", "season_full": "Ago-Set", "mei": -1.059, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2016, "season": "SO", "season_full": "Set-Out", "mei": -0.277, "phase": "Neutro", "tier": "neutral"}, {"year": 2016, "season": "ON", "season_full": "Out-Nov", "mei": -0.062, "phase": "Neutro", "tier": "neutral"}, {"year": 2016, "season": "ND", "season_full": "Nov-Dez", "mei": 0.084, "phase": "Neutro", "tier": "neutral"}, {"year": 2017, "season": "DJ", "season_full": "Dez-Jan", "mei": 0.248, "phase": "Neutro", "tier": "neutral"}, {"year": 2017, "season": "JF", "season_full": "Jan-Fev", "mei": 1.379, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2017, "season": "FM", "season_full": "Fev-Mar", "mei": 0.654, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2017, "season": "MA", "season_full": "Mar-Abr", "mei": -0.681, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2017, "season": "AM", "season_full": "Abr-Mai", "mei": -0.226, "phase": "Neutro", "tier": "neutral"}, {"year": 2017, "season": "MJ", "season_full": "Mai-Jun", "mei": -0.279, "phase": "Neutro", "tier": "neutral"}, {"year": 2017, "season": "JJ", "season_full": "Jun-Jul", "mei": -0.524, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2017, "season": "JA", "season_full": "Jul-Ago", "mei": -0.966, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2017, "season": "AS", "season_full": "Ago-Set", "mei": -0.969, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2017, "season": "SO", "season_full": "Set-Out", "mei": -0.666, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2017, "season": "ON", "season_full": "Out-Nov", "mei": -0.878, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2017, "season": "ND", "season_full": "Nov-Dez", "mei": 0.768, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2018, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.205, "phase": "Neutro", "tier": "neutral"}, {"year": 2018, "season": "JF", "season_full": "Jan-Fev", "mei": -0.491, "phase": "Neutro", "tier": "neutral"}, {"year": 2018, "season": "FM", "season_full": "Fev-Mar", "mei": -1.715, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2018, "season": "MA", "season_full": "Mar-Abr", "mei": -1.039, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2018, "season": "AM", "season_full": "Abr-Mai", "mei": -2.135, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2018, "season": "MJ", "season_full": "Mai-Jun", "mei": -1.865, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2018, "season": "JJ", "season_full": "Jun-Jul", "mei": -1.697, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2018, "season": "JA", "season_full": "Jul-Ago", "mei": -1.806, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2018, "season": "AS", "season_full": "Ago-Set", "mei": -0.391, "phase": "Neutro", "tier": "neutral"}, {"year": 2018, "season": "SO", "season_full": "Set-Out", "mei": 0.068, "phase": "Neutro", "tier": "neutral"}, {"year": 2018, "season": "ON", "season_full": "Out-Nov", "mei": 0.772, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2018, "season": "ND", "season_full": "Nov-Dez", "mei": -0.014, "phase": "Neutro", "tier": "neutral"}, {"year": 2019, "season": "DJ", "season_full": "Dez-Jan", "mei": 0.78, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2019, "season": "JF", "season_full": "Jan-Fev", "mei": 0.8, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2019, "season": "FM", "season_full": "Fev-Mar", "mei": 1.097, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2019, "season": "MA", "season_full": "Mar-Abr", "mei": 1.447, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2019, "season": "AM", "season_full": "Abr-Mai", "mei": 0.563, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2019, "season": "MJ", "season_full": "Mai-Jun", "mei": 0.33, "phase": "Neutro", "tier": "neutral"}, {"year": 2019, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.814, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2019, "season": "JA", "season_full": "Jul-Ago", "mei": -1.006, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2019, "season": "AS", "season_full": "Ago-Set", "mei": 0.371, "phase": "Neutro", "tier": "neutral"}, {"year": 2019, "season": "SO", "season_full": "Set-Out", "mei": 0.42, "phase": "Neutro", "tier": "neutral"}, {"year": 2019, "season": "ON", "season_full": "Out-Nov", "mei": 0.302, "phase": "Neutro", "tier": "neutral"}, {"year": 2019, "season": "ND", "season_full": "Nov-Dez", "mei": 0.391, "phase": "Neutro", "tier": "neutral"}, {"year": 2020, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.315, "phase": "Neutro", "tier": "neutral"}, {"year": 2020, "season": "JF", "season_full": "Jan-Fev", "mei": -0.355, "phase": "Neutro", "tier": "neutral"}, {"year": 2020, "season": "FM", "season_full": "Fev-Mar", "mei": 0.378, "phase": "Neutro", "tier": "neutral"}, {"year": 2020, "season": "MA", "season_full": "Mar-Abr", "mei": 0.967, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2020, "season": "AM", "season_full": "Abr-Mai", "mei": 2.293, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 2020, "season": "MJ", "season_full": "Mai-Jun", "mei": 1.592, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 2020, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.986, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2020, "season": "JA", "season_full": "Jul-Ago", "mei": 0.573, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2020, "season": "AS", "season_full": "Ago-Set", "mei": -0.087, "phase": "Neutro", "tier": "neutral"}, {"year": 2020, "season": "SO", "season_full": "Set-Out", "mei": -0.017, "phase": "Neutro", "tier": "neutral"}, {"year": 2020, "season": "ON", "season_full": "Out-Nov", "mei": 0.204, "phase": "Neutro", "tier": "neutral"}, {"year": 2020, "season": "ND", "season_full": "Nov-Dez", "mei": 0.11, "phase": "Neutro", "tier": "neutral"}, {"year": 2021, "season": "DJ", "season_full": "Dez-Jan", "mei": 0.756, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2021, "season": "JF", "season_full": "Jan-Fev", "mei": 0.368, "phase": "Neutro", "tier": "neutral"}, {"year": 2021, "season": "FM", "season_full": "Fev-Mar", "mei": 0.145, "phase": "Neutro", "tier": "neutral"}, {"year": 2021, "season": "MA", "season_full": "Mar-Abr", "mei": -0.197, "phase": "Neutro", "tier": "neutral"}, {"year": 2021, "season": "AM", "season_full": "Abr-Mai", "mei": -1.08, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2021, "season": "MJ", "season_full": "Mai-Jun", "mei": -1.667, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2021, "season": "JJ", "season_full": "Jun-Jul", "mei": -1.949, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2021, "season": "JA", "season_full": "Jul-Ago", "mei": -0.74, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2021, "season": "AS", "season_full": "Ago-Set", "mei": -0.24, "phase": "Neutro", "tier": "neutral"}, {"year": 2021, "season": "SO", "season_full": "Set-Out", "mei": 0.553, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2021, "season": "ON", "season_full": "Out-Nov", "mei": -0.471, "phase": "Neutro", "tier": "neutral"}, {"year": 2021, "season": "ND", "season_full": "Nov-Dez", "mei": -1.397, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2022, "season": "DJ", "season_full": "Dez-Jan", "mei": -1.372, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2022, "season": "JF", "season_full": "Jan-Fev", "mei": -0.997, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2022, "season": "FM", "season_full": "Fev-Mar", "mei": -0.556, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2022, "season": "MA", "season_full": "Mar-Abr", "mei": 0.114, "phase": "Neutro", "tier": "neutral"}, {"year": 2022, "season": "AM", "season_full": "Abr-Mai", "mei": 0.16, "phase": "Neutro", "tier": "neutral"}, {"year": 2022, "season": "MJ", "season_full": "Mai-Jun", "mei": 1.161, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2022, "season": "JJ", "season_full": "Jun-Jul", "mei": 0.646, "phase": "El Ni\u00f1o", "tier": "el"}, {"year": 2022, "season": "JA", "season_full": "Jul-Ago", "mei": 0.049, "phase": "Neutro", "tier": "neutral"}, {"year": 2022, "season": "AS", "season_full": "Ago-Set", "mei": -0.874, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2022, "season": "SO", "season_full": "Set-Out", "mei": -1.091, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2022, "season": "ON", "season_full": "Out-Nov", "mei": -0.696, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2022, "season": "ND", "season_full": "Nov-Dez", "mei": -1.146, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2023, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.291, "phase": "Neutro", "tier": "neutral"}, {"year": 2023, "season": "JF", "season_full": "Jan-Fev", "mei": 0.482, "phase": "Neutro", "tier": "neutral"}, {"year": 2023, "season": "FM", "season_full": "Fev-Mar", "mei": -1.144, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2023, "season": "MA", "season_full": "Mar-Abr", "mei": -0.156, "phase": "Neutro", "tier": "neutral"}, {"year": 2023, "season": "AM", "season_full": "Abr-Mai", "mei": -1.609, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2023, "season": "MJ", "season_full": "Mai-Jun", "mei": -0.83, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2023, "season": "JJ", "season_full": "Jun-Jul", "mei": -0.05, "phase": "Neutro", "tier": "neutral"}, {"year": 2023, "season": "JA", "season_full": "Jul-Ago", "mei": -0.118, "phase": "Neutro", "tier": "neutral"}, {"year": 2023, "season": "AS", "season_full": "Ago-Set", "mei": 1.9, "phase": "El Ni\u00f1o Forte", "tier": "strong"}, {"year": 2023, "season": "SO", "season_full": "Set-Out", "mei": 2.1, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 2023, "season": "ON", "season_full": "Out-Nov", "mei": -0.88, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2023, "season": "ND", "season_full": "Nov-Dez", "mei": -0.818, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2024, "season": "DJ", "season_full": "Dez-Jan", "mei": -0.785, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2024, "season": "JF", "season_full": "Jan-Fev", "mei": -0.698, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2024, "season": "FM", "season_full": "Fev-Mar", "mei": -0.444, "phase": "Neutro", "tier": "neutral"}, {"year": 2024, "season": "MA", "season_full": "Mar-Abr", "mei": -1.114, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2024, "season": "AM", "season_full": "Abr-Mai", "mei": -0.935, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2024, "season": "MJ", "season_full": "Mai-Jun", "mei": 0.13, "phase": "Neutro", "tier": "neutral"}, {"year": 2024, "season": "JJ", "season_full": "Jun-Jul", "mei": -0.285, "phase": "Neutro", "tier": "neutral"}, {"year": 2024, "season": "JA", "season_full": "Jul-Ago", "mei": -0.43, "phase": "Neutro", "tier": "neutral"}, {"year": 2024, "season": "AS", "season_full": "Ago-Set", "mei": 0.321, "phase": "Neutro", "tier": "neutral"}, {"year": 2024, "season": "SO", "season_full": "Set-Out", "mei": -1.383, "phase": "La Ni\u00f1a", "tier": "la"}, {"year": 2024, "season": "ON", "season_full": "Out-Nov", "mei": -0.146, "phase": "Neutro", "tier": "neutral"}, {"year": 2024, "season": "ND", "season_full": "Nov-Dez", "mei": -0.679, "phase": "La Ni\u00f1a", "tier": "la"}];
-const FC       = [{"step": 1, "mei": -0.439, "lo": -1.769, "hi": 0.891, "phase": "Neutro", "tier": "neutral"}, {"step": 2, "mei": -0.416, "lo": -1.811, "hi": 0.979, "phase": "Neutro", "tier": "neutral"}, {"step": 3, "mei": -0.35, "lo": -1.807, "hi": 1.107, "phase": "Neutro", "tier": "neutral"}, {"step": 4, "mei": -0.307, "lo": -1.824, "hi": 1.21, "phase": "Neutro", "tier": "neutral"}, {"step": 5, "mei": -0.267, "lo": -1.841, "hi": 1.307, "phase": "Neutro", "tier": "neutral"}, {"step": 6, "mei": -0.235, "lo": -1.864, "hi": 1.394, "phase": "Neutro", "tier": "neutral"}, {"step": 7, "mei": -0.208, "lo": -1.891, "hi": 1.475, "phase": "Neutro", "tier": "neutral"}, {"step": 8, "mei": -0.185, "lo": -1.92, "hi": 1.55, "phase": "Neutro", "tier": "neutral"}, {"step": 9, "mei": -0.166, "lo": -1.951, "hi": 1.619, "phase": "Neutro", "tier": "neutral"}, {"step": 10, "mei": -0.15, "lo": -1.984, "hi": 1.684, "phase": "Neutro", "tier": "neutral"}, {"step": 11, "mei": -0.136, "lo": -2.017, "hi": 1.745, "phase": "Neutro", "tier": "neutral"}, {"step": 12, "mei": -0.125, "lo": -2.053, "hi": 1.803, "phase": "Neutro", "tier": "neutral"}, {"step": 13, "mei": -0.115, "lo": -2.088, "hi": 1.858, "phase": "Neutro", "tier": "neutral"}, {"step": 14, "mei": -0.107, "lo": -2.125, "hi": 1.911, "phase": "Neutro", "tier": "neutral"}, {"step": 15, "mei": -0.101, "lo": -2.162, "hi": 1.96, "phase": "Neutro", "tier": "neutral"}, {"step": 16, "mei": -0.095, "lo": -2.198, "hi": 2.008, "phase": "Neutro", "tier": "neutral"}, {"step": 17, "mei": -0.09, "lo": -2.235, "hi": 2.055, "phase": "Neutro", "tier": "neutral"}, {"step": 18, "mei": -0.086, "lo": -2.272, "hi": 2.1, "phase": "Neutro", "tier": "neutral"}, {"step": 19, "mei": -0.083, "lo": -2.309, "hi": 2.143, "phase": "Neutro", "tier": "neutral"}, {"step": 20, "mei": -0.08, "lo": -2.345, "hi": 2.185, "phase": "Neutro", "tier": "neutral"}, {"step": 21, "mei": -0.078, "lo": -2.382, "hi": 2.226, "phase": "Neutro", "tier": "neutral"}, {"step": 22, "mei": -0.076, "lo": -2.418, "hi": 2.266, "phase": "Neutro", "tier": "neutral"}, {"step": 23, "mei": -0.074, "lo": -2.454, "hi": 2.306, "phase": "Neutro", "tier": "neutral"}, {"step": 24, "mei": -0.073, "lo": -2.49, "hi": 2.344, "phase": "Neutro", "tier": "neutral"}];
-const TOP_EL   = [{"year": 1997, "season": "SO", "season_full": "Set-Out", "mei": 2.9, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1979, "season": "JJ", "season_full": "Jun-Jul", "mei": 2.84, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1997, "season": "AS", "season_full": "Ago-Set", "mei": 2.8, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1997, "season": "ND", "season_full": "Nov-Dez", "mei": 2.6, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 2015, "season": "ND", "season_full": "Nov-Dez", "mei": 2.6, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1997, "season": "JA", "season_full": "Jul-Ago", "mei": 2.5, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 2015, "season": "SO", "season_full": "Set-Out", "mei": 2.5, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1988, "season": "AM", "season_full": "Abr-Mai", "mei": 2.428, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1988, "season": "JA", "season_full": "Jul-Ago", "mei": 2.403, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1998, "season": "DJ", "season_full": "Dez-Jan", "mei": 2.4, "phase": "Super El Ni\u00f1o", "tier": "super"}];
-const TOP_LA   = [{"year": 2011, "season": "MJ", "season_full": "Mai-Jun", "mei": -2.655, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1994, "season": "MJ", "season_full": "Mai-Jun", "mei": -2.408, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1994, "season": "AS", "season_full": "Ago-Set", "mei": -2.313, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2011, "season": "AM", "season_full": "Abr-Mai", "mei": -2.229, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1994, "season": "JA", "season_full": "Jul-Ago", "mei": -2.224, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2011, "season": "MA", "season_full": "Mar-Abr", "mei": -2.194, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2001, "season": "FM", "season_full": "Fev-Mar", "mei": -2.163, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2018, "season": "AM", "season_full": "Abr-Mai", "mei": -2.135, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1984, "season": "AS", "season_full": "Ago-Set", "mei": -2.11, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1984, "season": "MJ", "season_full": "Mai-Jun", "mei": -1.99, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}];
-const MODEL    = {"order": 2, "phi": [0.5809066544831473, 0.2167430058298856], "mu": -0.0657391304347826, "sigma2": 0.46067658747269674, "aic": 999, "rho": [0.7405517373392566], "n": 552};
-const STATS    = {"n": 552, "year_min": 1979, "year_max": 2024, "mean": -0.0657, "std": 1.0332, "min_val": -2.655, "max_val": 2.9, "skewness": 0.3602, "kurtosis": -0.142, "phase_counts": {"neutral": 193, "la": 174, "el": 110, "la-strong": 34, "super": 21, "strong": 20}, "top_el": [{"year": 1997, "season": "SO", "season_full": "Set-Out", "mei": 2.9, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1979, "season": "JJ", "season_full": "Jun-Jul", "mei": 2.84, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1997, "season": "AS", "season_full": "Ago-Set", "mei": 2.8, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1997, "season": "ND", "season_full": "Nov-Dez", "mei": 2.6, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 2015, "season": "ND", "season_full": "Nov-Dez", "mei": 2.6, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1997, "season": "JA", "season_full": "Jul-Ago", "mei": 2.5, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 2015, "season": "SO", "season_full": "Set-Out", "mei": 2.5, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1988, "season": "AM", "season_full": "Abr-Mai", "mei": 2.428, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1988, "season": "JA", "season_full": "Jul-Ago", "mei": 2.403, "phase": "Super El Ni\u00f1o", "tier": "super"}, {"year": 1998, "season": "DJ", "season_full": "Dez-Jan", "mei": 2.4, "phase": "Super El Ni\u00f1o", "tier": "super"}], "top_la": [{"year": 2011, "season": "MJ", "season_full": "Mai-Jun", "mei": -2.655, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1994, "season": "MJ", "season_full": "Mai-Jun", "mei": -2.408, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1994, "season": "AS", "season_full": "Ago-Set", "mei": -2.313, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2011, "season": "AM", "season_full": "Abr-Mai", "mei": -2.229, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1994, "season": "JA", "season_full": "Jul-Ago", "mei": -2.224, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2011, "season": "MA", "season_full": "Mar-Abr", "mei": -2.194, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2001, "season": "FM", "season_full": "Fev-Mar", "mei": -2.163, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 2018, "season": "AM", "season_full": "Abr-Mai", "mei": -2.135, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1984, "season": "AS", "season_full": "Ago-Set", "mei": -2.11, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}, {"year": 1984, "season": "MJ", "season_full": "Mai-Jun", "mei": -1.99, "phase": "La Ni\u00f1a Forte", "tier": "la-strong"}]};
+'use strict';
 
-// ── Helpers ──────────────────────────────────────────────────────────────
-const C = {
-  elSuper:"#ffd700", elStrong:"#ff6a00", el:"#ff3d00",
-  la:"#1c8fff", neutral:"#6a8ca8", accent:"#e8b84b",
-  text:"#bcd4e6", dim:"#2e4a60", panel:"#070e18", border:"#0f2030"
-};
+// ── Data & URLs ───────────────────────────────────────────────────────────
+const INPE_URL="https://terrabrasilis.dpi.inpe.br/queimadas/situacao-atual/media/bioma/csv_estatisticas/historico_bioma_amazonia.csv";
+const MEI_URL ="https://psl.noaa.gov/enso/mei/data/meiv2.data";
+const AMO_URL ="https://psl.noaa.gov/data/correlation/amon.us.long.data";
+const PDO_URL ="https://psl.noaa.gov/data/correlation/pdo.data";
+const PROXY   = u=>`https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`;
 
-function meiColor(v) {
-  if (v >=  2.0) return C.elSuper;
-  if (v >=  1.5) return C.elStrong;
-  if (v >=  0.5) return C.el;
-  if (v <= -0.5) return C.la;
-  return C.neutral;
+const MPT=["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
+const MFULL=["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+const BISEASONS=["DJ","JF","FM","MA","AM","MJ","JJ","JA","AS","SO","ON","ND"];
+
+const C={ember:"#d94f1e",ember2:"#f07030",gold:"#c8930a",gold2:"#e8b84b",
+         leaf:"#1f6e40",leaf2:"#3dac68",sky:"#1558a8",sky2:"#5fa8e8",
+         mei:"#e8b84b",amo:"#3dac68",pdo:"#5fa8e8",
+         afci:"#f07030",afci3:"#d94f1e",
+         bg:"#131d2b",border:"rgba(255,255,255,.07)",
+         text:"#edeae2",dim:"#7a8fa8"};
+
+Chart.defaults.color=C.dim;Chart.defaults.borderColor=C.border;
+Chart.defaults.font.family="'DM Mono',monospace";Chart.defaults.font.size=10;
+
+let INPE=null,CLIMATE=null,AFCI=null,CH={};
+
+// ── Utils ─────────────────────────────────────────────────────────────────
+const fmt=(v,d=0)=>v==null||isNaN(v)?"—":Number(v).toLocaleString("pt-BR",{maximumFractionDigits:d});
+const fs=(v,d=2)=>v==null||isNaN(v)?"—":(v>0?"+":"")+Number(v).toFixed(d);
+const rc=v=>v==null||isNaN(v)?C.dim:v>1.5?C.ember:v>1.0?C.ember2:v>0.5?C.gold2:v>-0.5?C.dim:v>-1.0?C.sky2:C.sky2;
+const rl=v=>v==null||isNaN(v)?"—":v>1.5?"Extremo":v>1.0?"Alto":v>0.5?"Elevado":v>-0.5?"Neutro":v>-1.0?"Baixo":"Muito baixo";
+
+function lg(msg,t="dim"){
+  const b=document.getElementById("logBox");
+  b.innerHTML+=`<div class="l${t}">${msg}</div>`;b.scrollTop=b.scrollHeight;
 }
 
-function fmt(v, p=3) {
-  if (v===undefined||v===null) return "—";
-  return (v>0?"+":"")+v.toFixed(p);
-}
-
-function badge(color, text) {
-  return `<span class="badge" style="background:${color}18;border:1px solid ${color}50;color:${color}">${text}</span>`;
-}
-
-// ── Tabs ─────────────────────────────────────────────────────────────────
-function showTab(id, btn) {
-  document.querySelectorAll(".tab-pane").forEach(p=>p.classList.remove("active"));
-  document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
+// ── Tabs ──────────────────────────────────────────────────────────────────
+function showTab(id,btn){
+  document.querySelectorAll(".tp").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".tb").forEach(b=>b.classList.remove("active"));
   document.getElementById("tab-"+id).classList.add("active");
   btn.classList.add("active");
-  if (id==="serie") setTimeout(redrawChart, 50);
+  if(id==="heatmap"&&INPE) buildHeatmap();
+  if(id==="tabela"&&INPE) buildTable();
 }
 
-// ── Chart.js main chart ───────────────────────────────────────────────────
-let mainChartInst = null;
+// ═══════════════════════════════════════════════════════════════════════════
+// INPE
+// ═══════════════════════════════════════════════════════════════════════════
+function parseINPE(csv){
+  const skip=["Máximo","Média","Mínimo"];
+  const years=[],monthly={},annual={};
+  for(const raw of csv.trim().split("\n")){
+    const c=raw.split(",");const yr=c[0].trim();
+    if(!yr||isNaN(parseInt(yr))) continue;
+    if(skip.some(s=>yr.startsWith(s))) continue;
+    const y=parseInt(yr); let tot=0,has=false;
+    const vals=[];
+    for(let m=0;m<12;m++){const v=parseFloat(c[m+1]);
+      if(isNaN(v)){vals.push(null);has=true;}else{vals.push(v);tot+=v;}}
+    years.push(y);monthly[y]=vals;
+    annual[y]=(has&&tot<8000)?tot:(isNaN(tot)?null:tot);
+  }
+  const av=Object.values(annual).filter(v=>v&&v>10000);
+  const mean=av.reduce((a,b)=>a+b,0)/av.length;
+  const maxE=Object.entries(annual).filter(([,v])=>v).sort(([,a],[,b])=>b-a)[0];
+  const minE=Object.entries(annual).filter(([,v])=>v&&v>10000).sort(([,a],[,b])=>a-b)[0];
+  const mm=[],ms=[];
+  for(let m=0;m<12;m++){
+    const vs=Object.values(monthly).map(v=>v[m]).filter(v=>v!=null);
+    const mn=vs.reduce((a,b)=>a+b,0)/vs.length;
+    mm.push(mn);ms.push(Math.sqrt(vs.reduce((a,b)=>a+(b-mn)**2,0)/vs.length));
+  }
+  return{years,monthly,annual,mean,maxE,minE,mm,ms};
+}
 
-function redrawChart() {
-  const sel = document.getElementById("yearSel").value;
-  const now = new Date().getFullYear();
-  const filtered = sel==="all" ? OBS : OBS.filter(d=>d.year>=now-parseInt(sel));
+async function loadINPE(){
+  try{
+    const r=await fetch(INPE_URL,{cache:"no-cache"});
+    if(!r.ok)throw new Error(r.status);
+    INPE=parseINPE(await r.text());
+  }catch(e){
+    // Embedded fallback
+    INPE=parseINPE(`,Janeiro,Fevereiro,Março,Abril,Maio,Junho,Julho,Agosto,Setembro,Outubro,Novembro,Dezembro,Total
+1998,,,,,,1549.0,3192.0,20075.0,19214.0,8777.0,3833.0,2547.0,59187.0
+1999,160.0,358.0,130.0,70.0,449.0,1439.0,3675.0,21525.0,16106.0,12794.0,4449.0,1703.0,62858.0
+2000,87.0,182.0,405.0,92.0,930.0,3211.0,1510.0,12791.0,10062.0,10226.0,5497.0,3175.0,48168.0
+2001,165.0,699.0,1134.0,617.0,916.0,4227.0,1816.0,17679.0,15528.0,14292.0,8346.0,4256.0,69675.0
+2002,590.0,667.0,901.0,405.0,1490.0,5702.0,7529.0,43484.0,48549.0,27110.0,23660.0,9174.0,169261.0
+2003,3704.0,1573.0,1997.0,1038.0,1983.0,6848.0,15918.0,34765.0,47789.0,25341.0,19631.0,13813.0,174400.0
+2004,2178.0,805.0,1035.0,1012.0,3131.0,9179.0,19179.0,43320.0,71522.0,23928.0,26424.0,16924.0,218637.0
+2005,4314.0,1048.0,758.0,832.0,1746.0,2954.0,19364.0,63764.0,68560.0,26624.0,16790.0,6966.0,213720.0
+2006,1973.0,879.0,903.0,709.0,843.0,2522.0,6995.0,34208.0,51028.0,18309.0,17474.0,8579.0,144422.0
+2007,1918.0,1761.0,1431.0,760.0,1176.0,3519.0,6196.0,46385.0,73141.0,28731.0,16025.0,5437.0,186480.0
+2008,938.0,527.0,860.0,569.0,383.0,1248.0,5901.0,21445.0,26469.0,23518.0,15450.0,6145.0,103453.0
+2009,1095.0,354.0,584.0,435.0,673.0,1023.0,2327.0,9732.0,20527.0,19323.0,19104.0,6505.0,81682.0
+2010,1697.0,1147.0,1176.0,633.0,1026.0,1911.0,5868.0,45018.0,43933.0,14798.0,12167.0,5240.0,134614.0
+2011,771.0,271.0,427.0,465.0,528.0,1083.0,2445.0,8002.0,16987.0,9760.0,9815.0,7632.0,58186.0
+2012,1203.0,438.0,484.0,473.0,855.0,1875.0,3095.0,20687.0,24067.0,14814.0,13259.0,5469.0,86719.0
+2013,1181.0,374.0,738.0,518.0,796.0,1450.0,2531.0,9444.0,16786.0,10242.0,6615.0,8013.0,58688.0
+2014,1573.0,473.0,1010.0,632.0,673.0,1628.0,2766.0,20113.0,20522.0,13221.0,12169.0,7773.0,82553.0
+2015,2042.0,1047.0,572.0,762.0,407.0,1287.0,2817.0,20471.0,29326.0,19469.0,16935.0,11303.0,106438.0
+2016,4657.0,1559.0,2024.0,1075.0,895.0,1663.0,6120.0,18340.0,20460.0,14234.0,11610.0,5124.0,87761.0
+2017,796.0,379.0,736.0,618.0,805.0,1759.0,7986.0,21244.0,36569.0,14457.0,14105.0,7985.0,107439.0
+2018,1444.0,888.0,1359.0,513.0,772.0,1980.0,4788.0,10421.0,24803.0,10654.0,8881.0,1842.0,68345.0
+2019,1419.0,1368.0,3383.0,1702.0,854.0,1880.0,5318.0,30900.0,19925.0,7855.0,11297.0,3275.0,89176.0
+2020,1200.0,1196.0,1641.0,789.0,829.0,2248.0,6803.0,29307.0,32017.0,17326.0,6321.0,3484.0,103161.0
+2021,794.0,864.0,643.0,615.0,1166.0,2305.0,4977.0,28060.0,16742.0,11549.0,5779.0,1596.0,75090.0
+2022,1226.0,584.0,490.0,384.0,2287.0,2562.0,5373.0,33116.0,41282.0,13911.0,11062.0,2756.0,115033.0
+2023,1056.0,734.0,1019.0,768.0,1692.0,3075.0,5772.0,17372.0,26449.0,22061.0,13940.0,4701.0,98639.0
+2024,2049.0,3157.0,2654.0,1117.0,1670.0,2842.0,11434.0,38266.0,41463.0,16169.0,14158.0,5367.0,140346.0
+2025,1219.0,399.0,772.0,293.0,836.0,1650.0,2183.0,6094.0,7211.0,7868.0,9568.0,5038.0,43131.0
+2026,2056.0,873.0,873.0,402.0,,,,,,,,,4204.0`);
+  }
+  setINPEStats();
+  buildAnual();buildMensal();buildHeatmap();buildTable();
+}
 
-  const labels    = filtered.map(d=>`${d.season} ${d.year}`);
-  const vals      = filtered.map(d=>d.mei);
-  const ptColors  = vals.map(v=>meiColor(v));
+function setINPEStats(){
+  const d=INPE;
+  document.getElementById("smaxY").textContent=d.maxE[0];
+  document.getElementById("smaxV").textContent=fmt(d.maxE[1])+" focos";
+  document.getElementById("sminY").textContent=d.minE[0];
+  document.getElementById("sminV").textContent=fmt(d.minE[1])+" focos";
+  document.getElementById("smean").textContent=fmt(Math.round(d.mean));
+  const pk=d.mm.indexOf(Math.max(...d.mm));
+  document.getElementById("speak").textContent=MPT[pk];
+  document.getElementById("speakV").textContent=fmt(Math.round(d.mm[pk]))+" focos/mês";
+  document.getElementById("s2024").textContent=fmt(d.annual[2024]);
+  document.getElementById("s2026").textContent=d.annual[2026]?fmt(d.annual[2026]):"—";
+  // Hero
+  document.getElementById("h2025").textContent=d.annual[2025]?fmt(d.annual[2025]):"—";
+  if(d.annual[2025]&&d.mean){
+    const p=((d.annual[2025]-d.mean)/d.mean*100);
+    document.getElementById("hvsmed").textContent=fs(p,0)+"%";
+  }
+  document.getElementById("hrec").textContent=d.maxE[0];
+  document.getElementById("hyrs").textContent=d.years.length;
+  document.getElementById("heroDate").textContent=new Date().toLocaleDateString("pt-BR");
+}
 
-  // forecast extension
-  const fcLabels  = FC.map(f=>`FC+${f.step}`);
-  const fcVals    = FC.map(f=>f.mei);
-  const fcHi      = FC.map(f=>f.hi);
-  const fcLo      = FC.map(f=>f.lo);
-  const allLabels = [...labels, ...fcLabels];
-  const nObs      = labels.length;
+// ─ Chart: Anual ───────────────────────────────────────────────────────────
+function buildAnual(){
+  const labs=INPE.years.filter(y=>INPE.annual[y]&&INPE.annual[y]>100);
+  const vals=labs.map(y=>INPE.annual[y]);
+  const mean=INPE.mean;
+  const bc=labs.map(y=>y===2026?"rgba(200,147,10,.55)":INPE.annual[y]>=mean?"rgba(217,79,30,.72)":"rgba(95,168,232,.6)");
+  if(CH.an) CH.an.destroy();
+  CH.an=new Chart(document.getElementById("cAnual"),{
+    type:"bar",
+    data:{labels:labs,datasets:[
+      {label:"Focos anuais",data:vals,backgroundColor:bc,borderWidth:0,borderRadius:2},
+      {label:"Média",data:labs.map(()=>mean),type:"line",borderColor:"rgba(200,147,10,.55)",
+       borderWidth:1.5,borderDash:[5,4],pointRadius:0,fill:false}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{backgroundColor:C.bg,borderColor:C.border,borderWidth:1,
+        callbacks:{label:c=>{const v=c.parsed.y;const p=((v-mean)/mean*100).toFixed(0);
+          return ` ${c.dataset.label}: ${fmt(v)}  (${p>0?"+":""}${p}% vs média)`}}}},
+      scales:{x:{grid:{color:C.border},ticks:{color:C.dim,maxRotation:45,font:{size:8.5}}},
+              y:{grid:{color:C.border},ticks:{color:C.dim,callback:v=>fmt(v)}}}}
+  });
+}
 
-  if (mainChartInst) mainChartInst.destroy();
+// ─ Chart: Mensal ──────────────────────────────────────────────────────────
+function buildMensal(){
+  if(CH.men) CH.men.destroy();
+  CH.men=new Chart(document.getElementById("cMensal"),{
+    type:"bar",
+    data:{labels:MPT,datasets:[
+      {label:"Média",data:INPE.mm.map(v=>Math.round(v)),backgroundColor:"rgba(217,79,30,.6)",
+       borderColor:"rgba(217,79,30,.85)",borderWidth:1,borderRadius:3},
+      {label:"+1σ",data:INPE.mm.map((v,i)=>Math.round(v+INPE.ms[i])),type:"line",
+       borderColor:"rgba(200,147,10,.4)",borderWidth:1,borderDash:[3,3],pointRadius:0,
+       fill:"-1",backgroundColor:"rgba(200,147,10,.07)"},
+      {label:"-1σ",data:INPE.mm.map((v,i)=>Math.round(Math.max(0,v-INPE.ms[i]))),type:"line",
+       borderColor:"rgba(200,147,10,.4)",borderWidth:1,borderDash:[3,3],pointRadius:0,fill:false},
+      {label:"2024",data:INPE.monthly[2024]||[],type:"line",borderColor:"rgba(200,147,10,.9)",
+       borderWidth:2,pointRadius:3,fill:false},
+      {label:"2025",data:INPE.monthly[2025]||[],type:"line",borderColor:"rgba(95,168,232,.9)",
+       borderWidth:2,pointRadius:3,fill:false},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:C.dim,font:{size:9}}}},
+      scales:{x:{grid:{color:C.border},ticks:{color:C.dim}},
+              y:{grid:{color:C.border},ticks:{color:C.dim,callback:v=>fmt(v)}}}}
+  });
+}
 
-  const ctx = document.getElementById("mainChart").getContext("2d");
-  mainChartInst = new Chart(ctx, {
-    type: "line",
-    data: {
-      labels: allLabels,
-      datasets: [
-        // CI upper (fill to lower)
-        {
-          label:"IC Hi", data:[...Array(nObs).fill(null),...fcHi],
-          borderWidth:0, pointRadius:0, fill:"+1",
-          backgroundColor:"rgba(232,184,75,0.10)", tension:0.4, order:10
-        },
-        // CI lower
-        {
-          label:"IC Lo", data:[...Array(nObs).fill(null),...fcLo],
-          borderWidth:0, pointRadius:0, fill:false, tension:0.4, order:11
-        },
-        // Forecast line
-        {
-          label:"Previsão AR",
-          data:[...Array(nObs).fill(null),...fcVals],
-          borderColor:"rgba(232,184,75,0.9)", borderWidth:2, borderDash:[7,4],
-          pointRadius:3, pointBackgroundColor:fcVals.map(v=>meiColor(v)),
-          tension:0.4, fill:false, order:2
-        },
-        // Observed
-        {
-          label:"MEI Observado", data:[...vals,...Array(FC.length).fill(null)],
-          borderColor:"rgba(188,212,230,0.5)", borderWidth:1.3,
-          pointRadius:vals.length<300?2:0,
-          pointBackgroundColor:ptColors,
-          tension:0.25, fill:false, order:1
-        }
-      ]
-    },
-    options: {
-      responsive:true, maintainAspectRatio:false,
-      interaction:{mode:"index",intersect:false},
-      plugins:{
-        legend:{display:false},
-        tooltip:{
-          backgroundColor:"#070e18", borderColor:"#0f2030", borderWidth:1,
-          titleColor:"#bcd4e6", bodyColor:"#6a8ca8",
-          titleFont:{family:"Space Mono",size:10},
-          bodyFont:{family:"Space Mono",size:10},
-          callbacks:{
-            label: ctx => {
-              const v = ctx.parsed.y;
-              if (v===null) return null;
-              if (ctx.dataset.label==="IC Hi"||ctx.dataset.label==="IC Lo") return null;
-              let ph="—";
-              if (v>=2) ph="Super El Niño";
-              else if (v>=1.5) ph="El Niño Forte";
-              else if (v>=0.5) ph="El Niño";
-              else if (v<=-1.5) ph="La Niña Forte";
-              else if (v<=-0.5) ph="La Niña";
-              else ph="Neutro";
-              return ` ${ctx.dataset.label}: ${fmt(v)} — ${ph}`;
-            }
-          }
-        }
-      },
-      scales:{
-        x:{
-          grid:{color:"rgba(15,32,48,0.7)"},
-          ticks:{color:"#2e4a60",font:{family:"Space Mono",size:8},
-            maxTicksLimit:20,maxRotation:45}
-        },
-        y:{
-          grid:{color:"rgba(15,32,48,0.7)"},
-          ticks:{color:"#2e4a60",font:{family:"Space Mono",size:9},
-            callback:v=>(v>0?"+":"")+v.toFixed(1)+"°"}
-        }
-      }
-    },
-    plugins:[{
-      id:"thresholds",
-      afterDraw(chart) {
-        const {ctx:c,chartArea:ca,scales} = chart;
-        if (!ca) return;
-        c.save();
-        [[0.5,"#ff3d00"],[- 0.5,"#1c8fff"],[2.0,"#ffd700"],[-1.5,"#1c8fff"]].forEach(([v,col])=>{
-          const y = scales.y.getPixelForValue(v);
-          c.beginPath(); c.strokeStyle=col+"55"; c.lineWidth=.9;
-          c.setLineDash([4,4]); c.moveTo(ca.left,y); c.lineTo(ca.right,y); c.stroke();
-          c.setLineDash([]);
-          c.fillStyle=col+"88"; c.font="8px Space Mono";
-          c.fillText((v>0?"+":"")+v, ca.right+4, y+3);
-        });
-        c.restore();
-      }
+// ─ Heatmap ────────────────────────────────────────────────────────────────
+function buildHeatmap(){
+  if(!INPE) return;
+  let gmax=0;
+  for(const y of INPE.years) for(let m=0;m<12;m++){const v=INPE.monthly[y]?.[m];if(v)gmax=Math.max(gmax,v);}
+  const cw=38,ch=22,lw=44,hh=20;
+  const W=lw+12*cw,H=hh+INPE.years.length*ch;
+  const cv=document.createElement("canvas");cv.width=W;cv.height=H;cv.style.display="block";
+  const ctx=cv.getContext("2d");
+  ctx.fillStyle="#131d2b";ctx.fillRect(0,0,W,H);
+  ctx.font="8.5px 'DM Mono',monospace";ctx.fillStyle="#7a8fa8";
+  for(let m=0;m<12;m++) ctx.fillText(MPT[m],lw+m*cw+4,hh-4);
+  for(let ri=0;ri<INPE.years.length;ri++){
+    const y=INPE.years[ri];
+    ctx.fillStyle="#7a8fa8";ctx.font="8.5px 'DM Mono',monospace";
+    ctx.fillText(y,2,hh+ri*ch+14);
+    for(let m=0;m<12;m++){
+      const v=INPE.monthly[y]?.[m];
+      if(v==null||isNaN(v)){ctx.fillStyle="rgba(255,255,255,.03)";}
+      else{const t=v/gmax;
+        const r=Math.round(20+t*210),g=Math.round(28+t*(80-28)*(1-Math.max(0,(t-.4)/.6))),b=Math.round(30*(1-t));
+        ctx.fillStyle=`rgb(${r},${g},${b})`;}
+      ctx.fillRect(lw+m*cw,hh+ri*ch,cw-1,ch-1);
+      if(v&&v>18000){ctx.fillStyle="rgba(255,255,255,.65)";ctx.font="7px 'DM Mono',monospace";
+        ctx.fillText(Math.round(v/1000)+"k",lw+m*cw+2,hh+ri*ch+13);}
+    }
+  }
+  const d=document.getElementById("heatDiv");d.innerHTML="";d.appendChild(cv);
+}
+
+// ─ Table ──────────────────────────────────────────────────────────────────
+function buildTable(){
+  if(!INPE) return;
+  document.getElementById("tHead").innerHTML=`<th>Ano</th>${MPT.map(m=>`<th>${m}</th>`).join("")}<th>Total</th>`;
+  document.getElementById("tBody").innerHTML=[...INPE.years].reverse().map(y=>{
+    const an=INPE.annual[y]?fmt(INPE.annual[y]):"—";
+    return`<tr><td style="color:var(--gold2)">${y}</td>${MPT.map((_,m)=>{
+      const v=INPE.monthly[y]?.[m];
+      if(v==null||isNaN(v)) return`<td style="color:rgba(122,143,168,.3)">—</td>`;
+      const t=v/70000,r=Math.round(50+t*190),g=Math.round(50*(1-t)),b=Math.round(50*(1-t));
+      return`<td style="color:rgb(${r},${g},${b})">${fmt(v)}</td>`;
+    }).join("")}<td style="font-weight:500">${an}</td></tr>`;
+  }).join("");
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CLIMATE FETCH + PARSE
+// ═══════════════════════════════════════════════════════════════════════════
+async function tryGet(url){
+  for(const u of[url,PROXY(url)]){
+    try{const r=await fetch(u,{cache:"no-cache"});if(!r.ok)continue;
+      const t=await r.text();if(t.length>300&&/\d{4}/.test(t))return t;}catch(e){}
+  }return null;
+}
+
+function parseMEI(text){
+  const rows=[];
+  for(const l of text.split("\n")){const s=l.trim();if(!s||!/^\d{4}/.test(s))continue;
+    const p=s.split(/\s+/);const y=parseInt(p[0]);if(y<1979)continue;
+    for(let i=0;i<12;i++){const v=parseFloat(p[i+1]);if(isNaN(v)||v<=-99)continue;
+      rows.push({date:new Date(y,i,1),year:y,month:i+1,mei:+v.toFixed(4)});}}
+  return rows.sort((a,b)=>a.date-b.date);
+}
+function parseMon(text,key){
+  const rows=[];
+  for(const l of text.split("\n")){const s=l.trim();if(!s||!/^\d{4}/.test(s))continue;
+    const p=s.split(/\s+/);try{const y=parseInt(p[0]);
+      for(let m=0;m<12;m++){const v=parseFloat(p[m+1]);if(isNaN(v)||Math.abs(v)>90)continue;
+        rows.push({date:new Date(y,m,1),year:y,month:m+1,[key]:+v.toFixed(4)});}}catch(e){}}
+  return rows.sort((a,b)=>a.date-b.date);
+}
+function mergeCl(mei,amo,pdo){
+  const mp={};
+  for(const r of mei){const k=`${r.year}-${r.month}`;mp[k]={...r};}
+  for(const r of amo){const k=`${r.year}-${r.month}`;if(mp[k])mp[k].amo=r.amo;}
+  for(const r of pdo){const k=`${r.year}-${r.month}`;if(mp[k])mp[k].pdo=r.pdo;}
+  return Object.values(mp).filter(r=>r.mei!=null&&r.amo!=null&&r.pdo!=null).sort((a,b)=>a.date-b.date);
+}
+
+async function fetchClimate(){
+  document.getElementById("btnFetch").disabled=true;
+  lg("Buscando MEI.v2 (NOAA PSL)...");
+  const[mt,at,pt]=await Promise.all([tryGet(MEI_URL),tryGet(AMO_URL),tryGet(PDO_URL)]);
+  if(!mt){lg("⚠ MEI.v2 inacessível.","warn");document.getElementById("btnFetch").disabled=false;return;}
+  const mei=parseMEI(mt),amo=at?parseMon(at,"amo"):[],pdo=pt?parseMon(pt,"pdo"):[];
+  lg(`✓ MEI.v2: ${mei.length} bi-meses (${mei[0].year}–${mei[mei.length-1].year})`,"ok");
+  lg(`✓ AMO: ${amo.length}  PDO: ${pdo.length}`,"ok");
+  CLIMATE=mergeCl(mei,amo,pdo);
+  lg(`✓ Combinado: ${CLIMATE.length} meses`,"ok");
+  redrawClimate();computeAFCI();
+  document.getElementById("btnFetch").disabled=false;
+}
+
+function redrawClimate(){
+  if(!CLIMATE)return;
+  const sel=document.getElementById("yrSel").value;
+  const now=new Date().getFullYear();
+  const minY=sel==="all"?0:now-parseInt(sel);
+  const data=CLIMATE.filter(d=>d.year>=minY);
+  const labs=data.map(d=>`${d.month.toString().padStart(2,"0")}/${d.year}`);
+  if(CH.cl)CH.cl.destroy();
+  CH.cl=new Chart(document.getElementById("cClimate"),{
+    type:"line",
+    data:{labels:labs,datasets:[
+      {label:"MEI.v2",data:data.map(d=>d.mei),borderColor:C.mei,borderWidth:1.5,pointRadius:0,tension:.25,fill:false},
+      {label:"AMO",   data:data.map(d=>d.amo),borderColor:C.amo,borderWidth:1.2,pointRadius:0,tension:.3,fill:false,borderDash:[4,3]},
+      {label:"PDO",   data:data.map(d=>d.pdo),borderColor:C.pdo,borderWidth:1.2,pointRadius:0,tension:.3,fill:false,borderDash:[2,3]},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},
+      plugins:{legend:{labels:{color:C.dim,font:{size:9}}},
+        tooltip:{backgroundColor:C.bg,borderColor:C.border,borderWidth:1}},
+      scales:{x:{grid:{color:C.border},ticks:{color:C.dim,maxTicksLimit:16,font:{size:8}}},
+              y:{grid:{color:C.border},ticks:{color:C.dim,callback:v=>(v>0?"+":"")+v.toFixed(1)}}}}
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// AFCI
+// ═══════════════════════════════════════════════════════════════════════════
+function zsc(a){const m=a.reduce((s,v)=>s+v,0)/a.length,sd=Math.sqrt(a.reduce((s,v)=>s+(v-m)**2,0)/a.length);return a.map(v=>(v-m)/sd);}
+function ar2(s,steps){
+  const n=s.length,mu=s.reduce((a,b)=>a+b,0)/n,d=s.map(v=>v-mu);
+  let r0=0,r1=0,r2=0;
+  for(let i=0;i<n;i++)r0+=d[i]**2;for(let i=1;i<n;i++)r1+=d[i]*d[i-1];for(let i=2;i<n;i++)r2+=d[i]*d[i-2];
+  r0/=n;r1/=n;r2/=n;
+  const rh1=r1/r0,rh2=r2/r0,dn=1-rh1**2;
+  const p1=(rh1*(1-rh2))/dn,p2=(rh2-rh1**2)/dn;
+  let sg=0;for(let i=2;i<n;i++){const e=d[i]-p1*d[i-1]-p2*d[i-2];sg+=e**2;}sg/=(n-2);
+  const ext=[...d];
+  return Array.from({length:steps},(_,h)=>{
+    const m2=ext.length,pdm=p1*ext[m2-1]+p2*ext[m2-2];ext.push(pdm);
+    const p=+(pdm+mu).toFixed(4),ci=+(1.96*Math.sqrt(sg*(1+h*.1))).toFixed(4);
+    return{mei:p,lo:+(p-ci).toFixed(4),hi:+(p+ci).toFixed(4)};
+  });
+}
+
+function computeAFCI(){
+  if(!CLIMATE)return;
+  const d=CLIMATE,mz=zsc(d.map(r=>r.mei)),az=zsc(d.map(r=>r.amo)),pz=zsc(d.map(r=>r.pdo));
+  const lag=1,wm=.5,wa=.3,wp=.2;
+  const af=d.map((_,i)=>i<lag?null:wm*mz[i-lag]+wa*az[i-lag]+wp*pz[i-lag]);
+  const af3=af.map((v,i)=>{if(v==null)return null;const w=af.slice(Math.max(0,i-1),i+2).filter(x=>x!=null);return w.reduce((a,b)=>a+b,0)/w.length;});
+  const fc=ar2(af.filter(v=>v!=null),12);
+  AFCI={series:d.map((r,i)=>({date:r.date,year:r.year,month:r.month,mei:r.mei,amo:r.amo,pdo:r.pdo,
+    mei_z:+mz[i].toFixed(4),amo_z:+az[i].toFixed(4),pdo_z:+pz[i].toFixed(4),
+    afci:af[i]!=null?+af[i].toFixed(4):null,afci_3m:af3[i]!=null?+af3[i].toFixed(4):null})),forecasts:fc};
+  updAfciStats();buildAFCI();buildSeas();if(INPE)buildScatter();
+  document.getElementById("tagAfci").style.display="inline-block";
+  lg("✓ AFCI calculado.","ok");
+}
+
+function updAfciStats(){
+  const last=AFCI.series.filter(s=>s.afci!=null).at(-1);if(!last)return;
+  const v=last.afci_3m??last.afci,rlv=rl(v),rclv=rc(v);
+  document.getElementById("acur").textContent=fs(last.afci);document.getElementById("acur").style.color=rclv;
+  document.getElementById("acurS").textContent=`${MPT[last.month-1]} ${last.year}`;
+  document.getElementById("arisk").textContent=rlv;document.getElementById("arisk").style.color=rclv;
+  const f6=AFCI.forecasts[5];
+  document.getElementById("afc6").textContent=f6?fs(f6.mei):"—";
+  document.getElementById("afc6").style.color=f6?rc(f6.mei):C.dim;
+}
+
+// ─ Chart AFCI ─────────────────────────────────────────────────────────────
+function buildAFCI(){
+  const obs=AFCI.series.filter(s=>s.afci!=null&&s.year>=2001);
+  const labs=obs.map(s=>`${s.month.toString().padStart(2,"0")}/${s.year}`);
+  let fd=new Date(obs[obs.length-1].date);
+  const fcL=AFCI.forecasts.map(()=>{fd=new Date(fd.getFullYear(),fd.getMonth()+1,1);return`${(fd.getMonth()+1).toString().padStart(2,"0")}/${fd.getFullYear()}`;});
+  const nO=labs.length;
+  if(CH.af)CH.af.destroy();
+  CH.af=new Chart(document.getElementById("cAFCI"),{
+    type:"line",
+    data:{labels:[...labs,...fcL],datasets:[
+      {label:"IC",data:[...Array(nO).fill(null),...AFCI.forecasts.map(f=>f.hi)],
+       borderWidth:0,pointRadius:0,fill:"+1",backgroundColor:"rgba(240,112,48,.07)",order:10},
+      {label:"IC Lo",data:[...Array(nO).fill(null),...AFCI.forecasts.map(f=>f.lo)],
+       borderWidth:0,pointRadius:0,fill:false,order:11},
+      {label:"Previsão AR(2)",data:[...Array(nO).fill(null),...AFCI.forecasts.map(f=>f.mei)],
+       borderColor:"rgba(200,147,10,.82)",borderWidth:2,borderDash:[6,4],pointRadius:0,fill:false,order:2},
+      {label:"AFCI 3m",data:[...obs.map(s=>s.afci_3m),...Array(AFCI.forecasts.length).fill(null)],
+       borderColor:C.afci3,borderWidth:2.5,pointRadius:0,tension:.3,fill:false,order:1},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:C.dim,font:{size:9},filter:i=>!["IC","IC Lo"].includes(i.text)}},
+        tooltip:{backgroundColor:C.bg,borderColor:C.border,borderWidth:1}},
+      scales:{x:{grid:{color:C.border},ticks:{color:C.dim,maxTicksLimit:16,font:{size:8}}},
+              y:{grid:{color:C.border},ticks:{color:C.dim,callback:v=>(v>0?"+":"")+v.toFixed(1)}}}},
+    plugins:[{id:"zl",afterDraw(ch){
+      const{ctx:c,chartArea:ca,scales}=ch;if(!ca)return;c.save();
+      [[0,"rgba(255,255,255,.14)"],[.5,C.ember+"55"],[-.5,C.sky2+"55"]].forEach(([v,col])=>{
+        const y=scales.y.getPixelForValue(v);c.beginPath();c.strokeStyle=col;c.lineWidth=v===0?1:.7;
+        c.setLineDash(v===0?[]:[3,4]);c.moveTo(ca.left,y);c.lineTo(ca.right,y);c.stroke();c.setLineDash([]);});
+      c.restore();}
     }]
   });
 }
 
-// ── Table ─────────────────────────────────────────────────────────────────
-function buildTable() {
-  const rows = [...OBS].reverse().slice(0,48);
-  document.getElementById("obsBody").innerHTML = rows.map((d,i)=>{
-    const col = meiColor(d.mei);
-    const int = Math.abs(d.mei)>=2?"Super":Math.abs(d.mei)>=1.5?"Forte":
-                Math.abs(d.mei)>=0.5?"Moderado":"Fraco/Neutro";
-    return `<tr>
-      <td>${d.season}</td><td>${d.season_full}</td><td>${d.year}</td>
-      <td style="color:${col};font-weight:700">${fmt(d.mei)}</td>
-      <td>${badge(col,d.phase)}</td>
-      <td style="color:var(--dim)">${int}</td>
-    </tr>`;
-  }).join("");
+// ─ Scatter ────────────────────────────────────────────────────────────────
+function buildScatter(){
+  if(!AFCI||!INPE)return;
+  const pts=[];
+  for(const s of AFCI.series){
+    if(s.afci==null)continue;
+    const v=INPE.monthly[s.year]?.[s.month-1];
+    if(v&&v>50)pts.push({x:s.afci,y:v,year:s.year,month:s.month});
+  }
+  if(!pts.length)return;
+  const xs=pts.map(p=>p.x),ys=pts.map(p=>p.y);
+  const mx=xs.reduce((a,b)=>a+b)/xs.length,my=ys.reduce((a,b)=>a+b)/ys.length;
+  const num=xs.reduce((a,v,i)=>a+(v-mx)*(ys[i]-my),0);
+  const den=Math.sqrt(xs.reduce((a,v)=>a+(v-mx)**2,0)*ys.reduce((a,v)=>a+(v-my)**2,0));
+  const r=den?num/den:0;
+  document.getElementById("acorr").textContent=r.toFixed(3);
+  document.getElementById("acorrS").textContent=`r=${r.toFixed(3)}  n=${pts.length}`;
+  if(CH.sc)CH.sc.destroy();
+  CH.sc=new Chart(document.getElementById("cScatter"),{
+    type:"scatter",
+    data:{datasets:[{label:`r=${r.toFixed(3)}`,data:pts,
+      backgroundColor:pts.map(p=>rc(p.x)+"bb"),pointRadius:3,pointHoverRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:C.dim,font:{size:9}}},
+        tooltip:{backgroundColor:C.bg,borderColor:C.border,borderWidth:1,
+          callbacks:{label:p=>`${MPT[p.raw.month-1]}/${p.raw.year}: AFCI=${fs(p.raw.x,2)} focos=${fmt(p.raw.y)}`}}},
+      scales:{x:{title:{display:true,text:"AFCI",color:C.dim,font:{size:9}},grid:{color:C.border},ticks:{color:C.dim,callback:v=>(v>0?"+":"")+v.toFixed(1)}},
+              y:{title:{display:true,text:"Focos INPE",color:C.dim,font:{size:9}},grid:{color:C.border},ticks:{color:C.dim,callback:v=>fmt(v)}}}}
+  });
 }
 
-// ── Rankings ──────────────────────────────────────────────────────────────
-function buildRank(data, elId) {
-  const maxV = Math.max(...data.map(d=>Math.abs(d.mei)));
-  document.getElementById(elId).innerHTML = data.map((d,i)=>{
-    const col = meiColor(d.mei);
-    const pct = Math.min(100, Math.abs(d.mei/maxV)*100);
-    return `<div class="rank-row">
-      <span style="color:var(--dim);font-size:10px;width:18px">${i+1}.</span>
-      <span style="font-size:10px;width:22px;color:var(--dim)">${d.season}</span>
-      <span style="font-size:10px;width:36px">${d.year}</span>
-      <div class="rank-bar-wrap">
-        <div class="rank-bar" style="width:${pct}%;background:${col}"></div>
-      </div>
-      <span style="color:${col};font-weight:700;font-size:12px;width:50px;text-align:right">
-        ${fmt(d.mei,2)}
-      </span>
-    </div>`;
-  }).join("");
+// ─ Sazonalidade ───────────────────────────────────────────────────────────
+function buildSeas(){
+  if(!AFCI)return;
+  const bm=Array.from({length:12},()=>[]);
+  for(const s of AFCI.series)if(s.afci!=null)bm[s.month-1].push(s.afci);
+  const am=bm.map(a=>a.reduce((x,y)=>x+y,0)/a.length);
+  if(CH.se)CH.se.destroy();
+  const ds=[{label:"AFCI médio",data:am.map(v=>+v.toFixed(3)),type:"line",borderColor:C.ember2,
+    borderWidth:2.5,pointRadius:5,pointBackgroundColor:am.map(v=>rc(v)),yAxisID:"y",fill:false,tension:.3}];
+  if(INPE)ds.push({label:"Focos INPE médios",data:INPE.mm.map(v=>Math.round(v)),type:"bar",
+    backgroundColor:"rgba(200,147,10,.28)",borderColor:"rgba(200,147,10,.65)",borderWidth:1,yAxisID:"y2"});
+  CH.se=new Chart(document.getElementById("cSeas"),{type:"bar",data:{labels:MPT,datasets:ds},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:C.dim,font:{size:9}}}},
+      scales:{x:{grid:{color:C.border},ticks:{color:C.dim}},
+        y:{grid:{color:C.border},ticks:{color:C.dim,callback:v=>(v>0?"+":"")+v.toFixed(1)},
+           title:{display:true,text:"AFCI",color:C.dim,font:{size:9}}},
+        y2:{position:"right",grid:{display:false},ticks:{color:C.dim,callback:v=>fmt(v)},
+            title:{display:true,text:"Focos INPE",color:C.dim,font:{size:9}}}}}
+  });
 }
 
-// ── Model params ──────────────────────────────────────────────────────────
-function buildModel() {
-  const rows = [
-    ["Ordem",    `AR(${MODEL.order})`,    "#e8b84b"],
-    ["μ média",  fmt(MODEL.mu,4),           meiColor(MODEL.mu)],
-    ["σ² resid.", MODEL.sigma2,             "var(--dim)"],
-    ["AIC",      MODEL.aic,                 "var(--dim)"],
-    ["ρ₁ autocorr.", MODEL.rho?.[0]??"-",  "var(--text)"],
-    ["ρ₂ autocorr.", MODEL.rho?.[1]??"-",  "var(--text)"],
-    ["n série",  MODEL.n,                   "#3ddc84"],
-    ["Horizonte",`${FC.length} bi-meses`, "#1c8fff"],
-    ...MODEL.phi.map((v,i)=>[`φ${i+1} (lag-${i+1})`, fmt(v,5), "var(--text)"])
-  ];
-  document.getElementById("modelParams").innerHTML = rows.map(([l,v,c])=>`
-    <div>
-      <div class="param-lbl">${l}</div>
-      <div class="param-val" style="color:${c}">${v}</div>
-    </div>`).join("");
-
-  document.getElementById("fcBody").innerHTML = FC.map((f,i)=>{
-    const col = meiColor(f.mei);
-    return `<tr>
-      <td style="color:var(--dim)">+${f.step}</td>
-      <td style="color:${col};font-weight:700">${fmt(f.mei)}</td>
-      <td style="color:var(--dim)">${f.lo}</td>
-      <td style="color:var(--dim)">${f.hi}</td>
-      <td>${badge(col,f.phase)}</td>
-    </tr>`;
-  }).join("");
+// ═══════════════════════════════════════════════════════════════════════════
+// DOWNLOADS
+// ═══════════════════════════════════════════════════════════════════════════
+function dlCSV(){
+  let rows=["Ano,Mes,Focos_INPE,MEI,AMO,PDO,AFCI,AFCI_3m,Risco"];
+  const af=AFCI?AFCI.series:[];
+  for(const s of af){
+    const f=INPE?INPE.monthly[s.year]?.[s.month-1]??"":"";
+    rows.push([s.year,s.month,f,s.mei,s.amo,s.pdo,s.afci,s.afci_3m,rl(s.afci_3m??s.afci)].join(","));
+  }
+  const b=new Blob([rows.join("\n")],{type:"text/csv"});
+  Object.assign(document.createElement("a"),{href:URL.createObjectURL(b),download:"ybyra_afci.csv"}).click();
+}
+function dlJSON(){
+  if(!AFCI){alert("Execute o cálculo do AFCI primeiro.");return;}
+  const b=new Blob([JSON.stringify({project:"YbYrá-BR",cnpq:"401741/2023-0",updated:new Date().toISOString(),
+    sources:{inpe:INPE_URL,mei:MEI_URL,amo:AMO_URL,pdo:PDO_URL},
+    observations:AFCI.series.map(s=>({...s,date:s.date.toISOString().slice(0,7)})),forecasts:AFCI.forecasts},null,2)],
+    {type:"application/json"});
+  Object.assign(document.createElement("a"),{href:URL.createObjectURL(b),download:"ybyra_afci.json"}).click();
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────
-window.addEventListener("DOMContentLoaded", () => {
-  buildTable();
-  buildRank(TOP_EL, "topEl");
-  buildRank(TOP_LA, "topLa");
-  buildModel();
-  setTimeout(redrawChart, 100);
-});
+// ─ Init ───────────────────────────────────────────────────────────────────
+window.addEventListener("DOMContentLoaded",loadINPE);
 </script>
 </body>
 </html>
