@@ -1,0 +1,5212 @@
+{
+  "meta": {
+    "source": "NOAA PSL (SIMULADO)",
+    "url": "https://psl.noaa.gov/enso/mei/data/meiv2.data",
+    "description": "MEI.v2 — dados simulados para teste",
+    "variables": "SLP,SST,U,V,OLR",
+    "region": "30S-30N 100E-70W",
+    "reference": "Wolter & Timlin (1993,1998,2011)",
+    "updated_utc": "2026-05-01T18:29:30.802090+00:00",
+    "pipeline": "IPAM/UFMA — Celso H. L. Silva-Junior"
+  },
+  "validation": {
+    "passed": true,
+    "errors": [],
+    "warnings": []
+  },
+  "statistics": {
+    "n": 552,
+    "year_min": 1979,
+    "year_max": 2024,
+    "mean": -0.0657,
+    "std": 1.0332,
+    "min_val": -2.655,
+    "max_val": 2.9,
+    "skewness": 0.3602,
+    "kurtosis": -0.142,
+    "phase_counts": {
+      "neutral": 193,
+      "la": 174,
+      "el": 110,
+      "la-strong": 34,
+      "super": 21,
+      "strong": 20
+    },
+    "top_el": [
+      {
+        "year": 1997,
+        "season": "SO",
+        "season_full": "Set-Out",
+        "mei": 2.9,
+        "phase": "Super El Niño",
+        "tier": "super"
+      },
+      {
+        "year": 1979,
+        "season": "JJ",
+        "season_full": "Jun-Jul",
+        "mei": 2.84,
+        "phase": "Super El Niño",
+        "tier": "super"
+      },
+      {
+        "year": 1997,
+        "season": "AS",
+        "season_full": "Ago-Set",
+        "mei": 2.8,
+        "phase": "Super El Niño",
+        "tier": "super"
+      },
+      {
+        "year": 1997,
+        "season": "ND",
+        "season_full": "Nov-Dez",
+        "mei": 2.6,
+        "phase": "Super El Niño",
+        "tier": "super"
+      },
+      {
+        "year": 2015,
+        "season": "ND",
+        "season_full": "Nov-Dez",
+        "mei": 2.6,
+        "phase": "Super El Niño",
+        "tier": "super"
+      },
+      {
+        "year": 1997,
+        "season": "JA",
+        "season_full": "Jul-Ago",
+        "mei": 2.5,
+        "phase": "Super El Niño",
+        "tier": "super"
+      },
+      {
+        "year": 2015,
+        "season": "SO",
+        "season_full": "Set-Out",
+        "mei": 2.5,
+        "phase": "Super El Niño",
+        "tier": "super"
+      },
+      {
+        "year": 1988,
+        "season": "AM",
+        "season_full": "Abr-Mai",
+        "mei": 2.428,
+        "phase": "Super El Niño",
+        "tier": "super"
+      },
+      {
+        "year": 1988,
+        "season": "JA",
+        "season_full": "Jul-Ago",
+        "mei": 2.403,
+        "phase": "Super El Niño",
+        "tier": "super"
+      },
+      {
+        "year": 1998,
+        "season": "DJ",
+        "season_full": "Dez-Jan",
+        "mei": 2.4,
+        "phase": "Super El Niño",
+        "tier": "super"
+      }
+    ],
+    "top_la": [
+      {
+        "year": 2011,
+        "season": "MJ",
+        "season_full": "Mai-Jun",
+        "mei": -2.655,
+        "phase": "La Niña Forte",
+        "tier": "la-strong"
+      },
+      {
+        "year": 1994,
+        "season": "MJ",
+        "season_full": "Mai-Jun",
+        "mei": -2.408,
+        "phase": "La Niña Forte",
+        "tier": "la-strong"
+      },
+      {
+        "year": 1994,
+        "season": "AS",
+        "season_full": "Ago-Set",
+        "mei": -2.313,
+        "phase": "La Niña Forte",
+        "tier": "la-strong"
+      },
+      {
+        "year": 2011,
+        "season": "AM",
+        "season_full": "Abr-Mai",
+        "mei": -2.229,
+        "phase": "La Niña Forte",
+        "tier": "la-strong"
+      },
+      {
+        "year": 1994,
+        "season": "JA",
+        "season_full": "Jul-Ago",
+        "mei": -2.224,
+        "phase": "La Niña Forte",
+        "tier": "la-strong"
+      },
+      {
+        "year": 2011,
+        "season": "MA",
+        "season_full": "Mar-Abr",
+        "mei": -2.194,
+        "phase": "La Niña Forte",
+        "tier": "la-strong"
+      },
+      {
+        "year": 2001,
+        "season": "FM",
+        "season_full": "Fev-Mar",
+        "mei": -2.163,
+        "phase": "La Niña Forte",
+        "tier": "la-strong"
+      },
+      {
+        "year": 2018,
+        "season": "AM",
+        "season_full": "Abr-Mai",
+        "mei": -2.135,
+        "phase": "La Niña Forte",
+        "tier": "la-strong"
+      },
+      {
+        "year": 1984,
+        "season": "AS",
+        "season_full": "Ago-Set",
+        "mei": -2.11,
+        "phase": "La Niña Forte",
+        "tier": "la-strong"
+      },
+      {
+        "year": 1984,
+        "season": "MJ",
+        "season_full": "Mai-Jun",
+        "mei": -1.99,
+        "phase": "La Niña Forte",
+        "tier": "la-strong"
+      }
+    ]
+  },
+  "model": {
+    "order": 2,
+    "phi": [
+      0.5809066544831473,
+      0.2167430058298856
+    ],
+    "mu": -0.0657391304347826,
+    "sigma2": 0.46067658747269674,
+    "aic": 999,
+    "rho": [
+      0.7405517373392566
+    ],
+    "n": 552
+  },
+  "forecasts": [
+    {
+      "step": 1,
+      "mei": -0.439,
+      "lo": -1.769,
+      "hi": 0.891,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 2,
+      "mei": -0.416,
+      "lo": -1.811,
+      "hi": 0.979,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 3,
+      "mei": -0.35,
+      "lo": -1.807,
+      "hi": 1.107,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 4,
+      "mei": -0.307,
+      "lo": -1.824,
+      "hi": 1.21,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 5,
+      "mei": -0.267,
+      "lo": -1.841,
+      "hi": 1.307,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 6,
+      "mei": -0.235,
+      "lo": -1.864,
+      "hi": 1.394,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 7,
+      "mei": -0.208,
+      "lo": -1.891,
+      "hi": 1.475,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 8,
+      "mei": -0.185,
+      "lo": -1.92,
+      "hi": 1.55,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 9,
+      "mei": -0.166,
+      "lo": -1.951,
+      "hi": 1.619,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 10,
+      "mei": -0.15,
+      "lo": -1.984,
+      "hi": 1.684,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 11,
+      "mei": -0.136,
+      "lo": -2.017,
+      "hi": 1.745,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 12,
+      "mei": -0.125,
+      "lo": -2.053,
+      "hi": 1.803,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 13,
+      "mei": -0.115,
+      "lo": -2.088,
+      "hi": 1.858,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 14,
+      "mei": -0.107,
+      "lo": -2.125,
+      "hi": 1.911,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 15,
+      "mei": -0.101,
+      "lo": -2.162,
+      "hi": 1.96,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 16,
+      "mei": -0.095,
+      "lo": -2.198,
+      "hi": 2.008,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 17,
+      "mei": -0.09,
+      "lo": -2.235,
+      "hi": 2.055,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 18,
+      "mei": -0.086,
+      "lo": -2.272,
+      "hi": 2.1,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 19,
+      "mei": -0.083,
+      "lo": -2.309,
+      "hi": 2.143,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 20,
+      "mei": -0.08,
+      "lo": -2.345,
+      "hi": 2.185,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 21,
+      "mei": -0.078,
+      "lo": -2.382,
+      "hi": 2.226,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 22,
+      "mei": -0.076,
+      "lo": -2.418,
+      "hi": 2.266,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 23,
+      "mei": -0.074,
+      "lo": -2.454,
+      "hi": 2.306,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "step": 24,
+      "mei": -0.073,
+      "lo": -2.49,
+      "hi": 2.344,
+      "phase": "Neutro",
+      "tier": "neutral"
+    }
+  ],
+  "observations": [
+    {
+      "year": 1979,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": 0.0,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1979,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 0.0,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1979,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 1.052,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1979,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 0.923,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1979,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 1.341,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1979,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 2.347,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 1979,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 2.84,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 1979,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 1.615,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 1979,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 2.043,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 1979,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 1.48,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1979,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": 1.207,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1979,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": 1.251,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1980,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": 1.08,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1980,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 1.757,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 1980,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 1.758,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 1980,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 1.479,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1980,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 1.49,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1980,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 1.389,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1980,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 2.018,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 1980,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 1.397,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1980,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 1.398,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1980,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 0.609,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1980,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.917,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1980,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.115,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1981,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": 0.303,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1981,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.263,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1981,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 1.228,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1981,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.108,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1981,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 0.141,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1981,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -0.036,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1981,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.912,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1981,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 1.464,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1981,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 1.181,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1981,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 1.212,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1981,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": 0.436,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1981,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.716,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1982,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.608,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1982,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.409,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1982,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 0.377,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1982,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 0.901,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1982,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 0.411,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1982,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 0.222,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1982,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -0.42,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1982,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -1.086,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1982,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -1.787,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 1982,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -0.161,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1982,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.677,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1982,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.725,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1983,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -1.32,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1983,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.503,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1983,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -1.488,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1983,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -1.169,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1983,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -1.517,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 1983,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -0.931,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1983,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -1.137,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1983,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -1.583,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 1983,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -1.216,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1983,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -0.773,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1983,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.645,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1983,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.355,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1984,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.706,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1984,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.728,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1984,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.98,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1984,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.961,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1984,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -1.257,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1984,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -1.99,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 1984,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -1.376,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1984,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -1.433,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1984,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -2.11,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 1984,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -1.311,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1984,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -1.709,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 1984,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -1.277,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1985,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.651,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1985,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.538,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1985,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 0.232,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1985,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.666,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1985,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -0.158,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1985,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -0.611,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1985,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -0.94,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1985,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -1.048,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1985,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -1.008,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1985,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -0.779,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1985,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -1.353,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1985,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.459,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1986,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.223,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1986,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -1.13,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1986,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 0.119,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1986,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 1.039,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1986,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 1.396,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1986,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 0.956,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1986,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.192,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1986,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 0.897,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1986,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 0.372,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1986,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 1.105,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1986,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": 0.898,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1986,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": 1.332,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1987,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": 1.213,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1987,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 1.41,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1987,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 1.105,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1987,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 1.995,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 1987,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 1.538,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 1987,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 1.539,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 1987,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 2.354,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 1987,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 0.957,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1987,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 0.217,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1987,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 0.863,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1987,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.106,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1987,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": 1.22,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1988,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": 0.53,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1988,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 0.082,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1988,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 1.28,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1988,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 1.727,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 1988,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 2.428,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 1988,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 2.378,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 1988,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 1.396,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1988,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 2.403,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 1988,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 1.612,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 1988,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 1.887,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 1988,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": 2.033,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 1988,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": 1.512,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 1989,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": 1.654,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 1989,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 1.852,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 1989,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 1.676,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 1989,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 0.712,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1989,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 0.892,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1989,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 1.478,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1989,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.68,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1989,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 0.574,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1989,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 0.216,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1989,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 1.329,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1989,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": 1.297,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1989,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": 1.286,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1990,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": 0.571,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1990,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 0.886,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1990,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 0.259,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1990,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 0.32,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1990,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -0.132,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1990,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 0.366,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1990,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.562,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1990,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 0.296,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1990,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 0.513,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1990,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -0.274,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1990,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.991,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1990,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.423,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1991,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.324,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1991,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 0.105,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1991,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 1.441,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1991,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 1.515,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 1991,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 0.657,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1991,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 1.32,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1991,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.172,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1991,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 0.034,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1991,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 0.008,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1991,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 1.032,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1991,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": 0.228,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1991,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.19,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1992,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.148,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1992,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.521,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1992,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 0.311,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1992,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.52,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1992,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -0.976,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1992,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -0.973,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1992,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -1.076,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1992,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 0.305,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1992,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 0.603,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1992,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 0.49,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1992,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.322,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1992,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": 0.368,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1993,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.406,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1993,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -1.13,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1993,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.087,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1993,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.037,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1993,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 0.512,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1993,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 0.518,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1993,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.924,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1993,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 0.29,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1993,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -0.29,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1993,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 0.262,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1993,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.352,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1993,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.601,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1994,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.715,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1994,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.545,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1994,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.672,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1994,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -1.339,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1994,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -1.355,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1994,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -2.408,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 1994,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -1.395,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1994,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -2.224,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 1994,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -2.313,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 1994,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -1.806,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 1994,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -1.962,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 1994,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.626,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1995,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -1.472,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1995,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.892,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1995,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.824,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1995,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -1.366,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1995,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -0.699,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1995,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -0.762,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1995,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -0.14,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1995,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 0.286,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1995,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 1.455,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1995,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 1.786,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 1995,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": 1.159,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1995,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": 0.878,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1996,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": 1.401,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1996,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 1.433,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1996,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 1.523,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 1996,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 0.241,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1996,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 0.37,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1996,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -0.163,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1996,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.116,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1996,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.007,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1996,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 0.556,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1996,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 0.549,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1996,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": 0.909,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1996,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": 0.395,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1997,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.17,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1997,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.296,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1997,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.228,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1997,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 0.034,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1997,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 1.335,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1997,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 0.848,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 1997,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.181,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1997,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 2.5,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 1997,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 2.8,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 1997,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 2.9,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 1997,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.857,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1997,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": 2.6,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 1998,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": 2.4,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 1998,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.169,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1998,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.52,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1998,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.505,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1998,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -1.256,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1998,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -1.186,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1998,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -1.283,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1998,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.764,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1998,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -1.379,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1998,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -0.545,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1998,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": 0.33,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1998,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -1.101,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1999,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.412,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1999,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.029,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1999,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.461,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1999,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.541,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1999,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -0.5,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1999,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -0.584,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1999,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -0.639,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 1999,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -1.502,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 1999,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -0.385,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1999,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 0.168,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1999,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.434,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 1999,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -1.131,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2000,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.49,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2000,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.831,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2000,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.529,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2000,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.659,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2000,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -0.095,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2000,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 0.254,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2000,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -0.282,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2000,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.97,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2000,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -1.617,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2000,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -0.833,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2000,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -1.493,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2000,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -1.398,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2001,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -1.488,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2001,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -1.208,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2001,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -2.163,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2001,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -1.475,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2001,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -0.971,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2001,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -0.799,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2001,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -0.851,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2001,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.615,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2001,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -0.289,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2001,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -1.934,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2001,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.134,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2001,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.144,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2002,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.503,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2002,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.582,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2002,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.159,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2002,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.26,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2002,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -1.404,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2002,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 0.28,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2002,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -0.095,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2002,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 0.589,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2002,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -0.044,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2002,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 0.976,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2002,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": 0.798,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2002,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": 1.029,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2003,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": 0.165,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2003,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 0.984,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2003,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 1.076,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2003,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 1.623,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 2003,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 0.842,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2003,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 0.504,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2003,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 1.828,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 2003,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 0.631,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2003,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 0.604,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2003,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 1.165,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2003,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": 0.906,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2003,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": 1.111,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2004,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": 0.62,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2004,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 0.79,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2004,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.172,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2004,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 0.995,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2004,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 0.551,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2004,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 0.102,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2004,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.546,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2004,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 0.095,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2004,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -0.652,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2004,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -1.213,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2004,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.472,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2004,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.584,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2005,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.53,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2005,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 0.211,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2005,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.615,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2005,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.804,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2005,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -0.844,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2005,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -0.613,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2005,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -0.55,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2005,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.621,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2005,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -0.523,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2005,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -0.497,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2005,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.831,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2005,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -1.099,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2006,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.675,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2006,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -1.135,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2006,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -1.53,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2006,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -1.351,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2006,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -1.201,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2006,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 0.362,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2006,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -0.365,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2006,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 0.38,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2006,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 0.638,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2006,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -0.238,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2006,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": 0.402,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2006,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.48,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2007,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -1.838,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2007,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.905,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2007,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -1.911,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2007,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -1.109,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2007,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -1.415,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2007,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -0.097,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2007,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.362,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2007,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.05,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2007,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -0.388,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2007,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -0.984,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2007,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.961,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2007,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.939,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2008,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.972,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2008,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.679,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2008,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.242,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2008,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.051,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2008,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -0.525,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2008,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -1.207,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2008,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -0.049,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2008,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.624,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2008,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -0.802,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2008,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -0.926,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2008,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -1.821,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2008,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -1.608,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2009,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -1.604,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2009,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.914,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2009,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.418,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2009,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.407,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2009,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 0.229,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2009,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 0.29,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2009,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.214,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2009,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 0.278,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2009,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 0.099,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2009,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -0.129,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2009,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.229,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2009,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.841,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2010,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.414,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2010,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.987,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2010,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.202,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2010,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.428,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2010,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -0.279,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2010,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 0.049,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2010,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.374,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2010,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.687,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2010,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -0.514,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2010,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 0.088,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2010,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -1.033,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2010,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.427,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2011,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -1.778,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2011,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -1.829,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2011,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -1.433,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2011,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -2.194,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2011,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -2.229,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2011,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -2.655,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2011,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -1.077,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2011,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -1.001,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2011,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -0.474,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2011,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -0.591,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2011,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.666,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2011,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -1.486,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2012,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -1.24,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2012,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -1.483,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2012,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.638,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2012,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 0.043,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2012,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 0.807,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2012,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 1.04,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2012,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.44,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2012,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.224,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2012,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 0.378,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2012,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 0.425,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2012,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.722,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2012,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.194,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2013,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": 0.252,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2013,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 0.17,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2013,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 0.038,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2013,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.432,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2013,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -1.138,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2013,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -0.327,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2013,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -0.568,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2013,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.557,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2013,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 0.586,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2013,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 0.706,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2013,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": 0.768,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2013,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": 0.69,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2014,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": 1.47,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2014,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 2.085,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 2014,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 2.13,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 2014,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 2.044,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 2014,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 0.399,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2014,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 0.64,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2014,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.398,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2014,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 0.411,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2014,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 0.889,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2014,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -0.994,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2014,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.853,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2014,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.542,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2015,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.759,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2015,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -1.42,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2015,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.518,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2015,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.385,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2015,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -0.907,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2015,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -0.46,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2015,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.055,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2015,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.03,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2015,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 0.466,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2015,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 2.5,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 2015,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": 0.059,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2015,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": 2.6,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 2016,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.433,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2016,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.256,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2016,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 0.291,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2016,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 0.082,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2016,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 0.37,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2016,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -0.323,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2016,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -0.621,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2016,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.518,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2016,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -1.059,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2016,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -0.277,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2016,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.062,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2016,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": 0.084,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2017,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": 0.248,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2017,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 1.379,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2017,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 0.654,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2017,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.681,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2017,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -0.226,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2017,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -0.279,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2017,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -0.524,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2017,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.966,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2017,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -0.969,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2017,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -0.666,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2017,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.878,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2017,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": 0.768,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2018,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.205,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2018,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.491,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2018,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -1.715,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2018,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -1.039,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2018,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -2.135,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2018,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -1.865,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2018,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -1.697,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2018,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -1.806,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2018,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -0.391,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2018,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 0.068,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2018,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": 0.772,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2018,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.014,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2019,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": 0.78,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2019,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 0.8,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2019,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 1.097,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2019,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 1.447,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2019,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 0.563,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2019,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 0.33,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2019,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.814,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2019,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -1.006,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2019,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 0.371,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2019,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 0.42,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2019,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": 0.302,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2019,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": 0.391,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2020,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.315,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2020,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.355,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2020,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 0.378,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2020,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 0.967,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2020,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 2.293,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 2020,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 1.592,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 2020,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.986,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2020,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 0.573,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2020,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -0.087,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2020,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -0.017,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2020,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": 0.204,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2020,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": 0.11,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2021,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": 0.756,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2021,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 0.368,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2021,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 0.145,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2021,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.197,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2021,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -1.08,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2021,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -1.667,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2021,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -1.949,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2021,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.74,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2021,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -0.24,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2021,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 0.553,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2021,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.471,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2021,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -1.397,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2022,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -1.372,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2022,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.997,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2022,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.556,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2022,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 0.114,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2022,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 0.16,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2022,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 1.161,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2022,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.646,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2022,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 0.049,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2022,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -0.874,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2022,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -1.091,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2022,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.696,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2022,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -1.146,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2023,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.291,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2023,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 0.482,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2023,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -1.144,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2023,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.156,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2023,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -1.609,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2023,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -0.83,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2023,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -0.05,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2023,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.118,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2023,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 1.9,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 2023,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 2.1,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 2023,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.88,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2023,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.818,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2024,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.785,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2024,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.698,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2024,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.444,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2024,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -1.114,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2024,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -0.935,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2024,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 0.13,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2024,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -0.285,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2024,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.43,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2024,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 0.321,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2024,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -1.383,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2024,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.146,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2024,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.679,
+      "phase": "La Niña",
+      "tier": "la"
+    }
+  ],
+  "recent_48": [
+    {
+      "year": 2021,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": 0.756,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2021,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 0.368,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2021,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": 0.145,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2021,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.197,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2021,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -1.08,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2021,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -1.667,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2021,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -1.949,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2021,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.74,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2021,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -0.24,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2021,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 0.553,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2021,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.471,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2021,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -1.397,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2022,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -1.372,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2022,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.997,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2022,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.556,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2022,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": 0.114,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2022,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": 0.16,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2022,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 1.161,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2022,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": 0.646,
+      "phase": "El Niño",
+      "tier": "el"
+    },
+    {
+      "year": 2022,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": 0.049,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2022,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": -0.874,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2022,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -1.091,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2022,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.696,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2022,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -1.146,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2023,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.291,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2023,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": 0.482,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2023,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -1.144,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2023,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -0.156,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2023,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -1.609,
+      "phase": "La Niña Forte",
+      "tier": "la-strong"
+    },
+    {
+      "year": 2023,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": -0.83,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2023,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -0.05,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2023,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.118,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2023,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 1.9,
+      "phase": "El Niño Forte",
+      "tier": "strong"
+    },
+    {
+      "year": 2023,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": 2.1,
+      "phase": "Super El Niño",
+      "tier": "super"
+    },
+    {
+      "year": 2023,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.88,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2023,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.818,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2024,
+      "season": "DJ",
+      "season_full": "Dez-Jan",
+      "mei": -0.785,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2024,
+      "season": "JF",
+      "season_full": "Jan-Fev",
+      "mei": -0.698,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2024,
+      "season": "FM",
+      "season_full": "Fev-Mar",
+      "mei": -0.444,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2024,
+      "season": "MA",
+      "season_full": "Mar-Abr",
+      "mei": -1.114,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2024,
+      "season": "AM",
+      "season_full": "Abr-Mai",
+      "mei": -0.935,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2024,
+      "season": "MJ",
+      "season_full": "Mai-Jun",
+      "mei": 0.13,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2024,
+      "season": "JJ",
+      "season_full": "Jun-Jul",
+      "mei": -0.285,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2024,
+      "season": "JA",
+      "season_full": "Jul-Ago",
+      "mei": -0.43,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2024,
+      "season": "AS",
+      "season_full": "Ago-Set",
+      "mei": 0.321,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2024,
+      "season": "SO",
+      "season_full": "Set-Out",
+      "mei": -1.383,
+      "phase": "La Niña",
+      "tier": "la"
+    },
+    {
+      "year": 2024,
+      "season": "ON",
+      "season_full": "Out-Nov",
+      "mei": -0.146,
+      "phase": "Neutro",
+      "tier": "neutral"
+    },
+    {
+      "year": 2024,
+      "season": "ND",
+      "season_full": "Nov-Dez",
+      "mei": -0.679,
+      "phase": "La Niña",
+      "tier": "la"
+    }
+  ]
+}
