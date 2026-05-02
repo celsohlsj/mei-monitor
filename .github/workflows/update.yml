@@ -1,0 +1,78 @@
+name: Atualização Mensal — YbYrá-BR
+
+on:
+  schedule:
+    # Dia 11 de cada mês às 06:00 UTC (NOAA atualiza no dia 10)
+    - cron: '0 6 11 * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Usar dados embutidos (sem fetch externo)'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Pipeline MEI → mei_data.json
+        run: python scripts/pipeline.py
+
+      - name: Pipeline RF → rf_forecast.json
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            python scripts/rf_pipeline.py --dry-run
+          else
+            python scripts/rf_pipeline.py
+          fi
+
+      - name: Verificar arquivos gerados
+        run: |
+          ls -lh docs/mei_data.json docs/rf_forecast.json
+          python -c "
+          import json
+          rf = json.load(open('docs/rf_forecast.json'))
+          print('RF forecast months:', len(rf['rf_forecast']))
+          print('Climate records:',  len(rf['climate_series']))
+          print('Fire records:',     len(rf['fire_monthly']))
+          print('R2 treino:', rf['rf_model']['r2_train'])
+          print('R2 teste:',  rf['rf_model']['r2_test'])
+          print('Atualizado:', rf['meta']['updated_utc'])
+          "
+
+      - name: Commit e push
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/mei_data.json docs/rf_forecast.json
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração nos dados."
+          else
+            MONTH=$(date -u +"%B %Y")
+            git commit -m "dados: atualização automática ${MONTH}
+
+          - pipeline.py: MEI.v2 → mei_data.json
+          - rf_pipeline.py: Random Forest → rf_forecast.json
+          "
+            git push
+          fi
