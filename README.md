@@ -4,7 +4,7 @@
 
 [![Update MEI.v2 Data](https://github.com/celsohlsj/mei-monitor/actions/workflows/update.yml/badge.svg)](https://github.com/celsohlsj/mei-monitor/actions/workflows/update.yml)
 
-🌐 **GitHub Pages:** `https://celsohlsj.github.io/mei-monitor/`
+🌐 **GitHub Pages:** `https://fire-monitor.github.io`
 
 ---
 
