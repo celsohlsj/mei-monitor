@@ -1,148 +1,5700 @@
 {
   "meta": {
-    "updated_utc": "2026-05-02T14:51:58.377040+00:00",
+    "updated_utc": "2026-05-03T18:03:02.321903+00:00",
     "pipeline": "YbYrá-BR Prophet Pipeline",
+    "model_type": "Facebook Prophet + SARIMA (índices oceânicos)",
     "mei_records": 552,
     "fire_records": 335,
     "amo_records": 0,
     "pdo_records": 0
   },
-  "prophet_model": {
-    "features": [
-      "mei_lag1",
-      "mei_lag2",
-      "mei_lag3",
-      "amo_lag1",
-      "amo_lag2",
-      "amo_lag3",
-      "pdo_lag1",
-      "pdo_lag2",
-      "pdo_lag3",
-      "month_sin",
-      "month_cos",
-      "month"
-    ],
-    "lags": 3,
-    "n_estimators": 300,
-    "n_samples": 316,
-    "n_train": 280,
-    "n_test": 36,
-    "r2_train": 0.9076,
-    "r2_test": 0.8508,
-    "feature_importance": {
-      "mei_lag1": 0.04961,
-      "mei_lag2": 0.04769,
-      "mei_lag3": 0.01989,
-      "amo_lag1": 0.00413,
-      "amo_lag2": 0.00387,
-      "amo_lag3": 0.00348,
-      "pdo_lag1": 0.00558,
-      "pdo_lag2": 0.00624,
-      "pdo_lag3": 0.00394,
-      "month_sin": 0.37687,
-      "month_cos": 0.05746,
-      "month": 0.42125
+  "climate_series": [
+    {
+      "year": 1979,
+      "month": 1,
+      "mei": 0.0,
+      "amo": null,
+      "pdo": null
     },
-    "trained_on": "1998-09 a 2024-12"
-  },
-  "prophet_forecast": [
+    {
+      "year": 1979,
+      "month": 2,
+      "mei": 0.0,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1979,
+      "month": 3,
+      "mei": 1.052,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1979,
+      "month": 4,
+      "mei": 0.923,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1979,
+      "month": 5,
+      "mei": 1.341,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1979,
+      "month": 6,
+      "mei": 2.347,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1979,
+      "month": 7,
+      "mei": 2.84,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1979,
+      "month": 8,
+      "mei": 1.615,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1979,
+      "month": 9,
+      "mei": 2.043,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1979,
+      "month": 10,
+      "mei": 1.48,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1979,
+      "month": 11,
+      "mei": 1.207,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1979,
+      "month": 12,
+      "mei": 1.251,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1980,
+      "month": 1,
+      "mei": 1.08,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1980,
+      "month": 2,
+      "mei": 1.757,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1980,
+      "month": 3,
+      "mei": 1.758,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1980,
+      "month": 4,
+      "mei": 1.479,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1980,
+      "month": 5,
+      "mei": 1.49,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1980,
+      "month": 6,
+      "mei": 1.389,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1980,
+      "month": 7,
+      "mei": 2.018,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1980,
+      "month": 8,
+      "mei": 1.397,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1980,
+      "month": 9,
+      "mei": 1.398,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1980,
+      "month": 10,
+      "mei": 0.609,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1980,
+      "month": 11,
+      "mei": -0.917,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1980,
+      "month": 12,
+      "mei": -0.115,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1981,
+      "month": 1,
+      "mei": 0.303,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1981,
+      "month": 2,
+      "mei": -0.263,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1981,
+      "month": 3,
+      "mei": 1.228,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1981,
+      "month": 4,
+      "mei": -0.108,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1981,
+      "month": 5,
+      "mei": 0.141,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1981,
+      "month": 6,
+      "mei": -0.036,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1981,
+      "month": 7,
+      "mei": 0.912,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1981,
+      "month": 8,
+      "mei": 1.464,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1981,
+      "month": 9,
+      "mei": 1.181,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1981,
+      "month": 10,
+      "mei": 1.212,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1981,
+      "month": 11,
+      "mei": 0.436,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1981,
+      "month": 12,
+      "mei": -0.716,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1982,
+      "month": 1,
+      "mei": -0.608,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1982,
+      "month": 2,
+      "mei": -0.409,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1982,
+      "month": 3,
+      "mei": 0.377,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1982,
+      "month": 4,
+      "mei": 0.901,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1982,
+      "month": 5,
+      "mei": 0.411,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1982,
+      "month": 6,
+      "mei": 0.222,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1982,
+      "month": 7,
+      "mei": -0.42,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1982,
+      "month": 8,
+      "mei": -1.086,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1982,
+      "month": 9,
+      "mei": -1.787,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1982,
+      "month": 10,
+      "mei": -0.161,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1982,
+      "month": 11,
+      "mei": -0.677,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1982,
+      "month": 12,
+      "mei": -0.725,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1983,
+      "month": 1,
+      "mei": -1.32,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1983,
+      "month": 2,
+      "mei": -0.503,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1983,
+      "month": 3,
+      "mei": -1.488,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1983,
+      "month": 4,
+      "mei": -1.169,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1983,
+      "month": 5,
+      "mei": -1.517,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1983,
+      "month": 6,
+      "mei": -0.931,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1983,
+      "month": 7,
+      "mei": -1.137,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1983,
+      "month": 8,
+      "mei": -1.583,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1983,
+      "month": 9,
+      "mei": -1.216,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1983,
+      "month": 10,
+      "mei": -0.773,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1983,
+      "month": 11,
+      "mei": -0.645,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1983,
+      "month": 12,
+      "mei": -0.355,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1984,
+      "month": 1,
+      "mei": -0.706,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1984,
+      "month": 2,
+      "mei": -0.728,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1984,
+      "month": 3,
+      "mei": -0.98,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1984,
+      "month": 4,
+      "mei": -0.961,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1984,
+      "month": 5,
+      "mei": -1.257,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1984,
+      "month": 6,
+      "mei": -1.99,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1984,
+      "month": 7,
+      "mei": -1.376,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1984,
+      "month": 8,
+      "mei": -1.433,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1984,
+      "month": 9,
+      "mei": -2.11,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1984,
+      "month": 10,
+      "mei": -1.311,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1984,
+      "month": 11,
+      "mei": -1.709,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1984,
+      "month": 12,
+      "mei": -1.277,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1985,
+      "month": 1,
+      "mei": -0.651,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1985,
+      "month": 2,
+      "mei": -0.538,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1985,
+      "month": 3,
+      "mei": 0.232,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1985,
+      "month": 4,
+      "mei": -0.666,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1985,
+      "month": 5,
+      "mei": -0.158,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1985,
+      "month": 6,
+      "mei": -0.611,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1985,
+      "month": 7,
+      "mei": -0.94,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1985,
+      "month": 8,
+      "mei": -1.048,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1985,
+      "month": 9,
+      "mei": -1.008,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1985,
+      "month": 10,
+      "mei": -0.779,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1985,
+      "month": 11,
+      "mei": -1.353,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1985,
+      "month": 12,
+      "mei": -0.459,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1986,
+      "month": 1,
+      "mei": -0.223,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1986,
+      "month": 2,
+      "mei": -1.13,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1986,
+      "month": 3,
+      "mei": 0.119,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1986,
+      "month": 4,
+      "mei": 1.039,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1986,
+      "month": 5,
+      "mei": 1.396,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1986,
+      "month": 6,
+      "mei": 0.956,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1986,
+      "month": 7,
+      "mei": 0.192,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1986,
+      "month": 8,
+      "mei": 0.897,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1986,
+      "month": 9,
+      "mei": 0.372,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1986,
+      "month": 10,
+      "mei": 1.105,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1986,
+      "month": 11,
+      "mei": 0.898,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1986,
+      "month": 12,
+      "mei": 1.332,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1987,
+      "month": 1,
+      "mei": 1.213,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1987,
+      "month": 2,
+      "mei": 1.41,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1987,
+      "month": 3,
+      "mei": 1.105,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1987,
+      "month": 4,
+      "mei": 1.995,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1987,
+      "month": 5,
+      "mei": 1.538,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1987,
+      "month": 6,
+      "mei": 1.539,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1987,
+      "month": 7,
+      "mei": 2.354,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1987,
+      "month": 8,
+      "mei": 0.957,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1987,
+      "month": 9,
+      "mei": 0.217,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1987,
+      "month": 10,
+      "mei": 0.863,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1987,
+      "month": 11,
+      "mei": -0.106,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1987,
+      "month": 12,
+      "mei": 1.22,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1988,
+      "month": 1,
+      "mei": 0.53,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1988,
+      "month": 2,
+      "mei": 0.082,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1988,
+      "month": 3,
+      "mei": 1.28,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1988,
+      "month": 4,
+      "mei": 1.727,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1988,
+      "month": 5,
+      "mei": 2.428,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1988,
+      "month": 6,
+      "mei": 2.378,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1988,
+      "month": 7,
+      "mei": 1.396,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1988,
+      "month": 8,
+      "mei": 2.403,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1988,
+      "month": 9,
+      "mei": 1.612,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1988,
+      "month": 10,
+      "mei": 1.887,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1988,
+      "month": 11,
+      "mei": 2.033,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1988,
+      "month": 12,
+      "mei": 1.512,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1989,
+      "month": 1,
+      "mei": 1.654,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1989,
+      "month": 2,
+      "mei": 1.852,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1989,
+      "month": 3,
+      "mei": 1.676,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1989,
+      "month": 4,
+      "mei": 0.712,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1989,
+      "month": 5,
+      "mei": 0.892,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1989,
+      "month": 6,
+      "mei": 1.478,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1989,
+      "month": 7,
+      "mei": 0.68,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1989,
+      "month": 8,
+      "mei": 0.574,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1989,
+      "month": 9,
+      "mei": 0.216,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1989,
+      "month": 10,
+      "mei": 1.329,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1989,
+      "month": 11,
+      "mei": 1.297,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1989,
+      "month": 12,
+      "mei": 1.286,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1990,
+      "month": 1,
+      "mei": 0.571,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1990,
+      "month": 2,
+      "mei": 0.886,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1990,
+      "month": 3,
+      "mei": 0.259,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1990,
+      "month": 4,
+      "mei": 0.32,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1990,
+      "month": 5,
+      "mei": -0.132,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1990,
+      "month": 6,
+      "mei": 0.366,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1990,
+      "month": 7,
+      "mei": 0.562,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1990,
+      "month": 8,
+      "mei": 0.296,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1990,
+      "month": 9,
+      "mei": 0.513,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1990,
+      "month": 10,
+      "mei": -0.274,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1990,
+      "month": 11,
+      "mei": -0.991,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1990,
+      "month": 12,
+      "mei": -0.423,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1991,
+      "month": 1,
+      "mei": -0.324,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1991,
+      "month": 2,
+      "mei": 0.105,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1991,
+      "month": 3,
+      "mei": 1.441,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1991,
+      "month": 4,
+      "mei": 1.515,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1991,
+      "month": 5,
+      "mei": 0.657,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1991,
+      "month": 6,
+      "mei": 1.32,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1991,
+      "month": 7,
+      "mei": 0.172,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1991,
+      "month": 8,
+      "mei": 0.034,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1991,
+      "month": 9,
+      "mei": 0.008,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1991,
+      "month": 10,
+      "mei": 1.032,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1991,
+      "month": 11,
+      "mei": 0.228,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1991,
+      "month": 12,
+      "mei": -0.19,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1992,
+      "month": 1,
+      "mei": -0.148,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1992,
+      "month": 2,
+      "mei": -0.521,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1992,
+      "month": 3,
+      "mei": 0.311,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1992,
+      "month": 4,
+      "mei": -0.52,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1992,
+      "month": 5,
+      "mei": -0.976,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1992,
+      "month": 6,
+      "mei": -0.973,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1992,
+      "month": 7,
+      "mei": -1.076,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1992,
+      "month": 8,
+      "mei": 0.305,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1992,
+      "month": 9,
+      "mei": 0.603,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1992,
+      "month": 10,
+      "mei": 0.49,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1992,
+      "month": 11,
+      "mei": -0.322,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1992,
+      "month": 12,
+      "mei": 0.368,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1993,
+      "month": 1,
+      "mei": -0.406,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1993,
+      "month": 2,
+      "mei": -1.13,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1993,
+      "month": 3,
+      "mei": -0.087,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1993,
+      "month": 4,
+      "mei": -0.037,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1993,
+      "month": 5,
+      "mei": 0.512,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1993,
+      "month": 6,
+      "mei": 0.518,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1993,
+      "month": 7,
+      "mei": 0.924,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1993,
+      "month": 8,
+      "mei": 0.29,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1993,
+      "month": 9,
+      "mei": -0.29,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1993,
+      "month": 10,
+      "mei": 0.262,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1993,
+      "month": 11,
+      "mei": -0.352,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1993,
+      "month": 12,
+      "mei": -0.601,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1994,
+      "month": 1,
+      "mei": -0.715,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1994,
+      "month": 2,
+      "mei": -0.545,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1994,
+      "month": 3,
+      "mei": -0.672,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1994,
+      "month": 4,
+      "mei": -1.339,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1994,
+      "month": 5,
+      "mei": -1.355,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1994,
+      "month": 6,
+      "mei": -2.408,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1994,
+      "month": 7,
+      "mei": -1.395,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1994,
+      "month": 8,
+      "mei": -2.224,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1994,
+      "month": 9,
+      "mei": -2.313,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1994,
+      "month": 10,
+      "mei": -1.806,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1994,
+      "month": 11,
+      "mei": -1.962,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1994,
+      "month": 12,
+      "mei": -0.626,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1995,
+      "month": 1,
+      "mei": -1.472,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1995,
+      "month": 2,
+      "mei": -0.892,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1995,
+      "month": 3,
+      "mei": -0.824,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1995,
+      "month": 4,
+      "mei": -1.366,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1995,
+      "month": 5,
+      "mei": -0.699,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1995,
+      "month": 6,
+      "mei": -0.762,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1995,
+      "month": 7,
+      "mei": -0.14,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1995,
+      "month": 8,
+      "mei": 0.286,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1995,
+      "month": 9,
+      "mei": 1.455,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1995,
+      "month": 10,
+      "mei": 1.786,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1995,
+      "month": 11,
+      "mei": 1.159,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1995,
+      "month": 12,
+      "mei": 0.878,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1996,
+      "month": 1,
+      "mei": 1.401,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1996,
+      "month": 2,
+      "mei": 1.433,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1996,
+      "month": 3,
+      "mei": 1.523,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1996,
+      "month": 4,
+      "mei": 0.241,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1996,
+      "month": 5,
+      "mei": 0.37,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1996,
+      "month": 6,
+      "mei": -0.163,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1996,
+      "month": 7,
+      "mei": 0.116,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1996,
+      "month": 8,
+      "mei": -0.007,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1996,
+      "month": 9,
+      "mei": 0.556,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1996,
+      "month": 10,
+      "mei": 0.549,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1996,
+      "month": 11,
+      "mei": 0.909,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1996,
+      "month": 12,
+      "mei": 0.395,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1997,
+      "month": 1,
+      "mei": -0.17,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1997,
+      "month": 2,
+      "mei": -0.296,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1997,
+      "month": 3,
+      "mei": -0.228,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1997,
+      "month": 4,
+      "mei": 0.034,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1997,
+      "month": 5,
+      "mei": 1.335,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1997,
+      "month": 6,
+      "mei": 0.848,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1997,
+      "month": 7,
+      "mei": 0.181,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1997,
+      "month": 8,
+      "mei": 2.5,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1997,
+      "month": 9,
+      "mei": 2.8,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1997,
+      "month": 10,
+      "mei": 2.9,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1997,
+      "month": 11,
+      "mei": -0.857,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1997,
+      "month": 12,
+      "mei": 2.6,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1998,
+      "month": 1,
+      "mei": 2.4,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1998,
+      "month": 2,
+      "mei": -0.169,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1998,
+      "month": 3,
+      "mei": -0.52,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1998,
+      "month": 4,
+      "mei": -0.505,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1998,
+      "month": 5,
+      "mei": -1.256,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1998,
+      "month": 6,
+      "mei": -1.186,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1998,
+      "month": 7,
+      "mei": -1.283,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1998,
+      "month": 8,
+      "mei": -0.764,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1998,
+      "month": 9,
+      "mei": -1.379,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1998,
+      "month": 10,
+      "mei": -0.545,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1998,
+      "month": 11,
+      "mei": 0.33,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1998,
+      "month": 12,
+      "mei": -1.101,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1999,
+      "month": 1,
+      "mei": -0.412,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1999,
+      "month": 2,
+      "mei": -0.029,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1999,
+      "month": 3,
+      "mei": -0.461,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1999,
+      "month": 4,
+      "mei": -0.541,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1999,
+      "month": 5,
+      "mei": -0.5,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1999,
+      "month": 6,
+      "mei": -0.584,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1999,
+      "month": 7,
+      "mei": -0.639,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1999,
+      "month": 8,
+      "mei": -1.502,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1999,
+      "month": 9,
+      "mei": -0.385,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1999,
+      "month": 10,
+      "mei": 0.168,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1999,
+      "month": 11,
+      "mei": -0.434,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 1999,
+      "month": 12,
+      "mei": -1.131,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2000,
+      "month": 1,
+      "mei": -0.49,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2000,
+      "month": 2,
+      "mei": -0.831,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2000,
+      "month": 3,
+      "mei": -0.529,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2000,
+      "month": 4,
+      "mei": -0.659,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2000,
+      "month": 5,
+      "mei": -0.095,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2000,
+      "month": 6,
+      "mei": 0.254,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2000,
+      "month": 7,
+      "mei": -0.282,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2000,
+      "month": 8,
+      "mei": -0.97,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2000,
+      "month": 9,
+      "mei": -1.617,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2000,
+      "month": 10,
+      "mei": -0.833,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2000,
+      "month": 11,
+      "mei": -1.493,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2000,
+      "month": 12,
+      "mei": -1.398,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2001,
+      "month": 1,
+      "mei": -1.488,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2001,
+      "month": 2,
+      "mei": -1.208,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2001,
+      "month": 3,
+      "mei": -2.163,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2001,
+      "month": 4,
+      "mei": -1.475,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2001,
+      "month": 5,
+      "mei": -0.971,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2001,
+      "month": 6,
+      "mei": -0.799,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2001,
+      "month": 7,
+      "mei": -0.851,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2001,
+      "month": 8,
+      "mei": -0.615,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2001,
+      "month": 9,
+      "mei": -0.289,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2001,
+      "month": 10,
+      "mei": -1.934,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2001,
+      "month": 11,
+      "mei": -0.134,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2001,
+      "month": 12,
+      "mei": -0.144,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2002,
+      "month": 1,
+      "mei": -0.503,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2002,
+      "month": 2,
+      "mei": -0.582,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2002,
+      "month": 3,
+      "mei": -0.159,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2002,
+      "month": 4,
+      "mei": -0.26,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2002,
+      "month": 5,
+      "mei": -1.404,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2002,
+      "month": 6,
+      "mei": 0.28,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2002,
+      "month": 7,
+      "mei": -0.095,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2002,
+      "month": 8,
+      "mei": 0.589,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2002,
+      "month": 9,
+      "mei": -0.044,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2002,
+      "month": 10,
+      "mei": 0.976,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2002,
+      "month": 11,
+      "mei": 0.798,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2002,
+      "month": 12,
+      "mei": 1.029,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2003,
+      "month": 1,
+      "mei": 0.165,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2003,
+      "month": 2,
+      "mei": 0.984,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2003,
+      "month": 3,
+      "mei": 1.076,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2003,
+      "month": 4,
+      "mei": 1.623,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2003,
+      "month": 5,
+      "mei": 0.842,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2003,
+      "month": 6,
+      "mei": 0.504,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2003,
+      "month": 7,
+      "mei": 1.828,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2003,
+      "month": 8,
+      "mei": 0.631,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2003,
+      "month": 9,
+      "mei": 0.604,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2003,
+      "month": 10,
+      "mei": 1.165,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2003,
+      "month": 11,
+      "mei": 0.906,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2003,
+      "month": 12,
+      "mei": 1.111,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2004,
+      "month": 1,
+      "mei": 0.62,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2004,
+      "month": 2,
+      "mei": 0.79,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2004,
+      "month": 3,
+      "mei": -0.172,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2004,
+      "month": 4,
+      "mei": 0.995,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2004,
+      "month": 5,
+      "mei": 0.551,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2004,
+      "month": 6,
+      "mei": 0.102,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2004,
+      "month": 7,
+      "mei": 0.546,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2004,
+      "month": 8,
+      "mei": 0.095,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2004,
+      "month": 9,
+      "mei": -0.652,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2004,
+      "month": 10,
+      "mei": -1.213,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2004,
+      "month": 11,
+      "mei": -0.472,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2004,
+      "month": 12,
+      "mei": -0.584,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2005,
+      "month": 1,
+      "mei": -0.53,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2005,
+      "month": 2,
+      "mei": 0.211,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2005,
+      "month": 3,
+      "mei": -0.615,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2005,
+      "month": 4,
+      "mei": -0.804,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2005,
+      "month": 5,
+      "mei": -0.844,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2005,
+      "month": 6,
+      "mei": -0.613,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2005,
+      "month": 7,
+      "mei": -0.55,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2005,
+      "month": 8,
+      "mei": -0.621,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2005,
+      "month": 9,
+      "mei": -0.523,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2005,
+      "month": 10,
+      "mei": -0.497,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2005,
+      "month": 11,
+      "mei": -0.831,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2005,
+      "month": 12,
+      "mei": -1.099,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2006,
+      "month": 1,
+      "mei": -0.675,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2006,
+      "month": 2,
+      "mei": -1.135,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2006,
+      "month": 3,
+      "mei": -1.53,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2006,
+      "month": 4,
+      "mei": -1.351,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2006,
+      "month": 5,
+      "mei": -1.201,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2006,
+      "month": 6,
+      "mei": 0.362,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2006,
+      "month": 7,
+      "mei": -0.365,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2006,
+      "month": 8,
+      "mei": 0.38,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2006,
+      "month": 9,
+      "mei": 0.638,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2006,
+      "month": 10,
+      "mei": -0.238,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2006,
+      "month": 11,
+      "mei": 0.402,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2006,
+      "month": 12,
+      "mei": -0.48,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2007,
+      "month": 1,
+      "mei": -1.838,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2007,
+      "month": 2,
+      "mei": -0.905,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2007,
+      "month": 3,
+      "mei": -1.911,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2007,
+      "month": 4,
+      "mei": -1.109,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2007,
+      "month": 5,
+      "mei": -1.415,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2007,
+      "month": 6,
+      "mei": -0.097,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2007,
+      "month": 7,
+      "mei": 0.362,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2007,
+      "month": 8,
+      "mei": -0.05,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2007,
+      "month": 9,
+      "mei": -0.388,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2007,
+      "month": 10,
+      "mei": -0.984,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2007,
+      "month": 11,
+      "mei": -0.961,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2007,
+      "month": 12,
+      "mei": -0.939,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2008,
+      "month": 1,
+      "mei": -0.972,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2008,
+      "month": 2,
+      "mei": -0.679,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2008,
+      "month": 3,
+      "mei": -0.242,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2008,
+      "month": 4,
+      "mei": -0.051,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2008,
+      "month": 5,
+      "mei": -0.525,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2008,
+      "month": 6,
+      "mei": -1.207,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2008,
+      "month": 7,
+      "mei": -0.049,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2008,
+      "month": 8,
+      "mei": -0.624,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2008,
+      "month": 9,
+      "mei": -0.802,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2008,
+      "month": 10,
+      "mei": -0.926,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2008,
+      "month": 11,
+      "mei": -1.821,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2008,
+      "month": 12,
+      "mei": -1.608,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2009,
+      "month": 1,
+      "mei": -1.604,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2009,
+      "month": 2,
+      "mei": -0.914,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2009,
+      "month": 3,
+      "mei": -0.418,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2009,
+      "month": 4,
+      "mei": -0.407,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2009,
+      "month": 5,
+      "mei": 0.229,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2009,
+      "month": 6,
+      "mei": 0.29,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2009,
+      "month": 7,
+      "mei": 0.214,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2009,
+      "month": 8,
+      "mei": 0.278,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2009,
+      "month": 9,
+      "mei": 0.099,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2009,
+      "month": 10,
+      "mei": -0.129,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2009,
+      "month": 11,
+      "mei": -0.229,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2009,
+      "month": 12,
+      "mei": -0.841,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2010,
+      "month": 1,
+      "mei": -0.414,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2010,
+      "month": 2,
+      "mei": -0.987,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2010,
+      "month": 3,
+      "mei": -0.202,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2010,
+      "month": 4,
+      "mei": -0.428,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2010,
+      "month": 5,
+      "mei": -0.279,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2010,
+      "month": 6,
+      "mei": 0.049,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2010,
+      "month": 7,
+      "mei": 0.374,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2010,
+      "month": 8,
+      "mei": -0.687,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2010,
+      "month": 9,
+      "mei": -0.514,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2010,
+      "month": 10,
+      "mei": 0.088,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2010,
+      "month": 11,
+      "mei": -1.033,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2010,
+      "month": 12,
+      "mei": -0.427,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2011,
+      "month": 1,
+      "mei": -1.778,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2011,
+      "month": 2,
+      "mei": -1.829,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2011,
+      "month": 3,
+      "mei": -1.433,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2011,
+      "month": 4,
+      "mei": -2.194,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2011,
+      "month": 5,
+      "mei": -2.229,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2011,
+      "month": 6,
+      "mei": -2.655,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2011,
+      "month": 7,
+      "mei": -1.077,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2011,
+      "month": 8,
+      "mei": -1.001,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2011,
+      "month": 9,
+      "mei": -0.474,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2011,
+      "month": 10,
+      "mei": -0.591,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2011,
+      "month": 11,
+      "mei": -0.666,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2011,
+      "month": 12,
+      "mei": -1.486,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2012,
+      "month": 1,
+      "mei": -1.24,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2012,
+      "month": 2,
+      "mei": -1.483,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2012,
+      "month": 3,
+      "mei": -0.638,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2012,
+      "month": 4,
+      "mei": 0.043,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2012,
+      "month": 5,
+      "mei": 0.807,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2012,
+      "month": 6,
+      "mei": 1.04,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2012,
+      "month": 7,
+      "mei": 0.44,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2012,
+      "month": 8,
+      "mei": -0.224,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2012,
+      "month": 9,
+      "mei": 0.378,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2012,
+      "month": 10,
+      "mei": 0.425,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2012,
+      "month": 11,
+      "mei": -0.722,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2012,
+      "month": 12,
+      "mei": -0.194,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2013,
+      "month": 1,
+      "mei": 0.252,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2013,
+      "month": 2,
+      "mei": 0.17,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2013,
+      "month": 3,
+      "mei": 0.038,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2013,
+      "month": 4,
+      "mei": -0.432,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2013,
+      "month": 5,
+      "mei": -1.138,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2013,
+      "month": 6,
+      "mei": -0.327,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2013,
+      "month": 7,
+      "mei": -0.568,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2013,
+      "month": 8,
+      "mei": -0.557,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2013,
+      "month": 9,
+      "mei": 0.586,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2013,
+      "month": 10,
+      "mei": 0.706,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2013,
+      "month": 11,
+      "mei": 0.768,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2013,
+      "month": 12,
+      "mei": 0.69,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2014,
+      "month": 1,
+      "mei": 1.47,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2014,
+      "month": 2,
+      "mei": 2.085,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2014,
+      "month": 3,
+      "mei": 2.13,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2014,
+      "month": 4,
+      "mei": 2.044,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2014,
+      "month": 5,
+      "mei": 0.399,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2014,
+      "month": 6,
+      "mei": 0.64,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2014,
+      "month": 7,
+      "mei": 0.398,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2014,
+      "month": 8,
+      "mei": 0.411,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2014,
+      "month": 9,
+      "mei": 0.889,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2014,
+      "month": 10,
+      "mei": -0.994,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2014,
+      "month": 11,
+      "mei": -0.853,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2014,
+      "month": 12,
+      "mei": -0.542,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2015,
+      "month": 1,
+      "mei": -0.759,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2015,
+      "month": 2,
+      "mei": -1.42,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2015,
+      "month": 3,
+      "mei": -0.518,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2015,
+      "month": 4,
+      "mei": -0.385,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2015,
+      "month": 5,
+      "mei": -0.907,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2015,
+      "month": 6,
+      "mei": -0.46,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2015,
+      "month": 7,
+      "mei": 0.055,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2015,
+      "month": 8,
+      "mei": -0.03,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2015,
+      "month": 9,
+      "mei": 0.466,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2015,
+      "month": 10,
+      "mei": 2.5,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2015,
+      "month": 11,
+      "mei": 0.059,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2015,
+      "month": 12,
+      "mei": 2.6,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2016,
+      "month": 1,
+      "mei": -0.433,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2016,
+      "month": 2,
+      "mei": -0.256,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2016,
+      "month": 3,
+      "mei": 0.291,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2016,
+      "month": 4,
+      "mei": 0.082,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2016,
+      "month": 5,
+      "mei": 0.37,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2016,
+      "month": 6,
+      "mei": -0.323,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2016,
+      "month": 7,
+      "mei": -0.621,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2016,
+      "month": 8,
+      "mei": -0.518,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2016,
+      "month": 9,
+      "mei": -1.059,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2016,
+      "month": 10,
+      "mei": -0.277,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2016,
+      "month": 11,
+      "mei": -0.062,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2016,
+      "month": 12,
+      "mei": 0.084,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2017,
+      "month": 1,
+      "mei": 0.248,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2017,
+      "month": 2,
+      "mei": 1.379,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2017,
+      "month": 3,
+      "mei": 0.654,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2017,
+      "month": 4,
+      "mei": -0.681,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2017,
+      "month": 5,
+      "mei": -0.226,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2017,
+      "month": 6,
+      "mei": -0.279,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2017,
+      "month": 7,
+      "mei": -0.524,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2017,
+      "month": 8,
+      "mei": -0.966,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2017,
+      "month": 9,
+      "mei": -0.969,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2017,
+      "month": 10,
+      "mei": -0.666,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2017,
+      "month": 11,
+      "mei": -0.878,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2017,
+      "month": 12,
+      "mei": 0.768,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2018,
+      "month": 1,
+      "mei": -0.205,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2018,
+      "month": 2,
+      "mei": -0.491,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2018,
+      "month": 3,
+      "mei": -1.715,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2018,
+      "month": 4,
+      "mei": -1.039,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2018,
+      "month": 5,
+      "mei": -2.135,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2018,
+      "month": 6,
+      "mei": -1.865,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2018,
+      "month": 7,
+      "mei": -1.697,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2018,
+      "month": 8,
+      "mei": -1.806,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2018,
+      "month": 9,
+      "mei": -0.391,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2018,
+      "month": 10,
+      "mei": 0.068,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2018,
+      "month": 11,
+      "mei": 0.772,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2018,
+      "month": 12,
+      "mei": -0.014,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2019,
+      "month": 1,
+      "mei": 0.78,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2019,
+      "month": 2,
+      "mei": 0.8,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2019,
+      "month": 3,
+      "mei": 1.097,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2019,
+      "month": 4,
+      "mei": 1.447,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2019,
+      "month": 5,
+      "mei": 0.563,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2019,
+      "month": 6,
+      "mei": 0.33,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2019,
+      "month": 7,
+      "mei": 0.814,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2019,
+      "month": 8,
+      "mei": -1.006,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2019,
+      "month": 9,
+      "mei": 0.371,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2019,
+      "month": 10,
+      "mei": 0.42,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2019,
+      "month": 11,
+      "mei": 0.302,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2019,
+      "month": 12,
+      "mei": 0.391,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2020,
+      "month": 1,
+      "mei": -0.315,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2020,
+      "month": 2,
+      "mei": -0.355,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2020,
+      "month": 3,
+      "mei": 0.378,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2020,
+      "month": 4,
+      "mei": 0.967,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2020,
+      "month": 5,
+      "mei": 2.293,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2020,
+      "month": 6,
+      "mei": 1.592,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2020,
+      "month": 7,
+      "mei": 0.986,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2020,
+      "month": 8,
+      "mei": 0.573,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2020,
+      "month": 9,
+      "mei": -0.087,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2020,
+      "month": 10,
+      "mei": -0.017,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2020,
+      "month": 11,
+      "mei": 0.204,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2020,
+      "month": 12,
+      "mei": 0.11,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2021,
+      "month": 1,
+      "mei": 0.756,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2021,
+      "month": 2,
+      "mei": 0.368,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2021,
+      "month": 3,
+      "mei": 0.145,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2021,
+      "month": 4,
+      "mei": -0.197,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2021,
+      "month": 5,
+      "mei": -1.08,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2021,
+      "month": 6,
+      "mei": -1.667,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2021,
+      "month": 7,
+      "mei": -1.949,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2021,
+      "month": 8,
+      "mei": -0.74,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2021,
+      "month": 9,
+      "mei": -0.24,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2021,
+      "month": 10,
+      "mei": 0.553,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2021,
+      "month": 11,
+      "mei": -0.471,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2021,
+      "month": 12,
+      "mei": -1.397,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2022,
+      "month": 1,
+      "mei": -1.372,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2022,
+      "month": 2,
+      "mei": -0.997,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2022,
+      "month": 3,
+      "mei": -0.556,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2022,
+      "month": 4,
+      "mei": 0.114,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2022,
+      "month": 5,
+      "mei": 0.16,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2022,
+      "month": 6,
+      "mei": 1.161,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2022,
+      "month": 7,
+      "mei": 0.646,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2022,
+      "month": 8,
+      "mei": 0.049,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2022,
+      "month": 9,
+      "mei": -0.874,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2022,
+      "month": 10,
+      "mei": -1.091,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2022,
+      "month": 11,
+      "mei": -0.696,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2022,
+      "month": 12,
+      "mei": -1.146,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2023,
+      "month": 1,
+      "mei": -0.291,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2023,
+      "month": 2,
+      "mei": 0.482,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2023,
+      "month": 3,
+      "mei": -1.144,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2023,
+      "month": 4,
+      "mei": -0.156,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2023,
+      "month": 5,
+      "mei": -1.609,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2023,
+      "month": 6,
+      "mei": -0.83,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2023,
+      "month": 7,
+      "mei": -0.05,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2023,
+      "month": 8,
+      "mei": -0.118,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2023,
+      "month": 9,
+      "mei": 1.9,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2023,
+      "month": 10,
+      "mei": 2.1,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2023,
+      "month": 11,
+      "mei": -0.88,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2023,
+      "month": 12,
+      "mei": -0.818,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2024,
+      "month": 1,
+      "mei": -0.785,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2024,
+      "month": 2,
+      "mei": -0.698,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2024,
+      "month": 3,
+      "mei": -0.444,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2024,
+      "month": 4,
+      "mei": -1.114,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2024,
+      "month": 5,
+      "mei": -0.935,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2024,
+      "month": 6,
+      "mei": 0.13,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2024,
+      "month": 7,
+      "mei": -0.285,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2024,
+      "month": 8,
+      "mei": -0.43,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2024,
+      "month": 9,
+      "mei": 0.321,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2024,
+      "month": 10,
+      "mei": -1.383,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2024,
+      "month": 11,
+      "mei": -0.146,
+      "amo": null,
+      "pdo": null
+    },
+    {
+      "year": 2024,
+      "month": 12,
+      "mei": -0.679,
+      "amo": null,
+      "pdo": null
+    }
+  ],
+  "fire_monthly": [
+    {
+      "year": 1998,
+      "month": 6,
+      "focos": 1549
+    },
+    {
+      "year": 1998,
+      "month": 7,
+      "focos": 3192
+    },
+    {
+      "year": 1998,
+      "month": 8,
+      "focos": 20075
+    },
+    {
+      "year": 1998,
+      "month": 9,
+      "focos": 19214
+    },
+    {
+      "year": 1998,
+      "month": 10,
+      "focos": 8777
+    },
+    {
+      "year": 1998,
+      "month": 11,
+      "focos": 3833
+    },
+    {
+      "year": 1998,
+      "month": 12,
+      "focos": 2547
+    },
+    {
+      "year": 1999,
+      "month": 1,
+      "focos": 160
+    },
+    {
+      "year": 1999,
+      "month": 2,
+      "focos": 358
+    },
+    {
+      "year": 1999,
+      "month": 3,
+      "focos": 130
+    },
+    {
+      "year": 1999,
+      "month": 4,
+      "focos": 70
+    },
+    {
+      "year": 1999,
+      "month": 5,
+      "focos": 449
+    },
+    {
+      "year": 1999,
+      "month": 6,
+      "focos": 1439
+    },
+    {
+      "year": 1999,
+      "month": 7,
+      "focos": 3675
+    },
+    {
+      "year": 1999,
+      "month": 8,
+      "focos": 21525
+    },
+    {
+      "year": 1999,
+      "month": 9,
+      "focos": 16106
+    },
+    {
+      "year": 1999,
+      "month": 10,
+      "focos": 12794
+    },
+    {
+      "year": 1999,
+      "month": 11,
+      "focos": 4449
+    },
+    {
+      "year": 1999,
+      "month": 12,
+      "focos": 1703
+    },
+    {
+      "year": 2000,
+      "month": 1,
+      "focos": 87
+    },
+    {
+      "year": 2000,
+      "month": 2,
+      "focos": 182
+    },
+    {
+      "year": 2000,
+      "month": 3,
+      "focos": 405
+    },
+    {
+      "year": 2000,
+      "month": 4,
+      "focos": 92
+    },
+    {
+      "year": 2000,
+      "month": 5,
+      "focos": 930
+    },
+    {
+      "year": 2000,
+      "month": 6,
+      "focos": 3211
+    },
+    {
+      "year": 2000,
+      "month": 7,
+      "focos": 1510
+    },
+    {
+      "year": 2000,
+      "month": 8,
+      "focos": 12791
+    },
+    {
+      "year": 2000,
+      "month": 9,
+      "focos": 10062
+    },
+    {
+      "year": 2000,
+      "month": 10,
+      "focos": 10226
+    },
+    {
+      "year": 2000,
+      "month": 11,
+      "focos": 5497
+    },
+    {
+      "year": 2000,
+      "month": 12,
+      "focos": 3175
+    },
+    {
+      "year": 2001,
+      "month": 1,
+      "focos": 165
+    },
+    {
+      "year": 2001,
+      "month": 2,
+      "focos": 699
+    },
+    {
+      "year": 2001,
+      "month": 3,
+      "focos": 1134
+    },
+    {
+      "year": 2001,
+      "month": 4,
+      "focos": 617
+    },
+    {
+      "year": 2001,
+      "month": 5,
+      "focos": 916
+    },
+    {
+      "year": 2001,
+      "month": 6,
+      "focos": 4227
+    },
+    {
+      "year": 2001,
+      "month": 7,
+      "focos": 1816
+    },
+    {
+      "year": 2001,
+      "month": 8,
+      "focos": 17679
+    },
+    {
+      "year": 2001,
+      "month": 9,
+      "focos": 15528
+    },
+    {
+      "year": 2001,
+      "month": 10,
+      "focos": 14292
+    },
+    {
+      "year": 2001,
+      "month": 11,
+      "focos": 8346
+    },
+    {
+      "year": 2001,
+      "month": 12,
+      "focos": 4256
+    },
+    {
+      "year": 2002,
+      "month": 1,
+      "focos": 590
+    },
+    {
+      "year": 2002,
+      "month": 2,
+      "focos": 667
+    },
+    {
+      "year": 2002,
+      "month": 3,
+      "focos": 901
+    },
+    {
+      "year": 2002,
+      "month": 4,
+      "focos": 405
+    },
+    {
+      "year": 2002,
+      "month": 5,
+      "focos": 1490
+    },
+    {
+      "year": 2002,
+      "month": 6,
+      "focos": 5702
+    },
+    {
+      "year": 2002,
+      "month": 7,
+      "focos": 7529
+    },
+    {
+      "year": 2002,
+      "month": 8,
+      "focos": 43484
+    },
+    {
+      "year": 2002,
+      "month": 9,
+      "focos": 48549
+    },
+    {
+      "year": 2002,
+      "month": 10,
+      "focos": 27110
+    },
+    {
+      "year": 2002,
+      "month": 11,
+      "focos": 23660
+    },
+    {
+      "year": 2002,
+      "month": 12,
+      "focos": 9174
+    },
+    {
+      "year": 2003,
+      "month": 1,
+      "focos": 3704
+    },
+    {
+      "year": 2003,
+      "month": 2,
+      "focos": 1573
+    },
+    {
+      "year": 2003,
+      "month": 3,
+      "focos": 1997
+    },
+    {
+      "year": 2003,
+      "month": 4,
+      "focos": 1038
+    },
+    {
+      "year": 2003,
+      "month": 5,
+      "focos": 1983
+    },
+    {
+      "year": 2003,
+      "month": 6,
+      "focos": 6848
+    },
+    {
+      "year": 2003,
+      "month": 7,
+      "focos": 15918
+    },
+    {
+      "year": 2003,
+      "month": 8,
+      "focos": 34765
+    },
+    {
+      "year": 2003,
+      "month": 9,
+      "focos": 47789
+    },
+    {
+      "year": 2003,
+      "month": 10,
+      "focos": 25341
+    },
+    {
+      "year": 2003,
+      "month": 11,
+      "focos": 19631
+    },
+    {
+      "year": 2003,
+      "month": 12,
+      "focos": 13813
+    },
+    {
+      "year": 2004,
+      "month": 1,
+      "focos": 2178
+    },
+    {
+      "year": 2004,
+      "month": 2,
+      "focos": 805
+    },
+    {
+      "year": 2004,
+      "month": 3,
+      "focos": 1035
+    },
+    {
+      "year": 2004,
+      "month": 4,
+      "focos": 1012
+    },
+    {
+      "year": 2004,
+      "month": 5,
+      "focos": 3131
+    },
+    {
+      "year": 2004,
+      "month": 6,
+      "focos": 9179
+    },
+    {
+      "year": 2004,
+      "month": 7,
+      "focos": 19179
+    },
+    {
+      "year": 2004,
+      "month": 8,
+      "focos": 43320
+    },
+    {
+      "year": 2004,
+      "month": 9,
+      "focos": 71522
+    },
+    {
+      "year": 2004,
+      "month": 10,
+      "focos": 23928
+    },
+    {
+      "year": 2004,
+      "month": 11,
+      "focos": 26424
+    },
+    {
+      "year": 2004,
+      "month": 12,
+      "focos": 16924
+    },
+    {
+      "year": 2005,
+      "month": 1,
+      "focos": 4314
+    },
+    {
+      "year": 2005,
+      "month": 2,
+      "focos": 1048
+    },
+    {
+      "year": 2005,
+      "month": 3,
+      "focos": 758
+    },
+    {
+      "year": 2005,
+      "month": 4,
+      "focos": 832
+    },
+    {
+      "year": 2005,
+      "month": 5,
+      "focos": 1746
+    },
+    {
+      "year": 2005,
+      "month": 6,
+      "focos": 2954
+    },
+    {
+      "year": 2005,
+      "month": 7,
+      "focos": 19364
+    },
+    {
+      "year": 2005,
+      "month": 8,
+      "focos": 63764
+    },
+    {
+      "year": 2005,
+      "month": 9,
+      "focos": 68560
+    },
+    {
+      "year": 2005,
+      "month": 10,
+      "focos": 26624
+    },
+    {
+      "year": 2005,
+      "month": 11,
+      "focos": 16790
+    },
+    {
+      "year": 2005,
+      "month": 12,
+      "focos": 6966
+    },
+    {
+      "year": 2006,
+      "month": 1,
+      "focos": 1973
+    },
+    {
+      "year": 2006,
+      "month": 2,
+      "focos": 879
+    },
+    {
+      "year": 2006,
+      "month": 3,
+      "focos": 903
+    },
+    {
+      "year": 2006,
+      "month": 4,
+      "focos": 709
+    },
+    {
+      "year": 2006,
+      "month": 5,
+      "focos": 843
+    },
+    {
+      "year": 2006,
+      "month": 6,
+      "focos": 2522
+    },
+    {
+      "year": 2006,
+      "month": 7,
+      "focos": 6995
+    },
+    {
+      "year": 2006,
+      "month": 8,
+      "focos": 34208
+    },
+    {
+      "year": 2006,
+      "month": 9,
+      "focos": 51028
+    },
+    {
+      "year": 2006,
+      "month": 10,
+      "focos": 18309
+    },
+    {
+      "year": 2006,
+      "month": 11,
+      "focos": 17474
+    },
+    {
+      "year": 2006,
+      "month": 12,
+      "focos": 8579
+    },
+    {
+      "year": 2007,
+      "month": 1,
+      "focos": 1918
+    },
+    {
+      "year": 2007,
+      "month": 2,
+      "focos": 1761
+    },
+    {
+      "year": 2007,
+      "month": 3,
+      "focos": 1431
+    },
+    {
+      "year": 2007,
+      "month": 4,
+      "focos": 760
+    },
+    {
+      "year": 2007,
+      "month": 5,
+      "focos": 1176
+    },
+    {
+      "year": 2007,
+      "month": 6,
+      "focos": 3519
+    },
+    {
+      "year": 2007,
+      "month": 7,
+      "focos": 6196
+    },
+    {
+      "year": 2007,
+      "month": 8,
+      "focos": 46385
+    },
+    {
+      "year": 2007,
+      "month": 9,
+      "focos": 73141
+    },
+    {
+      "year": 2007,
+      "month": 10,
+      "focos": 28731
+    },
+    {
+      "year": 2007,
+      "month": 11,
+      "focos": 16025
+    },
+    {
+      "year": 2007,
+      "month": 12,
+      "focos": 5437
+    },
+    {
+      "year": 2008,
+      "month": 1,
+      "focos": 938
+    },
+    {
+      "year": 2008,
+      "month": 2,
+      "focos": 527
+    },
+    {
+      "year": 2008,
+      "month": 3,
+      "focos": 860
+    },
+    {
+      "year": 2008,
+      "month": 4,
+      "focos": 569
+    },
+    {
+      "year": 2008,
+      "month": 5,
+      "focos": 383
+    },
+    {
+      "year": 2008,
+      "month": 6,
+      "focos": 1248
+    },
+    {
+      "year": 2008,
+      "month": 7,
+      "focos": 5901
+    },
+    {
+      "year": 2008,
+      "month": 8,
+      "focos": 21445
+    },
+    {
+      "year": 2008,
+      "month": 9,
+      "focos": 26469
+    },
+    {
+      "year": 2008,
+      "month": 10,
+      "focos": 23518
+    },
+    {
+      "year": 2008,
+      "month": 11,
+      "focos": 15450
+    },
+    {
+      "year": 2008,
+      "month": 12,
+      "focos": 6145
+    },
+    {
+      "year": 2009,
+      "month": 1,
+      "focos": 1095
+    },
+    {
+      "year": 2009,
+      "month": 2,
+      "focos": 354
+    },
+    {
+      "year": 2009,
+      "month": 3,
+      "focos": 584
+    },
+    {
+      "year": 2009,
+      "month": 4,
+      "focos": 435
+    },
+    {
+      "year": 2009,
+      "month": 5,
+      "focos": 673
+    },
+    {
+      "year": 2009,
+      "month": 6,
+      "focos": 1023
+    },
+    {
+      "year": 2009,
+      "month": 7,
+      "focos": 2327
+    },
+    {
+      "year": 2009,
+      "month": 8,
+      "focos": 9732
+    },
+    {
+      "year": 2009,
+      "month": 9,
+      "focos": 20527
+    },
+    {
+      "year": 2009,
+      "month": 10,
+      "focos": 19323
+    },
+    {
+      "year": 2009,
+      "month": 11,
+      "focos": 19104
+    },
+    {
+      "year": 2009,
+      "month": 12,
+      "focos": 6505
+    },
+    {
+      "year": 2010,
+      "month": 1,
+      "focos": 1697
+    },
+    {
+      "year": 2010,
+      "month": 2,
+      "focos": 1147
+    },
+    {
+      "year": 2010,
+      "month": 3,
+      "focos": 1176
+    },
+    {
+      "year": 2010,
+      "month": 4,
+      "focos": 633
+    },
+    {
+      "year": 2010,
+      "month": 5,
+      "focos": 1026
+    },
+    {
+      "year": 2010,
+      "month": 6,
+      "focos": 1911
+    },
+    {
+      "year": 2010,
+      "month": 7,
+      "focos": 5868
+    },
+    {
+      "year": 2010,
+      "month": 8,
+      "focos": 45018
+    },
+    {
+      "year": 2010,
+      "month": 9,
+      "focos": 43933
+    },
+    {
+      "year": 2010,
+      "month": 10,
+      "focos": 14798
+    },
+    {
+      "year": 2010,
+      "month": 11,
+      "focos": 12167
+    },
+    {
+      "year": 2010,
+      "month": 12,
+      "focos": 5240
+    },
+    {
+      "year": 2011,
+      "month": 1,
+      "focos": 771
+    },
+    {
+      "year": 2011,
+      "month": 2,
+      "focos": 271
+    },
+    {
+      "year": 2011,
+      "month": 3,
+      "focos": 427
+    },
+    {
+      "year": 2011,
+      "month": 4,
+      "focos": 465
+    },
+    {
+      "year": 2011,
+      "month": 5,
+      "focos": 528
+    },
+    {
+      "year": 2011,
+      "month": 6,
+      "focos": 1083
+    },
+    {
+      "year": 2011,
+      "month": 7,
+      "focos": 2445
+    },
+    {
+      "year": 2011,
+      "month": 8,
+      "focos": 8002
+    },
+    {
+      "year": 2011,
+      "month": 9,
+      "focos": 16987
+    },
+    {
+      "year": 2011,
+      "month": 10,
+      "focos": 9760
+    },
+    {
+      "year": 2011,
+      "month": 11,
+      "focos": 9815
+    },
+    {
+      "year": 2011,
+      "month": 12,
+      "focos": 7632
+    },
+    {
+      "year": 2012,
+      "month": 1,
+      "focos": 1203
+    },
+    {
+      "year": 2012,
+      "month": 2,
+      "focos": 438
+    },
+    {
+      "year": 2012,
+      "month": 3,
+      "focos": 484
+    },
+    {
+      "year": 2012,
+      "month": 4,
+      "focos": 473
+    },
+    {
+      "year": 2012,
+      "month": 5,
+      "focos": 855
+    },
+    {
+      "year": 2012,
+      "month": 6,
+      "focos": 1875
+    },
+    {
+      "year": 2012,
+      "month": 7,
+      "focos": 3095
+    },
+    {
+      "year": 2012,
+      "month": 8,
+      "focos": 20687
+    },
+    {
+      "year": 2012,
+      "month": 9,
+      "focos": 24067
+    },
+    {
+      "year": 2012,
+      "month": 10,
+      "focos": 14814
+    },
+    {
+      "year": 2012,
+      "month": 11,
+      "focos": 13259
+    },
+    {
+      "year": 2012,
+      "month": 12,
+      "focos": 5469
+    },
+    {
+      "year": 2013,
+      "month": 1,
+      "focos": 1181
+    },
+    {
+      "year": 2013,
+      "month": 2,
+      "focos": 374
+    },
+    {
+      "year": 2013,
+      "month": 3,
+      "focos": 738
+    },
+    {
+      "year": 2013,
+      "month": 4,
+      "focos": 518
+    },
+    {
+      "year": 2013,
+      "month": 5,
+      "focos": 796
+    },
+    {
+      "year": 2013,
+      "month": 6,
+      "focos": 1450
+    },
+    {
+      "year": 2013,
+      "month": 7,
+      "focos": 2531
+    },
+    {
+      "year": 2013,
+      "month": 8,
+      "focos": 9444
+    },
+    {
+      "year": 2013,
+      "month": 9,
+      "focos": 16786
+    },
+    {
+      "year": 2013,
+      "month": 10,
+      "focos": 10242
+    },
+    {
+      "year": 2013,
+      "month": 11,
+      "focos": 6615
+    },
+    {
+      "year": 2013,
+      "month": 12,
+      "focos": 8013
+    },
+    {
+      "year": 2014,
+      "month": 1,
+      "focos": 1573
+    },
+    {
+      "year": 2014,
+      "month": 2,
+      "focos": 473
+    },
+    {
+      "year": 2014,
+      "month": 3,
+      "focos": 1010
+    },
+    {
+      "year": 2014,
+      "month": 4,
+      "focos": 632
+    },
+    {
+      "year": 2014,
+      "month": 5,
+      "focos": 673
+    },
+    {
+      "year": 2014,
+      "month": 6,
+      "focos": 1628
+    },
+    {
+      "year": 2014,
+      "month": 7,
+      "focos": 2766
+    },
+    {
+      "year": 2014,
+      "month": 8,
+      "focos": 20113
+    },
+    {
+      "year": 2014,
+      "month": 9,
+      "focos": 20522
+    },
+    {
+      "year": 2014,
+      "month": 10,
+      "focos": 13221
+    },
+    {
+      "year": 2014,
+      "month": 11,
+      "focos": 12169
+    },
+    {
+      "year": 2014,
+      "month": 12,
+      "focos": 7773
+    },
+    {
+      "year": 2015,
+      "month": 1,
+      "focos": 2042
+    },
+    {
+      "year": 2015,
+      "month": 2,
+      "focos": 1047
+    },
+    {
+      "year": 2015,
+      "month": 3,
+      "focos": 572
+    },
+    {
+      "year": 2015,
+      "month": 4,
+      "focos": 762
+    },
+    {
+      "year": 2015,
+      "month": 5,
+      "focos": 407
+    },
+    {
+      "year": 2015,
+      "month": 6,
+      "focos": 1287
+    },
+    {
+      "year": 2015,
+      "month": 7,
+      "focos": 2817
+    },
+    {
+      "year": 2015,
+      "month": 8,
+      "focos": 20471
+    },
+    {
+      "year": 2015,
+      "month": 9,
+      "focos": 29326
+    },
+    {
+      "year": 2015,
+      "month": 10,
+      "focos": 19469
+    },
+    {
+      "year": 2015,
+      "month": 11,
+      "focos": 16935
+    },
+    {
+      "year": 2015,
+      "month": 12,
+      "focos": 11303
+    },
+    {
+      "year": 2016,
+      "month": 1,
+      "focos": 4657
+    },
+    {
+      "year": 2016,
+      "month": 2,
+      "focos": 1559
+    },
+    {
+      "year": 2016,
+      "month": 3,
+      "focos": 2024
+    },
+    {
+      "year": 2016,
+      "month": 4,
+      "focos": 1075
+    },
+    {
+      "year": 2016,
+      "month": 5,
+      "focos": 895
+    },
+    {
+      "year": 2016,
+      "month": 6,
+      "focos": 1663
+    },
+    {
+      "year": 2016,
+      "month": 7,
+      "focos": 6120
+    },
+    {
+      "year": 2016,
+      "month": 8,
+      "focos": 18340
+    },
+    {
+      "year": 2016,
+      "month": 9,
+      "focos": 20460
+    },
+    {
+      "year": 2016,
+      "month": 10,
+      "focos": 14234
+    },
+    {
+      "year": 2016,
+      "month": 11,
+      "focos": 11610
+    },
+    {
+      "year": 2016,
+      "month": 12,
+      "focos": 5124
+    },
+    {
+      "year": 2017,
+      "month": 1,
+      "focos": 796
+    },
+    {
+      "year": 2017,
+      "month": 2,
+      "focos": 379
+    },
+    {
+      "year": 2017,
+      "month": 3,
+      "focos": 736
+    },
+    {
+      "year": 2017,
+      "month": 4,
+      "focos": 618
+    },
+    {
+      "year": 2017,
+      "month": 5,
+      "focos": 805
+    },
+    {
+      "year": 2017,
+      "month": 6,
+      "focos": 1759
+    },
+    {
+      "year": 2017,
+      "month": 7,
+      "focos": 7986
+    },
+    {
+      "year": 2017,
+      "month": 8,
+      "focos": 21244
+    },
+    {
+      "year": 2017,
+      "month": 9,
+      "focos": 36569
+    },
+    {
+      "year": 2017,
+      "month": 10,
+      "focos": 14457
+    },
+    {
+      "year": 2017,
+      "month": 11,
+      "focos": 14105
+    },
+    {
+      "year": 2017,
+      "month": 12,
+      "focos": 7985
+    },
+    {
+      "year": 2018,
+      "month": 1,
+      "focos": 1444
+    },
+    {
+      "year": 2018,
+      "month": 2,
+      "focos": 888
+    },
+    {
+      "year": 2018,
+      "month": 3,
+      "focos": 1359
+    },
+    {
+      "year": 2018,
+      "month": 4,
+      "focos": 513
+    },
+    {
+      "year": 2018,
+      "month": 5,
+      "focos": 772
+    },
+    {
+      "year": 2018,
+      "month": 6,
+      "focos": 1980
+    },
+    {
+      "year": 2018,
+      "month": 7,
+      "focos": 4788
+    },
+    {
+      "year": 2018,
+      "month": 8,
+      "focos": 10421
+    },
+    {
+      "year": 2018,
+      "month": 9,
+      "focos": 24803
+    },
+    {
+      "year": 2018,
+      "month": 10,
+      "focos": 10654
+    },
+    {
+      "year": 2018,
+      "month": 11,
+      "focos": 8881
+    },
+    {
+      "year": 2018,
+      "month": 12,
+      "focos": 1842
+    },
+    {
+      "year": 2019,
+      "month": 1,
+      "focos": 1419
+    },
+    {
+      "year": 2019,
+      "month": 2,
+      "focos": 1368
+    },
+    {
+      "year": 2019,
+      "month": 3,
+      "focos": 3383
+    },
+    {
+      "year": 2019,
+      "month": 4,
+      "focos": 1702
+    },
+    {
+      "year": 2019,
+      "month": 5,
+      "focos": 854
+    },
+    {
+      "year": 2019,
+      "month": 6,
+      "focos": 1880
+    },
+    {
+      "year": 2019,
+      "month": 7,
+      "focos": 5318
+    },
+    {
+      "year": 2019,
+      "month": 8,
+      "focos": 30900
+    },
+    {
+      "year": 2019,
+      "month": 9,
+      "focos": 19925
+    },
+    {
+      "year": 2019,
+      "month": 10,
+      "focos": 7855
+    },
+    {
+      "year": 2019,
+      "month": 11,
+      "focos": 11297
+    },
+    {
+      "year": 2019,
+      "month": 12,
+      "focos": 3275
+    },
+    {
+      "year": 2020,
+      "month": 1,
+      "focos": 1200
+    },
+    {
+      "year": 2020,
+      "month": 2,
+      "focos": 1196
+    },
+    {
+      "year": 2020,
+      "month": 3,
+      "focos": 1641
+    },
+    {
+      "year": 2020,
+      "month": 4,
+      "focos": 789
+    },
+    {
+      "year": 2020,
+      "month": 5,
+      "focos": 829
+    },
+    {
+      "year": 2020,
+      "month": 6,
+      "focos": 2248
+    },
+    {
+      "year": 2020,
+      "month": 7,
+      "focos": 6803
+    },
+    {
+      "year": 2020,
+      "month": 8,
+      "focos": 29307
+    },
+    {
+      "year": 2020,
+      "month": 9,
+      "focos": 32017
+    },
+    {
+      "year": 2020,
+      "month": 10,
+      "focos": 17326
+    },
+    {
+      "year": 2020,
+      "month": 11,
+      "focos": 6321
+    },
+    {
+      "year": 2020,
+      "month": 12,
+      "focos": 3484
+    },
+    {
+      "year": 2021,
+      "month": 1,
+      "focos": 794
+    },
+    {
+      "year": 2021,
+      "month": 2,
+      "focos": 864
+    },
+    {
+      "year": 2021,
+      "month": 3,
+      "focos": 643
+    },
+    {
+      "year": 2021,
+      "month": 4,
+      "focos": 615
+    },
+    {
+      "year": 2021,
+      "month": 5,
+      "focos": 1166
+    },
+    {
+      "year": 2021,
+      "month": 6,
+      "focos": 2305
+    },
+    {
+      "year": 2021,
+      "month": 7,
+      "focos": 4977
+    },
+    {
+      "year": 2021,
+      "month": 8,
+      "focos": 28060
+    },
+    {
+      "year": 2021,
+      "month": 9,
+      "focos": 16742
+    },
+    {
+      "year": 2021,
+      "month": 10,
+      "focos": 11549
+    },
+    {
+      "year": 2021,
+      "month": 11,
+      "focos": 5779
+    },
+    {
+      "year": 2021,
+      "month": 12,
+      "focos": 1596
+    },
+    {
+      "year": 2022,
+      "month": 1,
+      "focos": 1226
+    },
+    {
+      "year": 2022,
+      "month": 2,
+      "focos": 584
+    },
+    {
+      "year": 2022,
+      "month": 3,
+      "focos": 490
+    },
+    {
+      "year": 2022,
+      "month": 4,
+      "focos": 384
+    },
+    {
+      "year": 2022,
+      "month": 5,
+      "focos": 2287
+    },
+    {
+      "year": 2022,
+      "month": 6,
+      "focos": 2562
+    },
+    {
+      "year": 2022,
+      "month": 7,
+      "focos": 5373
+    },
+    {
+      "year": 2022,
+      "month": 8,
+      "focos": 33116
+    },
+    {
+      "year": 2022,
+      "month": 9,
+      "focos": 41282
+    },
+    {
+      "year": 2022,
+      "month": 10,
+      "focos": 13911
+    },
+    {
+      "year": 2022,
+      "month": 11,
+      "focos": 11062
+    },
+    {
+      "year": 2022,
+      "month": 12,
+      "focos": 2756
+    },
+    {
+      "year": 2023,
+      "month": 1,
+      "focos": 1056
+    },
+    {
+      "year": 2023,
+      "month": 2,
+      "focos": 734
+    },
+    {
+      "year": 2023,
+      "month": 3,
+      "focos": 1019
+    },
+    {
+      "year": 2023,
+      "month": 4,
+      "focos": 768
+    },
+    {
+      "year": 2023,
+      "month": 5,
+      "focos": 1692
+    },
+    {
+      "year": 2023,
+      "month": 6,
+      "focos": 3075
+    },
+    {
+      "year": 2023,
+      "month": 7,
+      "focos": 5772
+    },
+    {
+      "year": 2023,
+      "month": 8,
+      "focos": 17372
+    },
+    {
+      "year": 2023,
+      "month": 9,
+      "focos": 26449
+    },
+    {
+      "year": 2023,
+      "month": 10,
+      "focos": 22061
+    },
+    {
+      "year": 2023,
+      "month": 11,
+      "focos": 13940
+    },
+    {
+      "year": 2023,
+      "month": 12,
+      "focos": 4701
+    },
+    {
+      "year": 2024,
+      "month": 1,
+      "focos": 2049
+    },
+    {
+      "year": 2024,
+      "month": 2,
+      "focos": 3157
+    },
+    {
+      "year": 2024,
+      "month": 3,
+      "focos": 2654
+    },
+    {
+      "year": 2024,
+      "month": 4,
+      "focos": 1117
+    },
+    {
+      "year": 2024,
+      "month": 5,
+      "focos": 1670
+    },
+    {
+      "year": 2024,
+      "month": 6,
+      "focos": 2842
+    },
+    {
+      "year": 2024,
+      "month": 7,
+      "focos": 11434
+    },
+    {
+      "year": 2024,
+      "month": 8,
+      "focos": 38266
+    },
+    {
+      "year": 2024,
+      "month": 9,
+      "focos": 41463
+    },
+    {
+      "year": 2024,
+      "month": 10,
+      "focos": 16169
+    },
+    {
+      "year": 2024,
+      "month": 11,
+      "focos": 14158
+    },
+    {
+      "year": 2024,
+      "month": 12,
+      "focos": 5367
+    },
     {
       "year": 2025,
       "month": 1,
-      "step": 1,
-      "focos_pred": 1058,
-      "lo": 335,
-      "hi": 3337
+      "focos": 1219
     },
     {
       "year": 2025,
       "month": 2,
-      "step": 2,
-      "focos_pred": 723,
-      "lo": 317,
-      "hi": 1646
+      "focos": 399
     },
     {
       "year": 2025,
       "month": 3,
-      "step": 3,
-      "focos_pred": 697,
-      "lo": 256,
-      "hi": 1901
+      "focos": 772
     },
     {
       "year": 2025,
       "month": 4,
-      "step": 4,
-      "focos_pred": 482,
-      "lo": 178,
-      "hi": 1305
+      "focos": 293
     },
     {
       "year": 2025,
       "month": 5,
-      "step": 5,
-      "focos_pred": 779,
-      "lo": 352,
-      "hi": 1724
+      "focos": 836
     },
     {
       "year": 2025,
       "month": 6,
-      "step": 6,
-      "focos_pred": 1776,
-      "lo": 911,
-      "hi": 3464
+      "focos": 1650
     },
     {
       "year": 2025,
       "month": 7,
-      "step": 7,
-      "focos_pred": 4980,
-      "lo": 2302,
-      "hi": 10773
+      "focos": 2183
     },
     {
       "year": 2025,
       "month": 8,
-      "step": 8,
-      "focos_pred": 21527,
-      "lo": 9792,
-      "hi": 47327
+      "focos": 6094
     },
     {
       "year": 2025,
       "month": 9,
-      "step": 9,
-      "focos_pred": 28168,
-      "lo": 12844,
-      "hi": 61773
+      "focos": 7211
     },
     {
       "year": 2025,
       "month": 10,
-      "step": 10,
-      "focos_pred": 17839,
-      "lo": 9558,
-      "hi": 33293
+      "focos": 7868
     },
     {
       "year": 2025,
       "month": 11,
-      "step": 11,
-      "focos_pred": 11443,
-      "lo": 4922,
-      "hi": 26601
+      "focos": 9568
     },
     {
       "year": 2025,
       "month": 12,
-      "step": 12,
-      "focos_pred": 4499,
-      "lo": 1952,
-      "hi": 10371
+      "focos": 5038
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "focos": 2056
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "focos": 873
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "focos": 873
+    },
+    {
+      "year": 2026,
+      "month": 4,
+      "focos": 402
     }
   ],
-  "climate_series": [],
-  "fire_monthly": []
+  "prophet_model": {
+    "model": "Facebook Prophet",
+    "features": [
+      "mei_lag1",
+      "amo_lag1",
+      "pdo_lag1"
+    ],
+    "seasonality_mode": "multiplicative",
+    "interval_width": 0.9,
+    "n_samples": 334,
+    "n_train": 298,
+    "n_test": 36,
+    "mape_train": 42.35,
+    "mape_test": 50.83,
+    "mae_test": 3426.9,
+    "trained_on": "1998-07 a 2026-04",
+    "sarima_mei": "ver mei_data.json",
+    "sarima_amo": {
+      "order": [
+        0,
+        1,
+        1
+      ],
+      "seasonal_order": [
+        1,
+        1,
+        0,
+        12
+      ]
+    },
+    "sarima_pdo": {
+      "order": [
+        0,
+        1,
+        1
+      ],
+      "seasonal_order": [
+        1,
+        1,
+        0,
+        12
+      ]
+    },
+    "r2_train": null,
+    "r2_test": null,
+    "lags": 1,
+    "n_estimators": null
+  },
+  "prophet_forecast": [
+    {
+      "year": 2026,
+      "month": 5,
+      "step": 1,
+      "focos_pred": 937,
+      "lo": 447,
+      "hi": 2008
+    },
+    {
+      "year": 2026,
+      "month": 6,
+      "step": 2,
+      "focos_pred": 2314,
+      "lo": 1057,
+      "hi": 5238
+    },
+    {
+      "year": 2026,
+      "month": 7,
+      "step": 3,
+      "focos_pred": 4952,
+      "lo": 2034,
+      "hi": 11065
+    },
+    {
+      "year": 2026,
+      "month": 8,
+      "step": 4,
+      "focos_pred": 22617,
+      "lo": 10581,
+      "hi": 51958
+    },
+    {
+      "year": 2026,
+      "month": 9,
+      "step": 5,
+      "focos_pred": 29130,
+      "lo": 13913,
+      "hi": 66900
+    },
+    {
+      "year": 2026,
+      "month": 10,
+      "step": 6,
+      "focos_pred": 15250,
+      "lo": 6872,
+      "hi": 34472
+    },
+    {
+      "year": 2026,
+      "month": 11,
+      "step": 7,
+      "focos_pred": 11357,
+      "lo": 4876,
+      "hi": 26995
+    },
+    {
+      "year": 2026,
+      "month": 12,
+      "step": 8,
+      "focos_pred": 5346,
+      "lo": 2286,
+      "hi": 12096
+    },
+    {
+      "year": 2027,
+      "month": 1,
+      "step": 9,
+      "focos_pred": 1216,
+      "lo": 549,
+      "hi": 2663
+    },
+    {
+      "year": 2027,
+      "month": 2,
+      "step": 10,
+      "focos_pred": 810,
+      "lo": 341,
+      "hi": 1825
+    },
+    {
+      "year": 2027,
+      "month": 3,
+      "step": 11,
+      "focos_pred": 840,
+      "lo": 378,
+      "hi": 1894
+    },
+    {
+      "year": 2027,
+      "month": 4,
+      "step": 12,
+      "focos_pred": 579,
+      "lo": 245,
+      "hi": 1358
+    }
+  ]
 }

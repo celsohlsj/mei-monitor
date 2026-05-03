@@ -305,7 +305,8 @@ def _sarima_forecast_series(series_vals, periods, name=""):
         return np.full(periods, float(np.mean(clean))), None, None
 
     fc    = best_res.get_forecast(steps=periods)
-    vals  = fc.predicted_mean.values
+    pm    = fc.predicted_mean
+    vals  = pm.values if hasattr(pm, "values") else np.array(pm)
     o, so = best_ord
     print(f"  ✓ {name} SARIMA({o[0]},{o[1]},{o[2]})({so[0]},{so[1]},{so[2]},12) "
           f"AIC={round(best_aic, 1)}")
