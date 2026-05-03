@@ -37,7 +37,7 @@ BISEASONS = ["DJ","JF","FM","MA","AM","MJ","JJ","JA","AS","SO","ON","ND"]
 REGRESSORS = ["mei_lag1", "amo_lag1", "pdo_lag1"]
 
 AMO_URL  = "https://www.ncei.noaa.gov/pub/data/cmb/ersst/v5/index/ersst.v5.amo.dat"
-PDO_URL  = "https://psl.noaa.gov/data/correlation/pdo.data"
+PDO_URL  = "https://www.ncei.noaa.gov/pub/data/cmb/ersst/v5/v6/index/ersst.v6.pdo.dat"
 INPE_URL = ("https://terrabrasilis.dpi.inpe.br/queimadas/situacao-atual/"
             "media/bioma/csv_estatisticas/historico_bioma_amazonia.csv")
 
