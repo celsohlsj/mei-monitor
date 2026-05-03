@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_utc": "2026-05-03T18:15:03.935057+00:00",
+    "updated_utc": "2026-05-03T18:30:52.552293+00:00",
     "pipeline": "YbYrá-BR Prophet Pipeline",
     "model_type": "Facebook Prophet + SARIMA (índices oceânicos)",
     "mei_records": 552,
@@ -5605,96 +5605,96 @@
       "month": 5,
       "step": 1,
       "focos_pred": 937,
-      "lo": 336,
-      "hi": 2432
+      "lo": 359,
+      "hi": 2441
     },
     {
       "year": 2026,
       "month": 6,
       "step": 2,
       "focos_pred": 2314,
-      "lo": 928,
-      "hi": 6196
+      "lo": 886,
+      "hi": 5900
     },
     {
       "year": 2026,
       "month": 7,
       "step": 3,
       "focos_pred": 4952,
-      "lo": 1787,
-      "hi": 13201
+      "lo": 1829,
+      "hi": 11901
     },
     {
       "year": 2026,
       "month": 8,
       "step": 4,
       "focos_pred": 22617,
-      "lo": 9104,
-      "hi": 57473
+      "lo": 8216,
+      "hi": 63475
     },
     {
       "year": 2026,
       "month": 9,
       "step": 5,
       "focos_pred": 29130,
-      "lo": 10266,
-      "hi": 73768
+      "lo": 11403,
+      "hi": 72385
     },
     {
       "year": 2026,
       "month": 10,
       "step": 6,
       "focos_pred": 15250,
-      "lo": 5776,
-      "hi": 37441
+      "lo": 6361,
+      "hi": 43404
     },
     {
       "year": 2026,
       "month": 11,
       "step": 7,
       "focos_pred": 11357,
-      "lo": 4645,
-      "hi": 29171
+      "lo": 4494,
+      "hi": 33194
     },
     {
       "year": 2026,
       "month": 12,
       "step": 8,
       "focos_pred": 5346,
-      "lo": 2121,
-      "hi": 12235
+      "lo": 2035,
+      "hi": 12233
     },
     {
       "year": 2027,
       "month": 1,
       "step": 9,
       "focos_pred": 1216,
-      "lo": 485,
-      "hi": 3280
+      "lo": 444,
+      "hi": 3357
     },
     {
       "year": 2027,
       "month": 2,
       "step": 10,
       "focos_pred": 810,
-      "lo": 313,
-      "hi": 2048
+      "lo": 298,
+      "hi": 2146
     },
     {
       "year": 2027,
       "month": 3,
       "step": 11,
       "focos_pred": 840,
-      "lo": 289,
-      "hi": 2078
+      "lo": 315,
+      "hi": 2407
     },
     {
       "year": 2027,
       "month": 4,
       "step": 12,
       "focos_pred": 579,
-      "lo": 219,
-      "hi": 1394
+      "lo": 220,
+      "hi": 1667
     }
   ],
   "sarima_climate_forecast": [

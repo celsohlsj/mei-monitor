@@ -176,7 +176,7 @@ footer{border-top:1px solid var(--wire);padding:26px 24px;
   <div class="n-brand"><em>YbYrá</em>-BR</div>
   <div class="n-links">
     <a href="#fogo">Fogo</a><a href="#clima">Clima</a>
-    <a href="#rf">Previsão Prophet</a><a href="#dados">Dados</a>
+    <a href="#rf">Previsão Prophet</a><a href="#dados">Dados</a><a href="methodology.html">Metodologia</a>
     <div class="n-live"></div>
   </div>
 </nav>
@@ -296,7 +296,7 @@ footer{border-top:1px solid var(--wire);padding:26px 24px;
     <div class="cc"><div class="ct">Metodologia</div>
       <div style="font-size:11px;color:var(--mist);line-height:1.9">
         <div><strong style="color:var(--text)">Índices oceânicos (SARIMA):</strong> SARIMA(p,d,q)(P,D,Q,s=12) · ordem selecionada por AIC · previsão 12 bi-meses à frente com IC 95%</div><br>
-        <div><strong style="color:var(--text)">Prophet (fogo):</strong> sazonalidade anual multiplicativa · regressores MEI, AMO, PDO com lag-1 (futuros via SARIMA) · target: log(focos+1) · IC 90%</div><br>
+        <div><strong style="color:var(--text)">Prophet (fogo):</strong> sazonalidade anual multiplicativa · regressores MEI, AMO, PDO com lag-1 (futuros via SARIMA) · target: log(focos+1) · IC 95%</div><br>
         <div><strong style="color:var(--text)">Referência:</strong><br>Aragão et al. (2018) <em>Nat. Commun.</em> 9:536<br><a href="https://doi.org/10.1038/s41467-017-02771-y" target="_blank" style="font-size:9px">DOI: 10.1038/s41467-017-02771-y</a></div><br>
         <div style="font-size:9px;padding:5px 9px;background:rgba(184,126,0,.07);border:1px solid rgba(184,126,0,.18);border-radius:2px">Projeto YbYrá-BR · CNPq Processo 401741/2023-0</div>
       </div>
@@ -307,6 +307,7 @@ footer{border-top:1px solid var(--wire);padding:26px 24px;
     <button class="cbtn" onclick="dlJSON()">↓ JSON completo</button>
     <a href="https://terrabrasilis.dpi.inpe.br/queimadas/situacao-atual/" target="_blank"><button class="cbtn">↗ BDQueimadas INPE</button></a>
     <a href="https://psl.noaa.gov/enso/mei/" target="_blank"><button class="cbtn">↗ NOAA MEI.v2</button></a>
+    <a href="methodology.html"><button class="cbtn">📄 Metodologia detalhada</button></a>
   </div>
 </div>
 <footer>

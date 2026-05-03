@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="YbYrá-BR · Metodologia detalhada do pipeline de previsão de focos de queimadas">
+<title>YbYrá-BR · Metodologia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Roboto+Condensed:ital,wght@0,700;1,700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f5f2ea;--bg2:#ffffff;--bg3:#ede9df;
+  --text:#1c1c2e;--text2:#525270;
+  --ember:#c23510;--ember2:#d94f1e;
+  --gold:#8a5e00;--gold2:#b87e00;
+  --leaf:#155a2e;--leaf2:#229948;
+  --sky:#0e428a;--sky2:#1e6ab8;
+  --mist:#6a6e84;--wire:rgba(0,0,0,.1);
+  --mono:'Roboto Mono','Courier New',monospace;
+  --serif:'Roboto Condensed','Arial Narrow',sans-serif;
+  --sans:'Roboto',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.7;overflow-x:hidden}
+a{color:var(--sky2);text-decoration:none}a:hover{text-decoration:underline}
+
+nav{position:sticky;top:0;z-index:100;height:50px;
+  background:rgba(245,242,234,.95);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(0,0,0,.1);
+  display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+.n-brand{font-family:var(--serif);font-style:italic;font-size:1.1rem;font-weight:700;color:var(--text)}
+.n-brand em{color:var(--ember2);font-style:normal}
+.n-links{display:flex;gap:18px;align-items:center}
+.n-links a{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);transition:color .2s;font-family:var(--sans);font-weight:500}
+.n-links a:hover{color:var(--text);text-decoration:none}
+
+.page{max-width:860px;margin:0 auto;padding:48px 24px 80px}
+h1{font-family:var(--serif);font-size:2rem;font-weight:900;color:var(--text);margin-bottom:6px}
+.subtitle{color:var(--mist);font-size:.85rem;margin-bottom:40px}
+h2{font-family:var(--serif);font-size:1.25rem;font-weight:700;color:var(--text);margin:40px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--ember2)}
+h3{font-size:.95rem;font-weight:700;color:var(--text);margin:24px 0 8px}
+p{margin-bottom:12px;color:var(--text2)}
+ul,ol{margin:0 0 14px 20px;color:var(--text2)}
+li{margin-bottom:4px}
+
+.pipeline-box{background:var(--bg2);border:1px solid var(--wire);border-radius:10px;padding:20px 24px;margin:20px 0;font-family:var(--mono);font-size:.8rem;line-height:1.9;color:var(--text2)}
+.pipeline-box strong{color:var(--ember2)}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+@media(max-width:600px){.grid2{grid-template-columns:1fr}}
+
+.card{background:var(--bg2);border:1px solid var(--wire);border-radius:10px;padding:18px 20px}
+.card-title{font-family:var(--serif);font-weight:700;font-size:.95rem;color:var(--text);margin-bottom:8px}
+.card p{font-size:.82rem;margin-bottom:0}
+
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:.7rem;font-weight:700;letter-spacing:.06em;vertical-align:middle;margin-left:6px}
+.b-sarima{background:#e8f4ff;color:#0e428a}
+.b-prophet{background:#fff3e8;color:#c23510}
+.b-noaa{background:#eaf6ee;color:#155a2e}
+.b-inpe{background:#f5f0ff;color:#5a2e8a}
+
+table{width:100%;border-collapse:collapse;font-size:.82rem;margin:16px 0}
+th{background:var(--bg3);color:var(--text);font-weight:700;text-align:left;padding:8px 12px;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase}
+td{padding:7px 12px;color:var(--text2);border-bottom:1px solid var(--wire)}
+tr:last-child td{border-bottom:none}
+
+.eq{background:var(--bg3);border-left:3px solid var(--gold2);border-radius:0 6px 6px 0;padding:12px 16px;margin:14px 0;font-family:var(--mono);font-size:.82rem;color:var(--text)}
+
+.note{background:#fffbec;border:1px solid #f0dea0;border-radius:8px;padding:12px 16px;font-size:.8rem;color:#6b5500;margin:16px 0}
+.note strong{color:#4a3a00}
+
+.ref-list{list-style:none;margin:0;padding:0}
+.ref-list li{padding:8px 0;border-bottom:1px solid var(--wire);font-size:.82rem;color:var(--text2)}
+.ref-list li:last-child{border-bottom:none}
+
+footer{text-align:center;padding:32px 24px;font-size:.75rem;color:var(--mist);border-top:1px solid var(--wire);margin-top:60px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="n-brand"><em>YbYrá</em>-BR</div>
+  <div class="n-links">
+    <a href="index.html">← Monitor</a>
+    <a href="#dados">Dados</a>
+    <a href="#sarima">SARIMA</a>
+    <a href="#prophet">Prophet</a>
+    <a href="#metricas">Métricas</a>
+    <a href="#referencias">Referências</a>
+  </div>
+</nav>
+
+<div class="page">
+  <h1>Metodologia</h1>
+  <p class="subtitle">Pipeline de previsão de focos de queimadas na Amazônia — YbYrá-BR</p>
+
+  <!-- ── VISÃO GERAL ───────────────────────────────────────────── -->
+  <h2 id="visao">Visão geral do pipeline</h2>
+  <p>O sistema combina dois modelos em cascata: <strong>SARIMA</strong> para os índices climáticos oceânicos (MEI, AMO, PDO) e <strong>Facebook Prophet</strong> para a série de focos mensais de queimadas na Amazônia Legal. Os índices climáticos funcionam como regressores externos no Prophet, capturando a teleconexão entre variabilidade oceânica e o regime de fogo.</p>
+
+  <div class="pipeline-box">
+    <strong>NOAA PSL</strong>   → MEI.v2 (bi-mensal 1979–hoje)<br>
+    <strong>NOAA NCEI</strong>  → AMO ERSSTv5 (mensal 1854–hoje)<br>
+    <strong>NOAA NCEI</strong>  → PDO ERSSTv6 (mensal 1854–hoje)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓ SARIMA Sazonal s=12<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓ previsão 12 meses (regressores futuros)<br>
+    <strong>INPE BDQ</strong>   → focos mensais Amazônia 1998–hoje<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓ Facebook Prophet + regressores lag-1<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓ previsão 12 meses com IC 95%<br>
+    <strong>docs/mei_data.json</strong> + <strong>docs/rf_forecast.json</strong>
+  </div>
+
+  <p>A atualização é automática: o GitHub Actions executa o pipeline todo dia <strong>11 de cada mês</strong>, logo após a divulgação do boletim mensal do INPE.</p>
+
+  <!-- ── FONTES DE DADOS ───────────────────────────────────────── -->
+  <h2 id="dados">Fontes de dados</h2>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">MEI.v2 <span class="badge b-noaa">NOAA PSL</span></div>
+      <p>Multivariate ENSO Index version 2. Índice bi-mensal (12 estações/ano) baseado em 6 variáveis oceano-atmosféricas (SLP, SST, U-vento, V-vento, OLR). Domínio 30°S–30°N, 100°E–70°W. Período: 1979–presente.</p>
+      <p><small><a href="https://psl.noaa.gov/enso/mei/" target="_blank">psl.noaa.gov/enso/mei</a></small></p>
+    </div>
+    <div class="card">
+      <div class="card-title">AMO <span class="badge b-noaa">NOAA NCEI</span></div>
+      <p>Atlantic Multidecadal Oscillation — anomalia de temperatura da superfície do mar no Atlântico Norte (ERSSTv5). Série mensal desde 1854. Formato: Year month SSTA (°C).</p>
+      <p><small><a href="https://www.ncei.noaa.gov/pub/data/cmb/ersst/v5/index/" target="_blank">NCEI ERSSTv5</a></small></p>
+    </div>
+    <div class="card">
+      <div class="card-title">PDO <span class="badge b-noaa">NOAA NCEI</span></div>
+      <p>Pacific Decadal Oscillation — primeiro modo de variabilidade da SST do Pacífico Norte (ERSSTv6). Série mensal desde 1854. Influencia precipitação e temperatura no Brasil via teleconexões.</p>
+      <p><small><a href="https://www.ncei.noaa.gov/pub/data/cmb/ersst/v5/v6/index/" target="_blank">NCEI ERSSTv6</a></small></p>
+    </div>
+    <div class="card">
+      <div class="card-title">Focos INPE <span class="badge b-inpe">BDQueimadas</span></div>
+      <p>Focos mensais de queimadas na Amazônia Legal detectados por satélite, série histórica 1998–presente. Fonte: Banco de Dados de Queimadas (BDQ) do Instituto Nacional de Pesquisas Espaciais.</p>
+      <p><small><a href="https://queimadas.dgi.inpe.br" target="_blank">queimadas.dgi.inpe.br</a></small></p>
+    </div>
+  </div>
+
+  <!-- ── SARIMA ───────────────────────────────────────────────── -->
+  <h2 id="sarima">SARIMA — índices oceânicos <span class="badge b-sarima">SARIMA</span></h2>
+
+  <p>O <strong>SARIMA</strong> (Seasonal AutoRegressive Integrated Moving Average) é usado para modelar e prever os três índices climáticos. A estrutura do modelo é SARIMA(p, d, q)(P, D, Q, s):</p>
+
+  <table>
+    <tr><th>Parâmetro</th><th>Significado</th></tr>
+    <tr><td><code>p</code></td><td>Ordem autorregressiva não-sazonal</td></tr>
+    <tr><td><code>d</code></td><td>Grau de diferenciação não-sazonal</td></tr>
+    <tr><td><code>q</code></td><td>Ordem média-móvel não-sazonal</td></tr>
+    <tr><td><code>P, D, Q</code></td><td>Equivalentes sazonais</td></tr>
+    <tr><td><code>s</code></td><td>Período sazonal — 12 (MEI usa s=12 bi-meses) ou 12 (AMO/PDO mensal)</td></tr>
+  </table>
+
+  <h3>Seleção de modelo por AIC</h3>
+  <p>O pipeline testa uma grade de candidatos (do modelo airline (0,1,1)(0,1,1,12) ao SARIMA(2,1,1)(1,1,1,12)) e seleciona o modelo com menor <strong>Critério de Informação de Akaike (AIC)</strong>:</p>
+  <div class="eq">AIC = 2k − 2 ln(L̂)</div>
+  <p>onde <code>k</code> é o número de parâmetros livres e <code>L̂</code> é a máxima verossimilhança do modelo. O AIC penaliza modelos mais complexos, equilibrando ajuste e parcimônia.</p>
+
+  <h3>Intervalo de Confiança 95%</h3>
+  <p>O IC 95% é obtido diretamente da distribuição preditiva do SARIMA. Para o MEI, as bandas superior e inferior são exibidas no gráfico de clima. Para AMO e PDO, somente o valor central da previsão é mostrado (via linhas tracejadas).</p>
+
+  <h3>MEI: tratamento bi-mensal</h3>
+  <p>O MEI.v2 é publicado em 12 estações bi-mensais (DJ, JF, FM, …, ND). O pipeline converte cada estação em um mês âncora para construir datas contínuas e aplicar SARIMA com s=12. A previsão de 24 passos cobre aproximadamente 2 anos.</p>
+
+  <!-- ── PROPHET ────────────────────────────────────────────────── -->
+  <h2 id="prophet">Facebook Prophet — previsão de focos <span class="badge b-prophet">Prophet</span></h2>
+
+  <p>O <strong>Facebook Prophet</strong> (Taylor &amp; Letham, 2018) decompõe a série temporal em componentes aditivos ou multiplicativos:</p>
+
+  <div class="eq">y(t) = g(t) + s(t) + h(t) + ε(t)</div>
+
+  <table>
+    <tr><th>Componente</th><th>Descrição</th></tr>
+    <tr><td><code>g(t)</code></td><td>Tendência de longo prazo (crescimento linear por partes)</td></tr>
+    <tr><td><code>s(t)</code></td><td>Sazonalidade anual multiplicativa (série de Fourier, ordem 10)</td></tr>
+    <tr><td><code>h(t)</code></td><td>Efeitos de feriados/eventos — não utilizado neste pipeline</td></tr>
+    <tr><td><code>ε(t)</code></td><td>Ruído i.i.d.</td></tr>
+  </table>
+
+  <p>O modo <strong>multiplicativo</strong> é adotado porque a magnitude da sazonalidade cresce com o nível da série — a variação relativa (±) dos focos nos meses de pico (ago–set) é muito maior que nos meses de baixa atividade (jan–abr).</p>
+
+  <h3>Regressores externos (lag-1)</h3>
+  <p>Os três índices oceânicos entram como regressores externos com <strong>defasagem de 1 mês</strong> (lag-1). A defasagem capta o atraso físico entre a sinalização climática oceânica e o comportamento do fogo na floresta:</p>
+
+  <div class="eq">regressor_t = índice_{t-1}</div>
+
+  <p>Para os 12 meses futuros, o valor do regressor é a previsão SARIMA do período anterior (exceto para o primeiro mês, que usa o último valor observado).</p>
+
+  <h3>Transformação log</h3>
+  <p>A série de focos é transformada por <code>y = log(1 + focos)</code> antes do ajuste para estabilizar a variância e tornar a distribuição mais simétrica. As previsões são convertidas de volta com <code>exp(y) − 1</code>.</p>
+
+  <h3>Intervalo de Confiança 95%</h3>
+  <p>O IC é gerado pelo método de Monte Carlo do Prophet (<code>uncertainty_samples=500</code>) com <code>interval_width=0.95</code>. Os limites inferior e superior (yhat_lower, yhat_upper) são exibidos como barras verticais estreitas no gráfico de previsão.</p>
+
+  <h3>Protocolo de validação</h3>
+  <p>O dataset é dividido em <strong>treino (80%)</strong> e <strong>teste (20%, aproximadamente os últimos 3 anos)</strong>. O modelo é ajustado no conjunto de treino e avaliado no conjunto de teste, usando os regressores climáticos observados (não as previsões SARIMA) para medir a capacidade preditiva real. Em seguida, o modelo é retreinado em toda a série antes de gerar a previsão futura.</p>
+
+  <!-- ── MÉTRICAS ────────────────────────────────────────────────── -->
+  <h2 id="metricas">Métricas de avaliação</h2>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">MAPE — Erro Percentual Absoluto Médio</div>
+      <div class="eq" style="margin:8px 0">MAPE = (1/n) Σ |yᵢ − ŷᵢ| / yᵢ × 100%</div>
+      <p>Mede o erro relativo em escala original (focos/mês). Valores menores são melhores. Reportado separadamente para treino e teste.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">MAE — Erro Absoluto Médio</div>
+      <div class="eq" style="margin:8px 0">MAE = (1/n) Σ |yᵢ − ŷᵢ|</div>
+      <p>Erro médio em unidades absolutas (focos/mês), calculado no conjunto de teste. Informa a magnitude típica do erro de previsão.</p>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Nota sobre MAPE alto:</strong> A série de focos tem forte assimetria e inclui meses com poucos focos (jan–abr). Erros percentuais em meses de baixa atividade são numericamente grandes mesmo quando os erros absolutos são pequenos. O MAE no período de teste é mais informativo para avaliar o desempenho durante a estação de queimadas (ago–set).
+  </div>
+
+  <!-- ── INTERPRETAÇÃO ──────────────────────────────────────────── -->
+  <h2 id="interpretacao">Como interpretar o gráfico de previsão</h2>
+
+  <table>
+    <tr><th>Elemento visual</th><th>Significado</th></tr>
+    <tr><td>Barras azuis (observado)</td><td>Total de focos mensais confirmados pelo INPE</td></tr>
+    <tr><td>Barras azul-claro (fundo)</td><td>Média histórica do mês calendário (1998–atual) — referência de sazonalidade típica</td></tr>
+    <tr><td>Barras laranja estreitas (IC 95%)</td><td>Intervalo de confiança 95% da previsão Prophet — representa a incerteza do modelo</td></tr>
+    <tr><td>Pontos laranja (previsão)</td><td>Previsão central mensal do Prophet para os 12 meses seguintes</td></tr>
+    <tr><td>Linha tracejada (clima)</td><td>Previsão SARIMA 12 meses do MEI / AMO / PDO no gráfico de índices</td></tr>
+    <tr><td>Banda sombreada (IC MEI)</td><td>Intervalo de confiança 95% da previsão SARIMA do MEI</td></tr>
+  </table>
+
+  <!-- ── LIMITAÇÕES ──────────────────────────────────────────────── -->
+  <h2 id="limitacoes">Limitações e ressalvas</h2>
+
+  <ul>
+    <li><strong>Horizonte:</strong> Previsões além de 6 meses têm incerteza substancialmente maior, especialmente em anos com transições de fase ENSO.</li>
+    <li><strong>Regressores futuros:</strong> A qualidade da previsão de focos depende da qualidade da previsão SARIMA dos índices climáticos. Erros se propagam em cascata.</li>
+    <li><strong>Eventos extremos:</strong> O modelo não capta choques exógenos como políticas de desmatamento, secas excepcionais ou anomalias sem precedente histórico.</li>
+    <li><strong>Dados recentes:</strong> O INPE publica o mês completo com atraso de ~10 dias. A previsão parte sempre do último mês com dados completos.</li>
+    <li><strong>AMO / PDO:</strong> Quando as fontes NOAA retornam erro HTTP, o pipeline usa climatologia zero para AMO/PDO, o que reduz a precisão dos regressores climáticos.</li>
+  </ul>
+
+  <!-- ── PIPELINE TÉCNICO ────────────────────────────────────────── -->
+  <h2 id="tecnico">Detalhes técnicos do pipeline</h2>
+
+  <h3>Bibliotecas principais</h3>
+  <table>
+    <tr><th>Biblioteca</th><th>Versão mín.</th><th>Uso</th></tr>
+    <tr><td><code>prophet</code></td><td>1.1</td><td>Previsão de séries temporais com regressores</td></tr>
+    <tr><td><code>statsmodels</code></td><td>0.14</td><td>SARIMA Sazonal (SARIMAX)</td></tr>
+    <tr><td><code>pandas</code></td><td>2.0</td><td>Manipulação e fusão de séries temporais</td></tr>
+    <tr><td><code>scikit-learn</code></td><td>1.3</td><td>Cálculo de métricas (MAE)</td></tr>
+    <tr><td><code>Chart.js</code></td><td>4.4.1</td><td>Visualização interativa no frontend</td></tr>
+  </table>
+
+  <h3>Arquivos de saída</h3>
+  <table>
+    <tr><th>Arquivo</th><th>Conteúdo</th></tr>
+    <tr><td><code>docs/mei_data.json</code></td><td>Observações MEI.v2 + previsão SARIMA 24 meses + estatísticas</td></tr>
+    <tr><td><code>docs/rf_forecast.json</code></td><td>Focos INPE + previsão Prophet 12m + previsão SARIMA AMO/PDO</td></tr>
+  </table>
+
+  <h3>Automação</h3>
+  <p>O GitHub Actions (<code>.github/workflows/update.yml</code>) executa o pipeline completo todo dia 11 de cada mês:</p>
+  <ol>
+    <li>Fetch MEI, AMO, PDO (NOAA)</li>
+    <li>Fetch INPE BDQueimadas</li>
+    <li>Ajuste SARIMA + Export <code>mei_data.json</code></li>
+    <li>Ajuste SARIMA AMO/PDO + Treino Prophet + Export <code>rf_forecast.json</code></li>
+    <li>Commit + Push → GitHub Pages</li>
+  </ol>
+
+  <!-- ── REFERÊNCIAS ─────────────────────────────────────────────── -->
+  <h2 id="referencias">Referências</h2>
+  <ul class="ref-list">
+    <li>Wolter, K. &amp; Timlin, M. S. (2011). El Niño/Southern Oscillation behaviour since 1871 as diagnosed in an extended multivariate ENSO index. <em>International Journal of Climatology</em>, 31(7), 1074–1087. — <strong>MEI.v2</strong></li>
+    <li>Huang, B. et al. (2017). Extended Reconstructed Sea Surface Temperature, Version 5 (ERSSTv5). <em>Journal of Climate</em>, 30(20), 8179–8205. — <strong>AMO, PDO</strong></li>
+    <li>Taylor, S. J. &amp; Letham, B. (2018). Forecasting at scale. <em>The American Statistician</em>, 72(1), 37–45. — <strong>Facebook Prophet</strong></li>
+    <li>Box, G. E. P., Jenkins, G. M., Reinsel, G. C. &amp; Ljung, G. M. (2015). <em>Time Series Analysis: Forecasting and Control</em> (5ª ed.). Wiley. — <strong>SARIMA</strong></li>
+    <li>Akaike, H. (1974). A new look at the statistical model identification. <em>IEEE Transactions on Automatic Control</em>, 19(6), 716–723. — <strong>Critério AIC</strong></li>
+    <li>INPE. Banco de Dados de Queimadas (BDQueimadas). Instituto Nacional de Pesquisas Espaciais. Disponível em: <a href="https://queimadas.dgi.inpe.br" target="_blank">queimadas.dgi.inpe.br</a>. — <strong>Focos de queimadas</strong></li>
+  </ul>
+</div>
+
+<footer>
+  YbYrá-BR · Monitor de Fogo &amp; Clima Amazônia · Dados INPE/NOAA · Previsão SARIMA + Prophet<br>
+  <a href="index.html">← Voltar ao monitor</a>
+</footer>
+
+</body>
+</html>
