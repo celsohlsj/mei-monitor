@@ -1,14 +1,27 @@
 {
   "meta": {
     "updated_utc": "2026-05-02T14:51:58.377040+00:00",
-    "pipeline": "YbYrá-BR RF Pipeline — IPAM/UFMA (CNPq 401741/2023-0)",
+    "pipeline": "YbYrá-BR Prophet Pipeline",
     "mei_records": 552,
     "fire_records": 335,
     "amo_records": 0,
     "pdo_records": 0
   },
-  "rf_model": {
-    "features": ["mei_lag1","mei_lag2","mei_lag3","amo_lag1","amo_lag2","amo_lag3","pdo_lag1","pdo_lag2","pdo_lag3","month_sin","month_cos","month"],
+  "prophet_model": {
+    "features": [
+      "mei_lag1",
+      "mei_lag2",
+      "mei_lag3",
+      "amo_lag1",
+      "amo_lag2",
+      "amo_lag3",
+      "pdo_lag1",
+      "pdo_lag2",
+      "pdo_lag3",
+      "month_sin",
+      "month_cos",
+      "month"
+    ],
     "lags": 3,
     "n_estimators": 300,
     "n_samples": 316,
@@ -16,22 +29,119 @@
     "n_test": 36,
     "r2_train": 0.9076,
     "r2_test": 0.8508,
-    "feature_importance": {"mei_lag1": 0.04961, "mei_lag2": 0.04769, "mei_lag3": 0.01989, "amo_lag1": 0.00413, "amo_lag2": 0.00387, "amo_lag3": 0.00348, "pdo_lag1": 0.00558, "pdo_lag2": 0.00624, "pdo_lag3": 0.00394, "month_sin": 0.37687, "month_cos": 0.05746, "month": 0.42125},
+    "feature_importance": {
+      "mei_lag1": 0.04961,
+      "mei_lag2": 0.04769,
+      "mei_lag3": 0.01989,
+      "amo_lag1": 0.00413,
+      "amo_lag2": 0.00387,
+      "amo_lag3": 0.00348,
+      "pdo_lag1": 0.00558,
+      "pdo_lag2": 0.00624,
+      "pdo_lag3": 0.00394,
+      "month_sin": 0.37687,
+      "month_cos": 0.05746,
+      "month": 0.42125
+    },
     "trained_on": "1998-09 a 2024-12"
   },
-  "rf_forecast": [
-    {"year": 2025, "month": 1, "step": 1, "focos_pred": 1058, "lo": 335, "hi": 3337},
-    {"year": 2025, "month": 2, "step": 2, "focos_pred": 723, "lo": 317, "hi": 1646},
-    {"year": 2025, "month": 3, "step": 3, "focos_pred": 697, "lo": 256, "hi": 1901},
-    {"year": 2025, "month": 4, "step": 4, "focos_pred": 482, "lo": 178, "hi": 1305},
-    {"year": 2025, "month": 5, "step": 5, "focos_pred": 779, "lo": 352, "hi": 1724},
-    {"year": 2025, "month": 6, "step": 6, "focos_pred": 1776, "lo": 911, "hi": 3464},
-    {"year": 2025, "month": 7, "step": 7, "focos_pred": 4980, "lo": 2302, "hi": 10773},
-    {"year": 2025, "month": 8, "step": 8, "focos_pred": 21527, "lo": 9792, "hi": 47327},
-    {"year": 2025, "month": 9, "step": 9, "focos_pred": 28168, "lo": 12844, "hi": 61773},
-    {"year": 2025, "month": 10, "step": 10, "focos_pred": 17839, "lo": 9558, "hi": 33293},
-    {"year": 2025, "month": 11, "step": 11, "focos_pred": 11443, "lo": 4922, "hi": 26601},
-    {"year": 2025, "month": 12, "step": 12, "focos_pred": 4499, "lo": 1952, "hi": 10371}
+  "prophet_forecast": [
+    {
+      "year": 2025,
+      "month": 1,
+      "step": 1,
+      "focos_pred": 1058,
+      "lo": 335,
+      "hi": 3337
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "step": 2,
+      "focos_pred": 723,
+      "lo": 317,
+      "hi": 1646
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "step": 3,
+      "focos_pred": 697,
+      "lo": 256,
+      "hi": 1901
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "step": 4,
+      "focos_pred": 482,
+      "lo": 178,
+      "hi": 1305
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "step": 5,
+      "focos_pred": 779,
+      "lo": 352,
+      "hi": 1724
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "step": 6,
+      "focos_pred": 1776,
+      "lo": 911,
+      "hi": 3464
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "step": 7,
+      "focos_pred": 4980,
+      "lo": 2302,
+      "hi": 10773
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "step": 8,
+      "focos_pred": 21527,
+      "lo": 9792,
+      "hi": 47327
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "step": 9,
+      "focos_pred": 28168,
+      "lo": 12844,
+      "hi": 61773
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "step": 10,
+      "focos_pred": 17839,
+      "lo": 9558,
+      "hi": 33293
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "step": 11,
+      "focos_pred": 11443,
+      "lo": 4922,
+      "hi": 26601
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "step": 12,
+      "focos_pred": 4499,
+      "lo": 1952,
+      "hi": 10371
+    }
   ],
   "climate_series": [],
   "fire_monthly": []
