@@ -37,7 +37,9 @@ BISEASONS = ["DJ","JF","FM","MA","AM","MJ","JJ","JA","AS","SO","ON","ND"]
 REGRESSORS = ["mei_lag1", "amo_lag1", "pdo_lag1"]
 
 AMO_URL  = "https://www.ncei.noaa.gov/pub/data/cmb/ersst/v5/index/ersst.v5.amo.dat"
+AMO_ALT  = "https://psl.noaa.gov/data/correlation/amon.us.long.data"
 PDO_URL  = "https://www.ncei.noaa.gov/pub/data/cmb/ersst/v5/v6/index/ersst.v6.pdo.dat"
+PDO_ALT  = "https://psl.noaa.gov/gcos_wgsp/Timeseries/Data/pdo.long.data"
 INPE_URL = ("https://terrabrasilis.dpi.inpe.br/queimadas/situacao-atual/"
             "media/bioma/csv_estatisticas/historico_bioma_amazonia.csv")
 
@@ -152,26 +154,50 @@ def _parse_amo_ersst(text):
     return pd.DataFrame(rows).sort_values(["year","month"]).reset_index(drop=True)
 
 
+def _parse_amo_psl(text):
+    """Parser para NOAA PSL AMO (amon.us.long.data): YEAR val1...val12 por linha."""
+    rows = []
+    for line in text.splitlines():
+        s = line.strip()
+        if not s or not s[:4].isdigit():
+            continue
+        parts = s.split()
+        if len(parts) < 2:
+            continue
+        year = int(parts[0])
+        for m in range(12):
+            try:
+                v = float(parts[m + 1])
+            except (IndexError, ValueError):
+                continue
+            if abs(v) > 90 or v <= -99:
+                continue
+            rows.append({"year": year, "month": m + 1, "amo": round(v, 4)})
+    return pd.DataFrame(rows).sort_values(["year","month"]).reset_index(drop=True)
+
+
 def fetch_amo(dry_run=False):
     if not dry_run:
-        text = _get(AMO_URL)
-        if text:
-            df = _parse_amo_ersst(text)
-            if len(df) > 100:
-                print(f"  ✓ AMO: {len(df)} meses")
-                return df
+        for url, parser in [(AMO_URL, _parse_amo_ersst), (AMO_ALT, _parse_amo_psl)]:
+            text = _get(url)
+            if text:
+                df = parser(text)
+                if len(df) > 100:
+                    print(f"  ✓ AMO: {len(df)} meses")
+                    return df
     print("  ⚠ AMO indisponível — usando climatologia zero")
     return pd.DataFrame(columns=["year","month","amo"])
 
 
 def fetch_pdo(dry_run=False):
     if not dry_run:
-        text = _get(PDO_URL)
-        if text:
-            df = _parse_monthly(text, "pdo")
-            if len(df) > 100:
-                print(f"  ✓ PDO: {len(df)} meses")
-                return df
+        for url in [PDO_URL, PDO_ALT]:
+            text = _get(url)
+            if text:
+                df = _parse_monthly(text, "pdo")
+                if len(df) > 100:
+                    print(f"  ✓ PDO: {len(df)} meses")
+                    return df
     print("  ⚠ PDO indisponível — usando climatologia zero")
     return pd.DataFrame(columns=["year","month","pdo"])
 
