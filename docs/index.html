@@ -6,12 +6,12 @@
 <meta name="description" content="Monitor de Fogo Amazônia · YbYrá-BR · CNPq 401741/2023-0">
 <title>YbYrá-BR · Fogo & Clima Amazônia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&family=Roboto+Condensed:ital,wght@0,700;0,900;1,700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  /* Light theme */
   --bg:#f5f2ea;
   --bg2:#ffffff;
   --bg3:#ede9df;
@@ -22,11 +22,12 @@
   --leaf:#155a2e;--leaf2:#229948;
   --sky:#0e428a;--sky2:#1e6ab8;
   --mist:#6a6e84;--wire:rgba(0,0,0,.1);
-  --mono:'DM Mono','Courier New',monospace;
-  --serif:'Fraunces',Georgia,serif;
+  --mono:'Roboto Mono','Courier New',monospace;
+  --serif:'Roboto Condensed','Arial Narrow',sans-serif;
+  --sans:'Roboto',sans-serif;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13px;line-height:1.6;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13px;line-height:1.6;overflow-x:hidden}
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:var(--bg3)}
 ::-webkit-scrollbar-thumb{background:rgba(0,0,0,.2);border-radius:2px}
@@ -45,22 +46,22 @@ nav{position:sticky;top:0;z-index:100;height:50px;
 .n-brand{font-family:var(--serif);font-style:italic;font-size:1.1rem;font-weight:700;color:var(--text)}
 .n-brand em{color:var(--ember2);font-style:normal}
 .n-links{display:flex;gap:18px;align-items:center}
-.n-links a{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);transition:color .2s}
+.n-links a{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);transition:color .2s;font-family:var(--sans);font-weight:500}
 .n-links a:hover{color:var(--text);text-decoration:none}
 .n-live{width:7px;height:7px;border-radius:50%;background:var(--ember2);animation:flicker 2s infinite}
 .hero{max-width:1140px;margin:0 auto;padding:72px 24px 52px;
   display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 @media(max-width:720px){.hero{grid-template-columns:1fr;padding:36px 16px}}
 .h-eye{font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--ember2);
-  margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  margin-bottom:12px;display:flex;align-items:center;gap:8px;font-weight:500}
 .h-eye::before{content:'';width:20px;height:1px;background:var(--ember2)}
 h1{font-family:var(--serif);font-size:clamp(2.2rem,5vw,3.5rem);
-  font-weight:900;line-height:1.05;letter-spacing:-.025em;color:var(--text);margin-bottom:18px}
+  font-weight:900;line-height:1.05;letter-spacing:-.02em;color:var(--text);margin-bottom:18px}
 h1 .hl{color:var(--ember2)}h1 .hl2{color:var(--gold2)}
-.h-desc{font-size:11.5px;color:var(--mist);line-height:1.85;max-width:440px;margin-bottom:24px}
+.h-desc{font-size:13px;color:var(--mist);line-height:1.75;max-width:440px;margin-bottom:24px;font-weight:300}
 .badges{display:flex;gap:7px;flex-wrap:wrap}
 .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:2px;
-  font-size:8px;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
+  font-size:8px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;font-family:var(--sans)}
 .b-e{background:rgba(194,53,16,.08);border:1px solid rgba(194,53,16,.28);color:var(--ember)}
 .b-g{background:rgba(184,126,0,.08);border:1px solid rgba(184,126,0,.28);color:var(--gold)}
 .b-l{background:rgba(21,90,46,.08);border:1px solid rgba(21,90,46,.28);color:var(--leaf)}
@@ -74,11 +75,11 @@ h1 .hl{color:var(--ember2)}h1 .hl2{color:var(--gold2)}
   background:linear-gradient(transparent,rgba(184,126,0,.15),transparent);
   animation:sweep 4s linear infinite;pointer-events:none}
 .hc-label{font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--mist);
-  margin-bottom:18px;display:flex;align-items:center;justify-content:space-between}
+  margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;font-weight:500}
 .hc-live{display:flex;align-items:center;gap:5px;font-size:7.5px}
 .live-dot{width:6px;height:6px;border-radius:50%;background:var(--ember2);animation:pulse 1.8s infinite}
 .hc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.hci-lbl{font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);margin-bottom:4px}
+.hci-lbl{font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);margin-bottom:4px;font-weight:500}
 .hci-val{font-family:var(--serif);font-size:1.8rem;font-weight:700;line-height:1;color:var(--text)}
 .hci-val.e{color:var(--ember)}.hci-val.g{color:var(--gold)}.hci-val.s{color:var(--sky)}
 .hci-sub{font-size:8.5px;color:var(--mist);margin-top:3px}
@@ -87,8 +88,8 @@ h1 .hl{color:var(--ember2)}h1 .hl2{color:var(--gold2)}
 .sec-hdr{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;
   margin-bottom:22px;padding-bottom:11px;border-bottom:1px solid var(--wire)}
 .sec-title{font-family:var(--serif);font-style:italic;font-size:1.35rem;font-weight:700;
-  color:var(--text);letter-spacing:-.015em}
-.sec-meta{font-size:8.5px;color:var(--mist);letter-spacing:.1em;text-transform:uppercase}
+  color:var(--text);letter-spacing:-.01em}
+.sec-meta{font-size:8.5px;color:var(--mist);letter-spacing:.1em;text-transform:uppercase;font-weight:400}
 hr.div{border:none;height:1px;
   background:linear-gradient(90deg,transparent,rgba(0,0,0,.12),transparent);margin:36px 0}
 .srow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:24px}
@@ -96,7 +97,7 @@ hr.div{border:none;height:1px;
   padding:14px;position:relative;overflow:hidden;transition:border-color .2s,transform .18s,box-shadow .18s;
   box-shadow:0 1px 4px rgba(0,0,0,.05)}
 .scard:hover{border-color:rgba(184,126,0,.4);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.1)}
-.sc-lbl{font-size:7.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--mist);margin-bottom:7px}
+.sc-lbl{font-size:7.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--mist);margin-bottom:7px;font-weight:500}
 .sc-val{font-family:var(--serif);font-size:1.75rem;font-weight:700;line-height:1;color:var(--text)}
 .sc-val.e{color:var(--ember)}.sc-val.g{color:var(--gold)}.sc-val.s{color:var(--sky)}.sc-val.l{color:var(--leaf)}
 .sc-sub{font-size:8.5px;color:var(--mist);margin-top:4px;line-height:1.4}
@@ -106,8 +107,8 @@ hr.div{border:none;height:1px;
 .cc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
   background:linear-gradient(90deg,var(--ember2),var(--gold2));border-radius:6px 6px 0 0}
 .ct{font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mist);
-  margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.tag{font-size:7.5px;padding:2px 7px;border-radius:2px;font-family:var(--mono);font-weight:400}
+  margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:500}
+.tag{font-size:7.5px;padding:2px 7px;border-radius:2px;font-family:var(--sans);font-weight:500}
 .te{background:rgba(194,53,16,.08);border:1px solid rgba(194,53,16,.25);color:var(--ember)}
 .tg{background:rgba(184,126,0,.08);border:1px solid rgba(184,126,0,.25);color:var(--gold)}
 .ts{background:rgba(14,66,138,.08);border:1px solid rgba(14,66,138,.25);color:var(--sky)}
@@ -120,14 +121,14 @@ hr.div{border:none;height:1px;
 @media(max-width:720px){.g2,.g3{grid-template-columns:1fr}}
 .tabs{display:flex;border-bottom:1px solid var(--wire);margin-bottom:18px;overflow-x:auto;gap:0}
 .tb{padding:7px 14px;background:none;border:none;border-bottom:2px solid transparent;
-  color:var(--mist);font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
-  cursor:pointer;transition:all .15s;margin-bottom:-1px;white-space:nowrap}
+  color:var(--mist);font-family:var(--sans);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;transition:all .15s;margin-bottom:-1px;white-space:nowrap;font-weight:500}
 .tb:hover{color:var(--text)}.tb.active{color:var(--ember2);border-bottom-color:var(--ember2)}
 .tp{display:none}.tp.active{display:block}
 .tw{overflow:auto;max-height:350px}
 table{width:100%;border-collapse:collapse;font-size:10.5px}
 th{padding:6px 9px;text-align:left;color:var(--mist);font-size:7.5px;letter-spacing:.1em;
-  text-transform:uppercase;border-bottom:1px solid var(--wire);position:sticky;top:0;background:var(--bg2)}
+  text-transform:uppercase;border-bottom:1px solid var(--wire);position:sticky;top:0;background:var(--bg2);font-weight:600}
 td{padding:5px 9px;border-bottom:1px solid rgba(0,0,0,.04)}
 tr:hover td{background:rgba(0,0,0,.02)}
 .leg{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
@@ -135,10 +136,10 @@ tr:hover td{background:rgba(0,0,0,.02)}
 .ld{width:8px;height:8px;border-radius:50%}
 .ctrls{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
 .cbtn{padding:6px 13px;background:var(--bg2);border:1px solid rgba(0,0,0,.15);
-  border-radius:3px;color:var(--text2);font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;
-  cursor:pointer;transition:all .18s;text-transform:uppercase}
+  border-radius:3px;color:var(--text2);font-family:var(--sans);font-size:9.5px;letter-spacing:.06em;
+  cursor:pointer;transition:all .18s;text-transform:uppercase;font-weight:500}
 .cbtn:hover{border-color:var(--ember2);color:var(--text)}
-.cbtn.p{background:var(--ember2);border-color:var(--ember2);color:#fff;font-weight:500}
+.cbtn.p{background:var(--ember2);border-color:var(--ember2);color:#fff;font-weight:600}
 .cbtn.p:hover{background:var(--ember);border-color:var(--ember)}
 .cbtn:disabled{opacity:.4;cursor:not-allowed}
 select.cbtn{cursor:pointer;background:var(--bg2)}
@@ -150,7 +151,7 @@ select.cbtn{cursor:pointer;background:var(--bg2)}
   border-left:2px solid var(--gold2);margin-bottom:10px;line-height:1.8}
 .metric-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:18px}
 .metric{background:var(--bg3);border-radius:4px;padding:12px;border:1px solid var(--wire)}
-.m-lbl{font-size:7px;letter-spacing:.15em;text-transform:uppercase;color:var(--mist);margin-bottom:5px}
+.m-lbl{font-size:7px;letter-spacing:.15em;text-transform:uppercase;color:var(--mist);margin-bottom:5px;font-weight:600}
 .m-val{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--text)}
 .fi-bar{display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:9px}
 .fi-name{width:110px;color:var(--text2);text-align:right;flex-shrink:0}
@@ -158,7 +159,7 @@ select.cbtn{cursor:pointer;background:var(--bg2)}
 .fi-fill{height:100%;border-radius:4px;background:var(--ember2)}
 .fi-pct{width:40px;color:var(--mist);font-size:8px}
 .sbadge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:3px;
-  font-size:8px;letter-spacing:.08em;text-transform:uppercase}
+  font-size:8px;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
 .sb-ok{background:rgba(21,90,46,.1);border:1px solid rgba(21,90,46,.3);color:var(--leaf)}
 .sb-warn{background:rgba(184,126,0,.1);border:1px solid rgba(184,126,0,.3);color:var(--gold)}
 footer{border-top:1px solid var(--wire);padding:26px 24px;
@@ -166,7 +167,7 @@ footer{border-top:1px solid var(--wire);padding:26px 24px;
   justify-content:space-between;flex-wrap:wrap;gap:18px}
 .fb{font-family:var(--serif);font-style:italic;font-size:1.05rem;font-weight:700;color:var(--text)}
 .fb em{color:var(--ember2);font-style:normal}
-.fm{font-size:8.5px;color:var(--mist);line-height:1.9}
+.fm{font-size:8.5px;color:var(--mist);line-height:1.9;font-weight:300}
 .fm a{color:var(--mist)}
 </style>
 </head>
@@ -174,7 +175,7 @@ footer{border-top:1px solid var(--wire);padding:26px 24px;
 <nav>
   <div class="n-brand"><em>YbYrá</em>-BR</div>
   <div class="n-links">
-    <a href="#fogo">Fogo</a><a href="#afci">AFCI</a>
+    <a href="#fogo">Fogo</a><a href="#clima">Clima</a>
     <a href="#rf">Previsão Prophet</a><a href="#dados">Dados</a>
     <div class="n-live"></div>
   </div>
@@ -183,7 +184,7 @@ footer{border-top:1px solid var(--wire);padding:26px 24px;
   <div>
     <div class="h-eye">YbYrá-BR · CNPq 401741/2023-0</div>
     <h1>Fogo &<br><span class="hl">Clima</span><br><span class="hl2">Amazônia</span></h1>
-    <p class="h-desc">Monitor integrado de focos de queimadas e índices climáticos oceânicos para a Amazônia Brasileira. Dados oficiais INPE/BDQueimadas + MEI.v2 · AMO · PDO (NOAA) com previsão por Random Forest.</p>
+    <p class="h-desc">Monitor integrado de focos de queimadas e índices climáticos oceânicos para a Amazônia Brasileira. Dados INPE/BDQueimadas + MEI.v2 · AMO · PDO (NOAA) com previsão por SARIMA e Facebook Prophet.</p>
     <div class="badges">
       <span class="badge b-e">INPE BDQueimadas</span>
       <span class="badge b-s">NOAA PSL</span>
@@ -207,7 +208,7 @@ footer{border-top:1px solid var(--wire);padding:26px 24px;
 <div class="sec fi3" id="fogo">
   <div class="sec-hdr">
     <h2 class="sec-title">Focos de Queimadas — Amazônia</h2>
-    <span class="sec-meta">INPE / BDQueimadas · TerraB rasilis · 1998–2026</span>
+    <span class="sec-meta">INPE / BDQueimadas · TerraBrasilis · 1998–2026</span>
   </div>
   <div class="srow">
     <div class="scard"><div class="sc-lbl">Ano recorde</div><div class="sc-val e" id="smaxY">—</div><div class="sc-sub" id="smaxV">—</div></div>
@@ -229,22 +230,31 @@ footer{border-top:1px solid var(--wire);padding:26px 24px;
   <div id="tab-tabela" class="tp"><div class="cc"><div class="ct">Série histórica completa — focos mensais</div><div class="tw"><table><thead><tr id="tHead"></tr></thead><tbody id="tBody"></tbody></table></div></div></div>
 </div>
 <hr class="div">
-<div class="sec" id="afci">
+<div class="sec" id="clima">
   <div class="sec-hdr">
-    <h2 class="sec-title">Amazon Fire-Climate Index</h2>
-    <span class="sec-meta">AFCI · MEI·AMO·PDO × Focos INPE</span>
+    <h2 class="sec-title">Índices Climáticos Oceânicos</h2>
+    <span class="sec-meta">NOAA PSL · MEI.v2 · AMO · PDO · SARIMA Sazonal</span>
   </div>
-  <div class="srow">
-    <div class="scard"><div class="sc-lbl">AFCI atual</div><div class="sc-val" id="acur" style="color:var(--mist)">—</div><div class="sc-sub" id="acurS">—</div></div>
-    <div class="scard"><div class="sc-lbl">Risco</div><div class="sc-val g" id="arisk">—</div><div class="sc-sub">3 meses suavizado</div></div>
-    <div class="scard"><div class="sc-lbl">Previsão +6m</div><div class="sc-val" id="afc6" style="color:var(--mist)">—</div><div class="sc-sub">Modelo AR(2)</div></div>
-    <div class="scard"><div class="sc-lbl">Corr. AFCI × INPE</div><div class="sc-val s" id="acorr">—</div><div class="sc-sub" id="acorrS">Pearson r</div></div>
+  <div class="ctrls">
+    <button class="cbtn p" onclick="fetchClimateOnline()" id="btnFetch">⟳ Atualizar ao vivo</button>
+    <select class="cbtn" id="yrSel" onchange="redrawClimate()">
+      <option value="all">Todo período (1979–)</option>
+      <option value="30">Últimos 30 anos</option>
+      <option value="20" selected>Últimos 20 anos</option>
+      <option value="10">Últimos 10 anos</option>
+    </select>
+    <span id="climateStatus" class="sbadge sb-ok" style="display:none"></span>
   </div>
-  <div class="g2">
-    <div class="cc"><div class="ct">AFCI — série + previsão AR(2) <span class="tag tg">lag=1m</span></div><div class="cw"><canvas id="cAFCI"></canvas></div></div>
-    <div class="cc"><div class="ct">AFCI × Focos INPE <span class="tag te">Scatter</span></div><div class="cw"><canvas id="cScatter"></canvas></div></div>
+  <div class="log" id="logBox"><span class="ldim">› Carregando índices climáticos…</span></div>
+  <div class="cc">
+    <div class="ct">MEI.v2 · AMO · PDO <span class="tag ts">NOAA PSL</span><span class="tag tg">SARIMA Sazonal</span></div>
+    <div class="cw tall"><canvas id="cClimate"></canvas></div>
+    <div class="leg">
+      <div class="li"><div class="ld" style="background:#c49000"></div>MEI.v2 (ENSO)</div>
+      <div class="li"><div class="ld" style="background:var(--leaf2)"></div>AMO</div>
+      <div class="li"><div class="ld" style="background:var(--sky2)"></div>PDO</div>
+    </div>
   </div>
-  <div class="cc"><div class="ct">Sazonalidade — AFCI médio vs Focos INPE médios</div><div class="cw"><canvas id="cSeas"></canvas></div></div>
 </div>
 <hr class="div">
 <div class="sec" id="rf">
@@ -256,10 +266,10 @@ footer{border-top:1px solid var(--wire);padding:26px 24px;
   <div id="rfContent" style="display:none">
     <div class="metric-row" id="rfMetrics"></div>
     <div class="cc">
-      <div class="ct">Focos previstos — próximos 12 meses <span class="tag te">Random Forest</span><span class="tag tg">IC 90%</span></div>
+      <div class="ct">Focos previstos — próximos 12 meses <span class="tag te">Prophet</span><span class="tag tg">IC 90%</span></div>
       <div class="cw tall"><canvas id="cRF"></canvas></div>
       <div class="leg">
-        <div class="li"><div class="ld" style="background:var(--ember2)"></div>Previsão RF</div>
+        <div class="li"><div class="ld" style="background:var(--ember2)"></div>Previsão Prophet</div>
         <div class="li"><div class="ld" style="background:rgba(194,53,16,.25)"></div>IC 90%</div>
         <div class="li"><div class="ld" style="background:var(--sky2)"></div>Observado recente</div>
       </div>
@@ -277,24 +287,23 @@ footer{border-top:1px solid var(--wire);padding:26px 24px;
     <span class="sec-meta">Transparência · Reprodutibilidade</span>
   </div>
   <div class="g2">
-    <div class="cc"><div class="ct">Fontes de dados</div><div style="font-size:11px;color:var(--mist);line-height:2.1">
-      <div>🔥 <strong style="color:var(--text)">Focos INPE</strong> — BDQueimadas / TerraB rasilis<br><span style="font-size:8.5px;opacity:.65">terrabrasilis.dpi.inpe.br/queimadas · 1998–2026</span></div><br>
-      <div>🌊 <strong style="color:var(--text)">MEI.v2</strong> — NOAA PSL · JRA-3Q · 1979–presente<br><span style="font-size:8.5px;opacity:.65">psl.noaa.gov/enso/mei · Wolter & Timlin (2011)</span></div><br>
-      <div>🌡️ <strong style="color:var(--text)">AMO</strong> — NOAA PSL · Kaplan SST · 1856–presente<br><span style="font-size:8.5px;opacity:.65">Enfield et al. (2001) Geophys. Res. Lett.</span></div><br>
-      <div>🌏 <strong style="color:var(--text)">PDO</strong> — NOAA PSL · ERSST V5 · 1900–presente<br><span style="font-size:8.5px;opacity:.65">Mantua et al. (1997) Bull. Amer. Meteor. Soc.</span></div>
+    <div class="cc"><div class="ct">Fontes de dados</div><div style="font-size:12px;color:var(--mist);line-height:2.1">
+      <div>🔥 <strong style="color:var(--text)">Focos INPE</strong> — BDQueimadas / TerraBrasilis<br><span style="font-size:9px;opacity:.65">terrabrasilis.dpi.inpe.br/queimadas · 1998–2026</span></div><br>
+      <div>🌊 <strong style="color:var(--text)">MEI.v2</strong> — NOAA PSL · JRA-3Q · 1979–presente<br><span style="font-size:9px;opacity:.65">psl.noaa.gov/enso/mei · Wolter &amp; Timlin (2011)</span></div><br>
+      <div>🌡️ <strong style="color:var(--text)">AMO</strong> — NOAA PSL · Kaplan SST · 1856–presente<br><span style="font-size:9px;opacity:.65">Enfield et al. (2001) Geophys. Res. Lett.</span></div><br>
+      <div>🌏 <strong style="color:var(--text)">PDO</strong> — NOAA PSL · ERSST V5 · 1900–presente<br><span style="font-size:9px;opacity:.65">Mantua et al. (1997) Bull. Amer. Meteor. Soc.</span></div>
     </div></div>
-    <div class="cc"><div class="ct">Metodologia AFCI + Prophet</div>
-      <div class="formula">AFCI(t) = 0.50·Z[MEI(t−1)]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ 0.30·Z[AMO(t−1)]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ 0.20·Z[PDO(t−1)]</div>
-      <div style="font-size:10.5px;color:var(--mist);line-height:1.9">
-        <div><strong style="color:var(--text)">Índices oceânicos:</strong> SARIMA Sazonal (s=12) para MEI, AMO e PDO · seleção automática de ordem por AIC · IC 95%</div><br>
-        <div><strong style="color:var(--text)">Prophet (fogo):</strong> sazonalidade anual multiplicativa · regressores MEI, AMO, PDO com lag-1 (previstos por SARIMA) · target: log(focos+1) · IC 90%</div><br>
+    <div class="cc"><div class="ct">Metodologia</div>
+      <div style="font-size:11px;color:var(--mist);line-height:1.9">
+        <div><strong style="color:var(--text)">Índices oceânicos (SARIMA):</strong> SARIMA(p,d,q)(P,D,Q,s=12) · ordem selecionada por AIC · previsão 12 bi-meses à frente com IC 95%</div><br>
+        <div><strong style="color:var(--text)">Prophet (fogo):</strong> sazonalidade anual multiplicativa · regressores MEI, AMO, PDO com lag-1 (futuros via SARIMA) · target: log(focos+1) · IC 90%</div><br>
         <div><strong style="color:var(--text)">Referência:</strong><br>Aragão et al. (2018) <em>Nat. Commun.</em> 9:536<br><a href="https://doi.org/10.1038/s41467-017-02771-y" target="_blank" style="font-size:9px">DOI: 10.1038/s41467-017-02771-y</a></div><br>
         <div style="font-size:9px;padding:5px 9px;background:rgba(184,126,0,.07);border:1px solid rgba(184,126,0,.18);border-radius:2px">Projeto YbYrá-BR · CNPq Processo 401741/2023-0</div>
       </div>
     </div>
   </div>
   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
-    <button class="cbtn" onclick="dlCSV()">↓ CSV (INPE + AFCI)</button>
+    <button class="cbtn" onclick="dlCSV()">↓ CSV (INPE + Clima)</button>
     <button class="cbtn" onclick="dlJSON()">↓ JSON completo</button>
     <a href="https://terrabrasilis.dpi.inpe.br/queimadas/situacao-atual/" target="_blank"><button class="cbtn">↗ BDQueimadas INPE</button></a>
     <a href="https://psl.noaa.gov/enso/mei/" target="_blank"><button class="cbtn">↗ NOAA MEI.v2</button></a>
@@ -306,14 +315,20 @@ footer{border-top:1px solid var(--wire);padding:26px 24px;
 </footer>
 <script>
 'use strict';
+const MEI_URL="https://psl.noaa.gov/enso/mei/data/meiv2.data";
+const AMO_URL="https://psl.noaa.gov/data/correlation/amon.us.long.data";
+const PDO_URL="https://psl.noaa.gov/data/correlation/pdo.data";
+const PROXIES=[
+  u=>`https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+  u=>`https://corsproxy.io/?url=${encodeURIComponent(u)}`,
+  u=>`https://api.codetabs.com/v1/proxy?quest=${u}`,
+];
 const MPT=["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
-const C={ember:"#c23510",ember2:"#d94f1e",gold:"#8a5e00",gold2:"#b87e00",leaf:"#155a2e",leaf2:"#229948",sky:"#0e428a",sky2:"#1e6ab8",mei:"#b87e00",amo:"#229948",pdo:"#1e6ab8",afci:"#d94f1e",afci3:"#c23510",bg:"#ffffff",border:"rgba(0,0,0,.09)",text:"#1c1c2e",dim:"#6a6e84"};
-Chart.defaults.color=C.dim;Chart.defaults.borderColor=C.border;Chart.defaults.font.family="'DM Mono',monospace";Chart.defaults.font.size=10;
-let INPE=null,CLIMATE=null,AFCI=null,RF=null,CH={};
+const C={ember:"#c23510",ember2:"#d94f1e",gold:"#8a5e00",gold2:"#b87e00",leaf:"#155a2e",leaf2:"#229948",sky:"#0e428a",sky2:"#1e6ab8",mei:"#b87e00",amo:"#229948",pdo:"#1e6ab8",bg:"#ffffff",border:"rgba(0,0,0,.09)",text:"#1c1c2e",dim:"#6a6e84"};
+Chart.defaults.color=C.dim;Chart.defaults.borderColor=C.border;Chart.defaults.font.family="'Roboto','Arial',sans-serif";Chart.defaults.font.size=10;
+let INPE=null,CLIMATE=null,RF=null,CH={};
 const fmt=(v,d=0)=>v==null||isNaN(v)?"—":Number(v).toLocaleString("pt-BR",{maximumFractionDigits:d});
 const fs=(v,d=2)=>v==null||isNaN(v)?"—":(v>0?"+":"")+Number(v).toFixed(d);
-const rc=v=>v==null||isNaN(v)?C.dim:v>1.5?C.ember:v>1.0?C.ember2:v>0.5?C.gold2:v>-0.5?C.dim:v>-1.0?C.sky2:C.sky2;
-const rl=v=>v==null||isNaN(v)?"—":v>1.5?"Extremo":v>1.0?"Alto":v>0.5?"Elevado":v>-0.5?"Neutro":v>-1.0?"Baixo":"Muito baixo";
 function lg(msg,t="dim"){const b=document.getElementById("logBox");b.innerHTML+=`<div class="l${t}">${msg}</div>`;b.scrollTop=b.scrollHeight;}
 function showTab(id,btn){document.querySelectorAll(".tp").forEach(p=>p.classList.remove("active"));document.querySelectorAll(".tb").forEach(b=>b.classList.remove("active"));document.getElementById("tab-"+id).classList.add("active");btn.classList.add("active");if(id==="heatmap"&&INPE)buildHeatmap();if(id==="tabela"&&INPE)buildTable();}
 async function loadRFJson(){try{const r=await fetch('./rf_forecast.json',{cache:'no-cache'});if(!r.ok)throw new Error(r.status);return await r.json();}catch(e){lg("⚠ rf_forecast.json não disponível.","warn");return null;}}
@@ -352,16 +367,15 @@ const INPE_EMBEDDED=`,Janeiro,Fevereiro,Março,Abril,Maio,Junho,Julho,Agosto,Set
 function setINPEStats(){const d=INPE;document.getElementById("smaxY").textContent=d.maxE[0];document.getElementById("smaxV").textContent=fmt(d.maxE[1])+" focos";document.getElementById("sminY").textContent=d.minE[0];document.getElementById("sminV").textContent=fmt(d.minE[1])+" focos";document.getElementById("smean").textContent=fmt(Math.round(d.mean));const pk=d.mm.indexOf(Math.max(...d.mm));document.getElementById("speak").textContent=MPT[pk];document.getElementById("speakV").textContent=fmt(Math.round(d.mm[pk]))+" focos/mês";document.getElementById("s2024").textContent=d.annual[2024]?fmt(d.annual[2024]):"—";document.getElementById("s2026").textContent=d.annual[2026]?fmt(d.annual[2026]):"—";document.getElementById("h2025").textContent=d.annual[2025]?fmt(d.annual[2025]):"—";if(d.annual[2025]&&d.mean){const p=((d.annual[2025]-d.mean)/d.mean*100);document.getElementById("hvsmed").textContent=fs(p,0)+"%";}document.getElementById("hrec").textContent=d.maxE[0];document.getElementById("heroDate").textContent=new Date().toLocaleDateString("pt-BR");}
 function buildAnual(){const labs=INPE.years.filter(y=>INPE.annual[y]&&INPE.annual[y]>100);const vals=labs.map(y=>INPE.annual[y]);const mean=INPE.mean;const bc=labs.map(y=>y===2026?"rgba(184,126,0,.55)":INPE.annual[y]>=mean?"rgba(194,53,16,.75)":"rgba(30,106,184,.6)");if(CH.an)CH.an.destroy();CH.an=new Chart(document.getElementById("cAnual"),{type:"bar",data:{labels:labs,datasets:[{label:"Focos anuais",data:vals,backgroundColor:bc,borderWidth:0,borderRadius:2},{label:"Média",data:labs.map(()=>mean),type:"line",borderColor:"rgba(184,126,0,.6)",borderWidth:1.5,borderDash:[5,4],pointRadius:0,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:C.bg,borderColor:C.border,borderWidth:1,titleColor:C.text,bodyColor:C.dim,callbacks:{label:c=>{const v=c.parsed.y;const p=((v-mean)/mean*100).toFixed(0);return` ${c.dataset.label}: ${fmt(v)}  (${p>0?"+":""}${p}% vs média)`}}}},scales:{x:{grid:{color:C.border},ticks:{color:C.dim,maxRotation:45,font:{size:8.5}}},y:{grid:{color:C.border},ticks:{color:C.dim,callback:v=>fmt(v)}}}}});}
 function buildMensal(){if(CH.men)CH.men.destroy();CH.men=new Chart(document.getElementById("cMensal"),{type:"bar",data:{labels:MPT,datasets:[{label:"Média",data:INPE.mm.map(v=>Math.round(v)),backgroundColor:"rgba(194,53,16,.55)",borderColor:"rgba(194,53,16,.8)",borderWidth:1,borderRadius:3},{label:"+1σ",data:INPE.mm.map((v,i)=>Math.round(v+INPE.ms[i])),type:"line",borderColor:"rgba(184,126,0,.5)",borderWidth:1,borderDash:[3,3],pointRadius:0,fill:"-1",backgroundColor:"rgba(184,126,0,.07)"},{label:"-1σ",data:INPE.mm.map((v,i)=>Math.round(Math.max(0,v-INPE.ms[i]))),type:"line",borderColor:"rgba(184,126,0,.5)",borderWidth:1,borderDash:[3,3],pointRadius:0,fill:false},{label:"2024",data:INPE.monthly[2024]||[],type:"line",borderColor:"rgba(184,126,0,.85)",borderWidth:2,pointRadius:3,fill:false},{label:"2025",data:INPE.monthly[2025]||[],type:"line",borderColor:"rgba(30,106,184,.85)",borderWidth:2,pointRadius:3,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:C.dim,font:{size:9}}}},scales:{x:{grid:{color:C.border},ticks:{color:C.dim}},y:{grid:{color:C.border},ticks:{color:C.dim,callback:v=>fmt(v)}}}}});}
-function buildHeatmap(){if(!INPE)return;let gmax=0;for(const y of INPE.years)for(let m=0;m<12;m++){const v=INPE.monthly[y]?.[m];if(v)gmax=Math.max(gmax,v);}const cw=38,ch=22,lw=44,hh=20;const W=lw+12*cw,H=hh+INPE.years.length*ch;const cv=document.createElement("canvas");cv.width=W;cv.height=H;cv.style.display="block";const ctx=cv.getContext("2d");ctx.fillStyle="#f5f2ea";ctx.fillRect(0,0,W,H);ctx.font="8.5px 'DM Mono',monospace";ctx.fillStyle="#6a6e84";for(let m=0;m<12;m++)ctx.fillText(MPT[m],lw+m*cw+4,hh-4);for(let ri=0;ri<INPE.years.length;ri++){const y=INPE.years[ri];ctx.fillStyle="#6a6e84";ctx.font="8.5px 'DM Mono',monospace";ctx.fillText(y,2,hh+ri*ch+14);for(let m=0;m<12;m++){const v=INPE.monthly[y]?.[m];if(v==null||isNaN(v)){ctx.fillStyle="rgba(0,0,0,.04)";}else{const t=v/gmax;const r=Math.round(230-t*30),g=Math.round(220-t*140),b=Math.round(220-t*200);ctx.fillStyle=`rgb(${r},${g},${b})`;}ctx.fillRect(lw+m*cw,hh+ri*ch,cw-1,ch-1);if(v&&v>18000){ctx.fillStyle="rgba(0,0,0,.7)";ctx.font="7px 'DM Mono',monospace";ctx.fillText(Math.round(v/1000)+"k",lw+m*cw+2,hh+ri*ch+13);}}}const d=document.getElementById("heatDiv");d.innerHTML="";d.appendChild(cv);}
+function buildHeatmap(){if(!INPE)return;let gmax=0;for(const y of INPE.years)for(let m=0;m<12;m++){const v=INPE.monthly[y]?.[m];if(v)gmax=Math.max(gmax,v);}const cw=38,ch=22,lw=44,hh=20;const W=lw+12*cw,H=hh+INPE.years.length*ch;const cv=document.createElement("canvas");cv.width=W;cv.height=H;cv.style.display="block";const ctx=cv.getContext("2d");ctx.fillStyle="#f5f2ea";ctx.fillRect(0,0,W,H);ctx.font="8.5px 'Roboto Mono',monospace";ctx.fillStyle="#6a6e84";for(let m=0;m<12;m++)ctx.fillText(MPT[m],lw+m*cw+4,hh-4);for(let ri=0;ri<INPE.years.length;ri++){const y=INPE.years[ri];ctx.fillStyle="#6a6e84";ctx.font="8.5px 'Roboto Mono',monospace";ctx.fillText(y,2,hh+ri*ch+14);for(let m=0;m<12;m++){const v=INPE.monthly[y]?.[m];if(v==null||isNaN(v)){ctx.fillStyle="rgba(0,0,0,.04)";}else{const t=v/gmax;const r=Math.round(230-t*30),g=Math.round(220-t*140),b=Math.round(220-t*200);ctx.fillStyle=`rgb(${r},${g},${b})`;}ctx.fillRect(lw+m*cw,hh+ri*ch,cw-1,ch-1);if(v&&v>18000){ctx.fillStyle="rgba(0,0,0,.7)";ctx.font="7px 'Roboto Mono',monospace";ctx.fillText(Math.round(v/1000)+"k",lw+m*cw+2,hh+ri*ch+13);}}}const d=document.getElementById("heatDiv");d.innerHTML="";d.appendChild(cv);}
 function buildTable(){if(!INPE)return;document.getElementById("tHead").innerHTML=`<th>Ano</th>${MPT.map(m=>`<th>${m}</th>`).join("")}<th>Total</th>`;document.getElementById("tBody").innerHTML=[...INPE.years].reverse().map(y=>{const an=INPE.annual[y]?fmt(INPE.annual[y]):"—";return`<tr><td style="color:var(--gold2);font-weight:500">${y}</td>${MPT.map((_,m)=>{const v=INPE.monthly[y]?.[m];if(v==null||isNaN(v))return`<td style="color:rgba(0,0,0,.2)">—</td>`;const t=v/70000,opacity=0.15+t*0.85;return`<td style="background:rgba(${Math.round(194-t*180)},${Math.round(53+t*20)},16,${opacity});color:${t>0.4?"#fff":"var(--text)"}">${fmt(v)}</td>`;}).join("")}<td style="font-weight:500">${an}</td></tr>`;}).join("");}
-function buildCLIMATEFromRF(cs){CLIMATE=cs.filter(r=>r.mei!=null).map(r=>({date:new Date(r.year,r.month-1,1),year:r.year,month:r.month,mei:r.mei,amo:r.amo,pdo:r.pdo})).sort((a,b)=>a.date-b.date);lg(`✓ Índices oceânicos (rf_forecast.json): ${CLIMATE.length} meses  SARIMA`,'ok');}
-function zsc(a){const m=a.reduce((s,v)=>s+v,0)/a.length;const sd=Math.sqrt(a.reduce((s,v)=>s+(v-m)**2,0)/a.length);return sd>0?a.map(v=>(v-m)/sd):a.map(()=>0);}
-function ar2(s,steps){const n=s.length,mu=s.reduce((a,b)=>a+b,0)/n,d=s.map(v=>v-mu);let r0=0,r1=0,r2=0;for(let i=0;i<n;i++)r0+=d[i]**2;for(let i=1;i<n;i++)r1+=d[i]*d[i-1];for(let i=2;i<n;i++)r2+=d[i]*d[i-2];r0/=n;r1/=n;r2/=n;const rh1=r1/r0,rh2=r2/r0,dn=1-rh1**2;const p1=(rh1*(1-rh2))/dn,p2=(rh2-rh1**2)/dn;let sg=0;for(let i=2;i<n;i++){const e=d[i]-p1*d[i-1]-p2*d[i-2];sg+=e**2;}sg/=(n-2);const ext=[...d];return Array.from({length:steps},(_,h)=>{const m2=ext.length,pdm=p1*ext[m2-1]+p2*ext[m2-2];ext.push(pdm);const p=+(pdm+mu).toFixed(4),ci=+(1.96*Math.sqrt(sg*(1+h*.1))).toFixed(4);return{mei:p,lo:+(p-ci).toFixed(4),hi:+(p+ci).toFixed(4)};});}
-function computeAFCI(){if(!CLIMATE)return;const d=CLIMATE;const mz=zsc(d.map(r=>r.mei));const az=zsc(d.map(r=>r.amo!=null?r.amo:0));const pz=zsc(d.map(r=>r.pdo!=null?r.pdo:0));const lag=1,wm=.5,wa=.3,wp=.2;const af=d.map((_,i)=>i<lag?null:wm*mz[i-lag]+wa*az[i-lag]+wp*pz[i-lag]);const af3=af.map((v,i)=>{if(v==null)return null;const w=af.slice(Math.max(0,i-1),i+2).filter(x=>x!=null);return w.reduce((a,b)=>a+b,0)/w.length;});const fc=ar2(af.filter(v=>v!=null),12);AFCI={series:d.map((r,i)=>({date:r.date,year:r.year,month:r.month,mei:r.mei,amo:r.amo,pdo:r.pdo,mei_z:+mz[i].toFixed(4),amo_z:+az[i].toFixed(4),pdo_z:+pz[i].toFixed(4),afci:af[i]!=null?+af[i].toFixed(4):null,afci_3m:af3[i]!=null?+af3[i].toFixed(4):null})),forecasts:fc};updAfciStats();buildAFCI();buildSeas();if(INPE)buildScatter();document.getElementById("tagAfci").style.display="inline-block";lg("✓ AFCI calculado.",'ok');}
-function updAfciStats(){const last=AFCI.series.filter(s=>s.afci!=null).at(-1);if(!last)return;const v=last.afci_3m??last.afci,rlv=rl(v),rclv=rc(v);const ae=document.getElementById("acur");ae.textContent=fs(last.afci);ae.style.color=rclv;document.getElementById("acurS").textContent=`${MPT[last.month-1]} ${last.year}`;const ar=document.getElementById("arisk");ar.textContent=rlv;ar.style.color=rclv;const f6=AFCI.forecasts[5];const af=document.getElementById("afc6");af.textContent=f6?fs(f6.mei):"—";af.style.color=f6?rc(f6.mei):C.dim;}
-function buildAFCI(){const obs=AFCI.series.filter(s=>s.afci!=null&&s.year>=2001);const labs=obs.map(s=>`${s.month.toString().padStart(2,"0")}/${s.year}`);let fd=new Date(obs[obs.length-1].date);const fcL=AFCI.forecasts.map(()=>{fd=new Date(fd.getFullYear(),fd.getMonth()+1,1);return`${(fd.getMonth()+1).toString().padStart(2,"0")}/${fd.getFullYear()}`;});const nO=labs.length;if(CH.af)CH.af.destroy();CH.af=new Chart(document.getElementById("cAFCI"),{type:"line",data:{labels:[...labs,...fcL],datasets:[{label:"IC",data:[...Array(nO).fill(null),...AFCI.forecasts.map(f=>f.hi)],borderWidth:0,pointRadius:0,fill:"+1",backgroundColor:"rgba(194,53,16,.08)",order:10},{label:"IC Lo",data:[...Array(nO).fill(null),...AFCI.forecasts.map(f=>f.lo)],borderWidth:0,pointRadius:0,fill:false,order:11},{label:"Previsão AR(2)",data:[...Array(nO).fill(null),...AFCI.forecasts.map(f=>f.mei)],borderColor:"rgba(184,126,0,.85)",borderWidth:2,borderDash:[6,4],pointRadius:0,fill:false,order:2},{label:"AFCI 3m",data:[...obs.map(s=>s.afci_3m),...Array(AFCI.forecasts.length).fill(null)],borderColor:C.afci3,borderWidth:2.5,pointRadius:0,tension:.3,fill:false,order:1}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:C.dim,font:{size:9},filter:i=>!["IC","IC Lo"].includes(i.text)}},tooltip:{backgroundColor:C.bg,borderColor:C.border,borderWidth:1,titleColor:C.text,bodyColor:C.dim}},scales:{x:{grid:{color:C.border},ticks:{color:C.dim,maxTicksLimit:16,font:{size:8}}},y:{grid:{color:C.border},ticks:{color:C.dim,callback:v=>(v>0?"+":"")+v.toFixed(1)}}}},plugins:[{id:"zl",afterDraw(ch){const{ctx:c,chartArea:ca,scales}=ch;if(!ca)return;c.save();[[0,"rgba(0,0,0,.15)"],[.5,C.ember+"55"],[-.5,C.sky2+"55"]].forEach(([v,col])=>{const y=scales.y.getPixelForValue(v);c.beginPath();c.strokeStyle=col;c.lineWidth=v===0?1:.7;c.setLineDash(v===0?[]:[3,4]);c.moveTo(ca.left,y);c.lineTo(ca.right,y);c.stroke();c.setLineDash([]);});c.restore();}}]});}
-function buildScatter(){if(!AFCI||!INPE)return;const pts=[];for(const s of AFCI.series){if(s.afci==null)continue;const v=INPE.monthly[s.year]?.[s.month-1];if(v&&v>50)pts.push({x:s.afci,y:v,year:s.year,month:s.month});}if(!pts.length)return;const xs=pts.map(p=>p.x),ys=pts.map(p=>p.y);const mx=xs.reduce((a,b)=>a+b)/xs.length,my=ys.reduce((a,b)=>a+b)/ys.length;const num=xs.reduce((a,v,i)=>a+(v-mx)*(ys[i]-my),0);const den=Math.sqrt(xs.reduce((a,v)=>a+(v-mx)**2,0)*ys.reduce((a,v)=>a+(v-my)**2,0));const r=den?num/den:0;document.getElementById("acorr").textContent=r.toFixed(3);document.getElementById("acorrS").textContent=`r=${r.toFixed(3)}  n=${pts.length}`;if(CH.sc)CH.sc.destroy();CH.sc=new Chart(document.getElementById("cScatter"),{type:"scatter",data:{datasets:[{label:`r=${r.toFixed(3)}`,data:pts,backgroundColor:pts.map(p=>rc(p.x)+"bb"),pointRadius:3,pointHoverRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:C.dim,font:{size:9}}},tooltip:{backgroundColor:C.bg,borderColor:C.border,borderWidth:1,titleColor:C.text,bodyColor:C.dim,callbacks:{label:p=>`${MPT[p.raw.month-1]}/${p.raw.year}: AFCI=${fs(p.raw.x,2)} focos=${fmt(p.raw.y)}`}}},scales:{x:{title:{display:true,text:"AFCI",color:C.dim,font:{size:9}},grid:{color:C.border},ticks:{color:C.dim,callback:v=>(v>0?"+":"")+v.toFixed(1)}},y:{title:{display:true,text:"Focos INPE",color:C.dim,font:{size:9}},grid:{color:C.border},ticks:{color:C.dim,callback:v=>fmt(v)}}}}});}
-function buildSeas(){if(!AFCI)return;const bm=Array.from({length:12},()=>[]);for(const s of AFCI.series)if(s.afci!=null)bm[s.month-1].push(s.afci);const am=bm.map(a=>a.reduce((x,y)=>x+y,0)/a.length);if(CH.se)CH.se.destroy();const ds=[{label:"AFCI médio",data:am.map(v=>+v.toFixed(3)),type:"line",borderColor:C.afci3,borderWidth:2.5,pointRadius:5,pointBackgroundColor:am.map(v=>rc(v)),yAxisID:"y",fill:false,tension:.3}];if(INPE)ds.push({label:"Focos INPE médios",data:INPE.mm.map(v=>Math.round(v)),type:"bar",backgroundColor:"rgba(184,126,0,.25)",borderColor:"rgba(184,126,0,.6)",borderWidth:1,yAxisID:"y2"});CH.se=new Chart(document.getElementById("cSeas"),{type:"bar",data:{labels:MPT,datasets:ds},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:C.dim,font:{size:9}}}},scales:{x:{grid:{color:C.border},ticks:{color:C.dim}},y:{grid:{color:C.border},ticks:{color:C.dim,callback:v=>(v>0?"+":"")+v.toFixed(1)},title:{display:true,text:"AFCI",color:C.dim,font:{size:9}}},y2:{position:"right",grid:{display:false},ticks:{color:C.dim,callback:v=>fmt(v)},title:{display:true,text:"Focos INPE",color:C.dim,font:{size:9}}}}}});}
+function buildCLIMATEFromRF(cs){CLIMATE=cs.filter(r=>r.mei!=null).map(r=>({date:new Date(r.year,r.month-1,1),year:r.year,month:r.month,mei:r.mei,amo:r.amo,pdo:r.pdo})).sort((a,b)=>a.date-b.date);lg(`✓ Índices oceânicos: ${CLIMATE.length} meses (${CLIMATE[0].year}–${CLIMATE[CLIMATE.length-1].year})`,'ok');}
+async function tryGet(url){const attempts=[url,...PROXIES.map(p=>p(url))];for(const u of attempts){try{const r=await fetch(u,{cache:"no-cache"});if(!r.ok)continue;const t=await r.text();if(t.length>300&&/\d{4}/.test(t))return t;}catch(e){}}return null;}
+function parseMEI(text){const rows=[];for(const l of text.split("\n")){const s=l.trim();if(!s||!/^\d{4}/.test(s))continue;const p=s.split(/\s+/);const y=parseInt(p[0]);if(y<1979)continue;for(let i=0;i<12;i++){const v=parseFloat(p[i+1]);if(isNaN(v)||v<=-99)continue;rows.push({date:new Date(y,i,1),year:y,month:i+1,mei:+v.toFixed(4)});}}return rows.sort((a,b)=>a.date-b.date);}
+function parseMon(text,key){const rows=[];for(const l of text.split("\n")){const s=l.trim();if(!s||!/^\d{4}/.test(s))continue;const p=s.split(/\s+/);const y=parseInt(p[0]);for(let m=0;m<12;m++){const v=parseFloat(p[m+1]);if(isNaN(v)||Math.abs(v)>90||v<=-99)continue;rows.push({date:new Date(y,m,1),year:y,month:m+1,[key]:+v.toFixed(4)});}}return rows.sort((a,b)=>a.date-b.date);}
+function mergeCl(mei,amo,pdo){const mp={};for(const r of mei){const k=`${r.year}-${r.month}`;mp[k]={...r};}for(const r of amo){const k=`${r.year}-${r.month}`;if(mp[k])mp[k].amo=r.amo;}for(const r of pdo){const k=`${r.year}-${r.month}`;if(mp[k])mp[k].pdo=r.pdo;}return Object.values(mp).filter(r=>r.mei!=null).sort((a,b)=>a.date-b.date);}
+async function fetchClimateOnline(){const btn=document.getElementById("btnFetch");btn.disabled=true;lg("Buscando dados ao vivo do NOAA PSL…");const[mt,at,pt]=await Promise.all([tryGet(MEI_URL),tryGet(AMO_URL),tryGet(PDO_URL)]);if(!mt){lg("⚠ MEI.v2 inacessível. Usando dados pré-computados.","warn");btn.disabled=false;return;}const mei=parseMEI(mt);const amo=at?parseMon(at,"amo"):[];const pdo=pt?parseMon(pt,"pdo"):[];lg(`✓ MEI.v2: ${mei.length}  AMO: ${amo.length}  PDO: ${pdo.length}`,'ok');CLIMATE=mergeCl(mei,amo,pdo);lg(`✓ Combinado: ${CLIMATE.length} meses (ao vivo)`,'ok');const st=document.getElementById("climateStatus");st.className="sbadge sb-ok";st.textContent="Ao vivo";st.style.display="";redrawClimate();btn.disabled=false;}
+function redrawClimate(){if(!CLIMATE)return;const sel=document.getElementById("yrSel").value;const now=new Date().getFullYear();const minY=sel==="all"?0:now-parseInt(sel);const data=CLIMATE.filter(d=>d.year>=minY);const labs=data.map(d=>`${d.month.toString().padStart(2,"0")}/${d.year}`);if(CH.cl)CH.cl.destroy();CH.cl=new Chart(document.getElementById("cClimate"),{type:"line",data:{labels:labs,datasets:[{label:"MEI.v2",data:data.map(d=>d.mei),borderColor:C.mei,borderWidth:1.5,pointRadius:0,tension:.25,fill:false},{label:"AMO",data:data.map(d=>d.amo),borderColor:C.amo,borderWidth:1.2,pointRadius:0,tension:.3,fill:false,borderDash:[4,3]},{label:"PDO",data:data.map(d=>d.pdo),borderColor:C.pdo,borderWidth:1.2,pointRadius:0,tension:.3,fill:false,borderDash:[2,3]}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},plugins:{legend:{labels:{color:C.dim,font:{size:9}}},tooltip:{backgroundColor:C.bg,borderColor:C.border,borderWidth:1,titleColor:C.text,bodyColor:C.dim}},scales:{x:{grid:{color:C.border},ticks:{color:C.dim,maxTicksLimit:16,font:{size:8}}},y:{grid:{color:C.border},ticks:{color:C.dim,callback:v=>(v>0?"+":"")+v.toFixed(1)}}}}});}
 function renderRFSection(rfData){
   RF=rfData;
   const m=rfData.prophet_model||rfData.rf_model||{};
@@ -370,33 +384,30 @@ function renderRFSection(rfData){
   document.getElementById("rfNoData").style.display="none";
   document.getElementById("rfContent").style.display="block";
   const fc1=fc[0];
-  const el=document.getElementById("hrf1");
-  el.textContent=fmt(fc1.focos_pred);
+  document.getElementById("hrf1").textContent=fmt(fc1.focos_pred);
   document.getElementById("hrf1s").textContent=`${MPT[fc1.month-1]}/${fc1.year} Prophet`;
-  // Métricas: MAPE (Prophet) com fallback para R² (modelo antigo)
   const mtr=m.mape_train!=null?m.mape_train.toFixed(1)+"%":(m.r2_train!=null?(m.r2_train*100).toFixed(1)+"%":"—");
   const mte=m.mape_test!=null?m.mape_test.toFixed(1)+"%":(m.r2_test!=null?(m.r2_test*100).toFixed(1)+"%":"—");
   const lbl1=m.mape_train!=null?"MAPE treino":"R² treino";
   const lbl2=m.mape_test!=null?"MAPE teste":"R² teste";
   const mae=m.mae_test!=null?fmt(m.mae_test,0):"—";
   document.getElementById("rfMetrics").innerHTML=`<div class="metric"><div class="m-lbl">${lbl1}</div><div class="m-val">${mtr}</div></div><div class="metric"><div class="m-lbl">${lbl2}</div><div class="m-val">${mte}</div></div><div class="metric"><div class="m-lbl">MAE teste</div><div class="m-val">${mae}</div></div><div class="metric"><div class="m-lbl">Amostras</div><div class="m-val">${fmt(m.n_samples||m.n_train)}</div></div><div class="metric"><div class="m-lbl">Sazonalidade</div><div class="m-val" style="font-size:.85rem">${m.seasonality_mode||"—"}</div></div><div class="metric"><div class="m-lbl">Período</div><div class="m-val" style="font-size:.75rem">${(m.trained_on||"").split(" a ")[0]||"—"}</div></div>`;
-  // Info do modelo e SARIMA dos índices
   const feats=(m.features||["mei_lag1","amo_lag1","pdo_lag1"]).join(" · ");
   const samoO=m.sarima_amo?.order?`SARIMA(${m.sarima_amo.order.join(",")})×(${(m.sarima_amo.seasonal_order||[]).join(",")},12)`:"—";
   const spdoO=m.sarima_pdo?.order?`SARIMA(${m.sarima_pdo.order.join(",")})×(${(m.sarima_pdo.seasonal_order||[]).join(",")},12)`:"—";
-  document.getElementById("rfImportance").innerHTML=`<div style="font-size:10.5px;color:var(--mist);line-height:2.2"><div><strong style="color:var(--text)">Modelo:</strong> Facebook Prophet</div><div><strong style="color:var(--text)">Sazonalidade:</strong> anual multiplicativa</div><div><strong style="color:var(--text)">Regressores:</strong> ${feats}</div><div><strong style="color:var(--text)">SARIMA AMO:</strong> ${samoO}</div><div><strong style="color:var(--text)">SARIMA PDO:</strong> ${spdoO}</div><div><strong style="color:var(--text)">IC:</strong> 90% — nativo Prophet</div></div>`;
+  document.getElementById("rfImportance").innerHTML=`<div style="font-size:11px;color:var(--mist);line-height:2.2"><div><strong style="color:var(--text)">Modelo:</strong> Facebook Prophet</div><div><strong style="color:var(--text)">Sazonalidade:</strong> anual multiplicativa</div><div><strong style="color:var(--text)">Regressores:</strong> ${feats}</div><div><strong style="color:var(--text)">SARIMA AMO:</strong> ${samoO}</div><div><strong style="color:var(--text)">SARIMA PDO:</strong> ${spdoO}</div><div><strong style="color:var(--text)">IC:</strong> 90% nativo Prophet</div></div>`;
   const obs=INPE?buildRecentObs(6):[];
   const obsLabs=obs.map(o=>`${MPT[o.month-1]} ${o.year}`);
   const obsVals=obs.map(o=>o.focos);
   const fcLabs=fc.map(f=>`${MPT[f.month-1]} ${f.year}`);
   const n0=obs.length;
   if(CH.rf)CH.rf.destroy();
-  CH.rf=new Chart(document.getElementById("cRF"),{type:"bar",data:{labels:[...obsLabs,...fcLabs],datasets:[{label:"IC sup",data:[...Array(n0).fill(null),...fc.map(f=>f.hi)],backgroundColor:"rgba(194,53,16,.12)",borderWidth:0,borderSkipped:false},{label:"Previsão Prophet",data:[...Array(n0).fill(null),...fc.map(f=>f.focos_pred)],backgroundColor:fc.map(()=>`rgba(194,53,16,.72)`),borderRadius:2,borderWidth:0,order:1},{label:"IC inf",data:[...Array(n0).fill(null),...fc.map(f=>f.lo)],backgroundColor:"rgba(245,242,234,1)",borderWidth:0,borderSkipped:false,order:0},{label:"Observado",data:[...obsVals,...Array(fc.length).fill(null)],backgroundColor:"rgba(30,106,184,.65)",borderRadius:2,borderWidth:0,order:1}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:C.dim,font:{size:9},filter:i=>!["IC sup","IC inf"].includes(i.text)}},tooltip:{backgroundColor:C.bg,borderColor:C.border,borderWidth:1,titleColor:C.text,bodyColor:C.dim,mode:"index",intersect:false,callbacks:{label:ctx=>{if(ctx.dataset.label==="IC sup"||ctx.dataset.label==="IC inf")return null;const v=ctx.parsed.y;if(v==null)return null;const fcRow=fc[ctx.dataIndex-n0];if(fcRow)return` Prophet: ${fmt(fcRow.focos_pred)}  IC90%: [${fmt(fcRow.lo)} – ${fmt(fcRow.hi)}]`;return` Observado: ${fmt(v)}`;}}}},scales:{x:{grid:{color:C.border},ticks:{color:C.dim,font:{size:8.5}}},y:{grid:{color:C.border},ticks:{color:C.dim,callback:v=>fmt(v)},title:{display:true,text:"Focos INPE",color:C.dim,font:{size:9}}}}},plugins:[{id:"fc-div",afterDraw(ch){if(!n0)return;const{ctx:c,chartArea:ca,scales}=ch;if(!ca)return;const x=scales.x.getPixelForValue(n0-.5);c.save();c.beginPath();c.strokeStyle="rgba(184,126,0,.5)";c.lineWidth=1.5;c.setLineDash([4,4]);c.moveTo(x,ca.top);c.lineTo(x,ca.bottom);c.stroke();c.setLineDash([]);c.fillStyle="rgba(184,126,0,.7)";c.font="8px 'DM Mono',monospace";c.fillText("Previsão →",x+4,ca.top+12);c.restore();}}]});
+  CH.rf=new Chart(document.getElementById("cRF"),{type:"bar",data:{labels:[...obsLabs,...fcLabs],datasets:[{label:"IC sup",data:[...Array(n0).fill(null),...fc.map(f=>f.hi)],backgroundColor:"rgba(194,53,16,.12)",borderWidth:0,borderSkipped:false},{label:"Previsão Prophet",data:[...Array(n0).fill(null),...fc.map(f=>f.focos_pred)],backgroundColor:fc.map(()=>`rgba(194,53,16,.72)`),borderRadius:2,borderWidth:0,order:1},{label:"IC inf",data:[...Array(n0).fill(null),...fc.map(f=>f.lo)],backgroundColor:"rgba(245,242,234,1)",borderWidth:0,borderSkipped:false,order:0},{label:"Observado",data:[...obsVals,...Array(fc.length).fill(null)],backgroundColor:"rgba(30,106,184,.65)",borderRadius:2,borderWidth:0,order:1}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:C.dim,font:{size:9},filter:i=>!["IC sup","IC inf"].includes(i.text)}},tooltip:{backgroundColor:C.bg,borderColor:C.border,borderWidth:1,titleColor:C.text,bodyColor:C.dim,mode:"index",intersect:false,callbacks:{label:ctx=>{if(ctx.dataset.label==="IC sup"||ctx.dataset.label==="IC inf")return null;const v=ctx.parsed.y;if(v==null)return null;const fcRow=fc[ctx.dataIndex-n0];if(fcRow)return` Prophet: ${fmt(fcRow.focos_pred)}  IC90%: [${fmt(fcRow.lo)} – ${fmt(fcRow.hi)}]`;return` Observado: ${fmt(v)}`;}}}},scales:{x:{grid:{color:C.border},ticks:{color:C.dim,font:{size:8.5}}},y:{grid:{color:C.border},ticks:{color:C.dim,callback:v=>fmt(v)},title:{display:true,text:"Focos INPE",color:C.dim,font:{size:9}}}}},plugins:[{id:"fc-div",afterDraw(ch){if(!n0)return;const{ctx:c,chartArea:ca,scales}=ch;if(!ca)return;const x=scales.x.getPixelForValue(n0-.5);c.save();c.beginPath();c.strokeStyle="rgba(184,126,0,.5)";c.lineWidth=1.5;c.setLineDash([4,4]);c.moveTo(x,ca.top);c.lineTo(x,ca.bottom);c.stroke();c.setLineDash([]);c.fillStyle="rgba(184,126,0,.7)";c.font="8px 'Roboto',sans-serif";c.fillText("Previsão →",x+4,ca.top+12);c.restore();}}]});
   document.getElementById("rfTable").innerHTML=fc.map(f=>`<tr><td style="color:var(--gold);font-weight:500">${MPT[f.month-1]} ${f.year}</td><td style="font-weight:500">${fmt(f.focos_pred)}</td><td style="color:var(--leaf)">${fmt(f.lo)}</td><td style="color:var(--ember)">${fmt(f.hi)}</td></tr>`).join("");
 }
 function buildRecentObs(n){if(!INPE)return[];const out=[];for(const y of[...INPE.years].reverse()){for(let m=11;m>=0;m--){const v=INPE.monthly[y]?.[m];if(v!=null&&v>0){out.unshift({year:y,month:m+1,focos:v});if(out.length>=n)return out;}}}return out;}
-function dlCSV(){let rows=["Ano,Mes,Focos_INPE,MEI,AMO,PDO,AFCI,AFCI_3m,Risco"];const af=AFCI?AFCI.series:[];for(const s of af){const f=INPE?(INPE.monthly[s.year]?.[s.month-1]??""):"";rows.push([s.year,s.month,f,s.mei,s.amo,s.pdo,s.afci,s.afci_3m,rl(s.afci_3m??s.afci)].join(","));}const b=new Blob([rows.join("\n")],{type:"text/csv"});Object.assign(document.createElement("a"),{href:URL.createObjectURL(b),download:"ybyra_afci.csv"}).click();}
-function dlJSON(){if(!AFCI){alert("Execute o cálculo do AFCI primeiro.");return;}const pm=RF?.prophet_model||RF?.rf_model;const pf=RF?.prophet_forecast||RF?.rf_forecast;const b=new Blob([JSON.stringify({project:"YbYrá-BR",cnpq:"401741/2023-0",updated:new Date().toISOString(),prophet_model:pm,prophet_forecast:pf,observations:AFCI.series.map(s=>({...s,date:s.date.toISOString().slice(0,7)})),afci_forecasts:AFCI.forecasts},null,2)],{type:"application/json"});Object.assign(document.createElement("a"),{href:URL.createObjectURL(b),download:"ybyra_afci.json"}).click();}
+function dlCSV(){if(!CLIMATE){alert("Carregue os índices climáticos primeiro.");return;}let rows=["Ano,Mes,Focos_INPE,MEI,AMO,PDO"];for(const r of CLIMATE){const f=INPE?(INPE.monthly[r.year]?.[r.month-1]??""):"";rows.push([r.year,r.month,f,r.mei,r.amo??'',r.pdo??''].join(","));}const b=new Blob([rows.join("\n")],{type:"text/csv"});Object.assign(document.createElement("a"),{href:URL.createObjectURL(b),download:"ybyra_clima.csv"}).click();}
+function dlJSON(){const pm=RF?.prophet_model||RF?.rf_model;const pf=RF?.prophet_forecast||RF?.rf_forecast;const payload={project:"YbYrá-BR",cnpq:"401741/2023-0",updated:new Date().toISOString(),prophet_model:pm,prophet_forecast:pf,climate_series:CLIMATE?CLIMATE.map(r=>({...r,date:r.date.toISOString().slice(0,7)})):[]};const b=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});Object.assign(document.createElement("a"),{href:URL.createObjectURL(b),download:"ybyra_data.json"}).click();}
 window.addEventListener("DOMContentLoaded",async()=>{
   document.getElementById("heroDate").textContent=new Date().toLocaleDateString("pt-BR");
   const rfJson=await loadRFJson();
@@ -404,10 +415,13 @@ window.addEventListener("DOMContentLoaded",async()=>{
   setINPEStats();buildAnual();buildMensal();
   if(rfJson?.climate_series?.length){
     buildCLIMATEFromRF(rfJson.climate_series);
-    computeAFCI();
-    lg(`Índices: SARIMA · atualizado ${rfJson.meta?.updated_utc?.slice(0,10)||"cache"}`,'ok');
+    redrawClimate();
+    const st=document.getElementById("climateStatus");
+    st.className="sbadge sb-ok";
+    st.textContent=`SARIMA · ${rfJson.meta?.updated_utc?.slice(0,10)||"cache"}`;
+    st.style.display="";
   }else{
-    lg("⚠ Índices climáticos não disponíveis em rf_forecast.json.","warn");
+    lg("⚠ Índices climáticos não disponíveis — clique em 'Atualizar ao vivo'.","warn");
   }
   const hasProphet=(rfJson?.prophet_forecast?.length&&rfJson?.prophet_model)||(rfJson?.rf_forecast?.length&&rfJson?.rf_model);
   if(hasProphet){renderRFSection(rfJson);}
