@@ -38,7 +38,7 @@ jobs:
       - name: Pipeline MEI → mei_data.json
         run: python scripts/pipeline.py
 
-      - name: Pipeline RF → rf_forecast.json
+      - name: Pipeline Prophet → rf_forecast.json
         run: |
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             python scripts/rf_pipeline.py --dry-run
@@ -51,12 +51,19 @@ jobs:
           ls -lh docs/mei_data.json docs/rf_forecast.json
           python -c "
           import json
+          mei = json.load(open('docs/mei_data.json'))
+          print('MEI modelo:', mei['model']['type'])
+          print('MEI ordem SARIMA:', mei['model'].get('order'), mei['model'].get('seasonal_order'))
+          print('MEI previsoes:', len(mei['forecasts']))
           rf = json.load(open('docs/rf_forecast.json'))
-          print('RF forecast months:', len(rf['rf_forecast']))
-          print('Climate records:',  len(rf['climate_series']))
-          print('Fire records:',     len(rf['fire_monthly']))
-          print('R2 treino:', rf['rf_model']['r2_train'])
-          print('R2 teste:',  rf['rf_model']['r2_test'])
+          pm = rf.get('prophet_model') or rf.get('rf_model', {})
+          pf = rf.get('prophet_forecast') or rf.get('rf_forecast', [])
+          print('Prophet forecast months:', len(pf))
+          print('Climate records:', len(rf['climate_series']))
+          print('Fire records:', len(rf['fire_monthly']))
+          print('MAPE treino:', pm.get('mape_train'))
+          print('MAPE teste:', pm.get('mape_test'))
+          print('MAE teste:', pm.get('mae_test'))
           print('Atualizado:', rf['meta']['updated_utc'])
           "
 
@@ -71,8 +78,8 @@ jobs:
             MONTH=$(date -u +"%B %Y")
             git commit -m "dados: atualização automática ${MONTH}
 
-          - pipeline.py: MEI.v2 → mei_data.json
-          - rf_pipeline.py: Random Forest → rf_forecast.json
+          - pipeline.py: MEI.v2 + SARIMA Sazonal → mei_data.json
+          - rf_pipeline.py: Prophet + SARIMA (AMO/PDO) → rf_forecast.json
           "
             git push
           fi
