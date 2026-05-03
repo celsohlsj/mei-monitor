@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_utc": "2026-05-03T18:03:02.321903+00:00",
+    "updated_utc": "2026-05-03T18:15:03.935057+00:00",
     "pipeline": "YbYrá-BR Prophet Pipeline",
     "model_type": "Facebook Prophet + SARIMA (índices oceânicos)",
     "mei_records": 552,
@@ -5559,7 +5559,7 @@
       "pdo_lag1"
     ],
     "seasonality_mode": "multiplicative",
-    "interval_width": 0.9,
+    "interval_width": 0.95,
     "n_samples": 334,
     "n_train": 298,
     "n_test": 36,
@@ -5605,96 +5605,182 @@
       "month": 5,
       "step": 1,
       "focos_pred": 937,
-      "lo": 447,
-      "hi": 2008
+      "lo": 336,
+      "hi": 2432
     },
     {
       "year": 2026,
       "month": 6,
       "step": 2,
       "focos_pred": 2314,
-      "lo": 1057,
-      "hi": 5238
+      "lo": 928,
+      "hi": 6196
     },
     {
       "year": 2026,
       "month": 7,
       "step": 3,
       "focos_pred": 4952,
-      "lo": 2034,
-      "hi": 11065
+      "lo": 1787,
+      "hi": 13201
     },
     {
       "year": 2026,
       "month": 8,
       "step": 4,
       "focos_pred": 22617,
-      "lo": 10581,
-      "hi": 51958
+      "lo": 9104,
+      "hi": 57473
     },
     {
       "year": 2026,
       "month": 9,
       "step": 5,
       "focos_pred": 29130,
-      "lo": 13913,
-      "hi": 66900
+      "lo": 10266,
+      "hi": 73768
     },
     {
       "year": 2026,
       "month": 10,
       "step": 6,
       "focos_pred": 15250,
-      "lo": 6872,
-      "hi": 34472
+      "lo": 5776,
+      "hi": 37441
     },
     {
       "year": 2026,
       "month": 11,
       "step": 7,
       "focos_pred": 11357,
-      "lo": 4876,
-      "hi": 26995
+      "lo": 4645,
+      "hi": 29171
     },
     {
       "year": 2026,
       "month": 12,
       "step": 8,
       "focos_pred": 5346,
-      "lo": 2286,
-      "hi": 12096
+      "lo": 2121,
+      "hi": 12235
     },
     {
       "year": 2027,
       "month": 1,
       "step": 9,
       "focos_pred": 1216,
-      "lo": 549,
-      "hi": 2663
+      "lo": 485,
+      "hi": 3280
     },
     {
       "year": 2027,
       "month": 2,
       "step": 10,
       "focos_pred": 810,
-      "lo": 341,
-      "hi": 1825
+      "lo": 313,
+      "hi": 2048
     },
     {
       "year": 2027,
       "month": 3,
       "step": 11,
       "focos_pred": 840,
-      "lo": 378,
-      "hi": 1894
+      "lo": 289,
+      "hi": 2078
     },
     {
       "year": 2027,
       "month": 4,
       "step": 12,
       "focos_pred": 579,
-      "lo": 245,
-      "hi": 1358
+      "lo": 219,
+      "hi": 1394
+    }
+  ],
+  "sarima_climate_forecast": [
+    {
+      "year": 2026,
+      "month": 5,
+      "step": 1,
+      "amo": 0.0,
+      "pdo": 0.0
+    },
+    {
+      "year": 2026,
+      "month": 6,
+      "step": 2,
+      "amo": 0.0,
+      "pdo": 0.0
+    },
+    {
+      "year": 2026,
+      "month": 7,
+      "step": 3,
+      "amo": 0.0,
+      "pdo": 0.0
+    },
+    {
+      "year": 2026,
+      "month": 8,
+      "step": 4,
+      "amo": 0.0,
+      "pdo": 0.0
+    },
+    {
+      "year": 2026,
+      "month": 9,
+      "step": 5,
+      "amo": 0.0,
+      "pdo": 0.0
+    },
+    {
+      "year": 2026,
+      "month": 10,
+      "step": 6,
+      "amo": 0.0,
+      "pdo": 0.0
+    },
+    {
+      "year": 2026,
+      "month": 11,
+      "step": 7,
+      "amo": 0.0,
+      "pdo": 0.0
+    },
+    {
+      "year": 2026,
+      "month": 12,
+      "step": 8,
+      "amo": 0.0,
+      "pdo": 0.0
+    },
+    {
+      "year": 2027,
+      "month": 1,
+      "step": 9,
+      "amo": 0.0,
+      "pdo": 0.0
+    },
+    {
+      "year": 2027,
+      "month": 2,
+      "step": 10,
+      "amo": 0.0,
+      "pdo": 0.0
+    },
+    {
+      "year": 2027,
+      "month": 3,
+      "step": 11,
+      "amo": 0.0,
+      "pdo": 0.0
+    },
+    {
+      "year": 2027,
+      "month": 4,
+      "step": 12,
+      "amo": 0.0,
+      "pdo": 0.0
     }
   ]
 }

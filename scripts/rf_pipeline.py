@@ -321,7 +321,7 @@ def _make_prophet():
         weekly_seasonality=False,
         daily_seasonality=False,
         seasonality_mode="multiplicative",
-        interval_width=0.90,
+        interval_width=0.95,
         uncertainty_samples=500,
     )
     for col in REGRESSORS:
@@ -432,8 +432,23 @@ def build_future_regressors(df_full, sarima_mei_fc, amo_fc_vals, pdo_fc_vals, st
 
 # ── 8. Export ──────────────────────────────────────────────────────────────────
 
+def _build_sarima_climate_fc(df_full, amo_fc_vals, pdo_fc_vals):
+    """Converte arrays SARIMA AMO/PDO em registros com datas."""
+    last = df_full.iloc[-1]
+    y, mo = int(last["year"]), int(last["month"])
+    rows = []
+    for i, (a, p) in enumerate(zip(amo_fc_vals, pdo_fc_vals), 1):
+        mo += 1
+        if mo > 12:
+            mo = 1
+            y += 1
+        rows.append({"year": y, "month": mo, "step": i,
+                     "amo": round(float(a), 4), "pdo": round(float(p), 4)})
+    return rows
+
 def export_json(mei_df, amo_df, pdo_df, fire_df,
-                prophet_meta, prophet_fc):
+                prophet_meta, prophet_fc,
+                amo_fc_vals=None, pdo_fc_vals=None, df_full=None):
     # Série climática para o frontend (AFCI, visualizações)
     cl = (mei_df
           .merge(amo_df if len(amo_df) else
@@ -470,6 +485,9 @@ def export_json(mei_df, amo_df, pdo_df, fire_df,
         "fire_monthly"    : to_list(fire_df[["year","month","focos"]]),
         "prophet_model"   : prophet_meta,
         "prophet_forecast": prophet_fc,
+        "sarima_climate_forecast": _build_sarima_climate_fc(
+            df_full, amo_fc_vals, pdo_fc_vals) if (
+            df_full is not None and amo_fc_vals is not None) else [],
     }
 
     DOCS.mkdir(parents=True, exist_ok=True)
@@ -527,7 +545,7 @@ def main():
         "model"            : "Facebook Prophet",
         "features"         : REGRESSORS,
         "seasonality_mode" : "multiplicative",
-        "interval_width"   : 0.90,
+        "interval_width"   : 0.95,
         "n_samples"        : len(df_full),
         "n_train"          : n_train,
         "n_test"           : len(df_full) - n_train,
@@ -546,7 +564,8 @@ def main():
     }
 
     print("\n[8/8] Exportando rf_forecast.json")
-    export_json(mei_df, amo_df, pdo_df, fire_df, prophet_meta, prophet_fc)
+    export_json(mei_df, amo_df, pdo_df, fire_df, prophet_meta, prophet_fc,
+                amo_fc_vals=amo_fc_vals, pdo_fc_vals=pdo_fc_vals, df_full=df_full)
 
     print("\n✓ Concluído.\n")
 
