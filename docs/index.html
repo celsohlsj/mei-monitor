@@ -425,6 +425,7 @@ window.addEventListener("DOMContentLoaded",async()=>{
   }
   const hasProphet=(rfJson?.prophet_forecast?.length&&rfJson?.prophet_model)||(rfJson?.rf_forecast?.length&&rfJson?.rf_model);
   if(hasProphet){renderRFSection(rfJson);}
+  fetchClimateOnline();
 });
 </script>
 </body>
