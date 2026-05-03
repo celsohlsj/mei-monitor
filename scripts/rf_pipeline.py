@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 """
-RF Fire Forecast Pipeline — YbYrá-BR
-=====================================
-MEI (mei_data.json) + AMO + PDO + INPE → Random Forest → rf_forecast.json
+Prophet Fire Forecast Pipeline — YbYrá-BR
+==========================================
+MEI (SARIMA, mei_data.json) + AMO (SARIMA) + PDO (SARIMA) + INPE
+→ Facebook Prophet → prophet_forecast.json
 
-Features: MEI_lag1..3, AMO_lag1..3, PDO_lag1..3 + month (sin/cos)
-Target  : focos mensais Amazônia (INPE BDQueimadas)
+Features como regressores: MEI_lag1, AMO_lag1, PDO_lag1
+Target  : focos mensais Amazônia — INPE BDQueimadas (log1p)
+Índices : previsão via SARIMA Sazonal (s=12) para alimentar o Prophet
 
 Usage:
     python scripts/rf_pipeline.py            # full run
     python scripts/rf_pipeline.py --dry-run  # usa dados embutidos (sem fetch)
+    python scripts/rf_pipeline.py --steps 12
 """
 
 import sys, json, argparse, warnings
@@ -19,8 +22,9 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import requests
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import r2_score
+from statsmodels.tsa.statespace.sarimax import SARIMAX
+from prophet import Prophet
+from sklearn.metrics import mean_absolute_error
 
 warnings.filterwarnings("ignore")
 
@@ -30,8 +34,7 @@ MEI_JSON = DOCS / "mei_data.json"
 RF_JSON  = DOCS / "rf_forecast.json"
 
 BISEASONS = ["DJ","JF","FM","MA","AM","MJ","JJ","JA","AS","SO","ON","ND"]
-LAGS      = 3
-N_EST     = 300
+REGRESSORS = ["mei_lag1", "amo_lag1", "pdo_lag1"]
 
 AMO_URL  = "https://psl.noaa.gov/data/correlation/amon.us.long.data"
 PDO_URL  = "https://psl.noaa.gov/data/correlation/pdo.data"
@@ -70,7 +73,7 @@ INPE_FALLBACK = """,Janeiro,Fevereiro,Março,Abril,Maio,Junho,Julho,Agosto,Setem
 2026,2056.0,873.0,873.0,402.0,,,,,,,,,4204.0"""
 
 
-# ── helpers ────────────────────────────────────────────
+# ── helpers ────────────────────────────────────────────────────────────────────
 
 def _get(url, timeout=25):
     hdrs = {"User-Agent": "MEI-Monitor/2.0 (IPAM/UFMA; celsohlsj@gmail.com)"}
@@ -89,23 +92,24 @@ def _get(url, timeout=25):
     return None
 
 
-# ── 1. Load MEI ────────────────────────────────────────────
+# ── 1. Load MEI ────────────────────────────────────────────────────────────────
 
 def load_mei():
-    """Read observations + AR forecasts from mei_data.json."""
+    """Lê observações + previsões SARIMA de mei_data.json."""
     data = json.loads(MEI_JSON.read_text())
     rows = []
     for o in data["observations"]:
         month = BISEASONS.index(o["season"]) + 1
         rows.append({"year": int(o["year"]), "month": month, "mei": float(o["mei"])})
     df = pd.DataFrame(rows).sort_values(["year","month"]).reset_index(drop=True)
-    ar_fc = data.get("forecasts", [])
+    sarima_fc = data.get("forecasts", [])
     last = data["statistics"]["year_max"]
-    print(f"  ✓ MEI: {len(df)} registros  (até {last})")
-    return df, ar_fc
+    model_type = data.get("model", {}).get("type", "SARIMA")
+    print(f"  ✓ MEI: {len(df)} registros  (até {last})  [{model_type}]")
+    return df, sarima_fc
 
 
-# ── 2. Fetch AMO / PDO ──────────────────────────────────────────
+# ── 2. Fetch AMO / PDO ─────────────────────────────────────────────────────────
 
 def _parse_monthly(text, key):
     rows = []
@@ -125,8 +129,7 @@ def _parse_monthly(text, key):
             if abs(v) > 90 or v <= -99:
                 continue
             rows.append({"year": year, "month": m + 1, key: round(v, 4)})
-    df = pd.DataFrame(rows).sort_values(["year","month"]).reset_index(drop=True)
-    return df
+    return pd.DataFrame(rows).sort_values(["year","month"]).reset_index(drop=True)
 
 
 def fetch_amo(dry_run=False):
@@ -153,7 +156,7 @@ def fetch_pdo(dry_run=False):
     return pd.DataFrame(columns=["year","month","pdo"])
 
 
-# ── 3. INPE fire data ───────────────────────────────────────────
+# ── 3. INPE fire data ──────────────────────────────────────────────────────────
 
 def _parse_inpe(csv_text):
     rows = []
@@ -189,146 +192,228 @@ def load_inpe(dry_run=False):
     return df
 
 
-# ── 4. Merge + feature engineering ─────────────────────────────────────
+# ── 4. Merge + lag regressors ──────────────────────────────────────────────────
 
-def build_features(mei_df, amo_df, pdo_df, fire_df, lags=LAGS):
-    df = (mei_df
-          .merge(amo_df if len(amo_df) else pd.DataFrame({"year":[],"month":[],"amo":[]}),
+def build_dataset(mei_df, amo_df, pdo_df, fire_df):
+    """
+    Mescla MEI + AMO + PDO + INPE e cria regressores com lag-1.
+    Retorna DataFrame pronto para o Prophet.
+    """
+    empty_amo = pd.DataFrame({"year": [], "month": [], "amo": []})
+    empty_pdo = pd.DataFrame({"year": [], "month": [], "pdo": []})
+
+    df = (fire_df
+          .merge(mei_df[["year","month","mei"]], on=["year","month"], how="left")
+          .merge(amo_df if len(amo_df) else empty_amo,
                  on=["year","month"], how="left")
-          .merge(pdo_df if len(pdo_df) else pd.DataFrame({"year":[],"month":[],"pdo":[]}),
+          .merge(pdo_df if len(pdo_df) else empty_pdo,
                  on=["year","month"], how="left")
-          .merge(fire_df, on=["year","month"], how="inner")
           .sort_values(["year","month"])
           .reset_index(drop=True))
 
-    for col in ["amo","pdo"]:
+    for col in ["amo", "pdo"]:
         if col not in df.columns:
             df[col] = 0.0
         df[col] = df[col].fillna(df[col].expanding().mean()).fillna(0.0)
+    df["mei"] = df["mei"].fillna(df["mei"].expanding().mean()).fillna(0.0)
 
-    for lag in range(1, lags + 1):
-        for col in ["mei","amo","pdo"]:
-            df[f"{col}_lag{lag}"] = df[col].shift(lag)
+    # Lag-1: valor do mês anterior como preditor do mês atual
+    df["mei_lag1"] = df["mei"].shift(1)
+    df["amo_lag1"] = df["amo"].shift(1)
+    df["pdo_lag1"] = df["pdo"].shift(1)
 
-    df["month_sin"] = np.sin(2 * np.pi * df["month"] / 12)
-    df["month_cos"] = np.cos(2 * np.pi * df["month"] / 12)
+    # Coluna de data para Prophet
+    df["ds"] = pd.to_datetime(dict(year=df["year"], month=df["month"], day=1))
+    df["y"]  = np.log1p(df["focos"].astype(float))
 
-    lag_cols = [f"{c}_lag{l}" for l in range(1, lags+1) for c in ["mei","amo","pdo"]]
-    df = df.dropna(subset=lag_cols).reset_index(drop=True)
-    for c in ["year","month","focos"]:
-        if c in df.columns:
-            df[c] = df[c].astype(int)
+    df = df.dropna(subset=REGRESSORS).reset_index(drop=True)
+
     y0, m0 = int(df.iloc[0]["year"]),  int(df.iloc[0]["month"])
     y1, m1 = int(df.iloc[-1]["year"]), int(df.iloc[-1]["month"])
-    print(f"  ✓ Dataset: {len(df)} linhas  ({y0}-{m0:02d} até {y1}-{m1:02d})")
+    print(f"  ✓ Dataset Prophet: {len(df)} linhas  ({y0}-{m0:02d} → {y1}-{m1:02d})")
     return df
 
 
-# ── 5. Train Random Forest ──────────────────────────────────────────
+# ── 5. SARIMA para previsão dos índices oceânicos ──────────────────────────────
 
-FEATURE_COLS = (
-    [f"mei_lag{l}" for l in range(1, LAGS+1)] +
-    [f"amo_lag{l}" for l in range(1, LAGS+1)] +
-    [f"pdo_lag{l}" for l in range(1, LAGS+1)] +
-    ["month_sin", "month_cos", "month"]
-)
+def _sarima_forecast_series(series_vals, periods, name=""):
+    """
+    Ajusta o melhor SARIMA(p,d,q)(P,D,Q,12) por AIC e retorna
+    (valores_previstos, order, seasonal_order).
+    """
+    clean = np.array(series_vals, dtype=float)
+    clean = clean[~np.isnan(clean)]
+
+    if len(clean) < 24:
+        print(f"  ⚠ {name}: série curta ({len(clean)}) — usando média")
+        mu = float(np.nanmean(clean)) if len(clean) else 0.0
+        return np.full(periods, mu), None, None
+
+    candidates = [
+        ((0, 1, 1), (0, 1, 1, 12)),
+        ((1, 1, 1), (0, 1, 1, 12)),
+        ((1, 1, 0), (0, 1, 1, 12)),
+        ((0, 1, 1), (1, 1, 0, 12)),
+        ((1, 1, 1), (1, 1, 0, 12)),
+    ]
+
+    best_aic = np.inf
+    best_res = None
+    best_ord = (None, None)
+
+    for order, sorder in candidates:
+        try:
+            mod = SARIMAX(
+                clean,
+                order=order,
+                seasonal_order=sorder,
+                enforce_stationarity=False,
+                enforce_invertibility=False,
+                simple_differencing=True,
+            )
+            res = mod.fit(disp=False, maxiter=400)
+            aic = float(res.aic)
+            if not np.isnan(aic) and not np.isinf(aic) and aic < best_aic:
+                best_aic = aic
+                best_res = res
+                best_ord = (order, sorder)
+        except Exception:
+            continue
+
+    if best_res is None:
+        print(f"  ⚠ {name}: SARIMA falhou — usando média")
+        return np.full(periods, float(np.mean(clean))), None, None
+
+    fc    = best_res.get_forecast(steps=periods)
+    vals  = fc.predicted_mean.values
+    o, so = best_ord
+    print(f"  ✓ {name} SARIMA({o[0]},{o[1]},{o[2]})({so[0]},{so[1]},{so[2]},12) "
+          f"AIC={round(best_aic, 1)}")
+    return vals, list(o), list(so)
 
 
-def train_rf(df):
-    X = df[FEATURE_COLS].values
-    y = np.log1p(df["focos"].values.astype(float))
+# ── 6. Treinar e prever com Prophet ───────────────────────────────────────────
 
-    n = len(X)
+def _make_prophet():
+    m = Prophet(
+        yearly_seasonality=True,
+        weekly_seasonality=False,
+        daily_seasonality=False,
+        seasonality_mode="multiplicative",
+        interval_width=0.90,
+        uncertainty_samples=500,
+    )
+    for col in REGRESSORS:
+        m.add_regressor(col)
+    return m
+
+
+def train_and_forecast(df_full, future_reg_df, steps):
+    """
+    Treina Prophet, calcula métricas no conjunto de teste (últimos ~20%)
+    e retorna previsões para os próximos `steps` meses.
+    """
+    n     = len(df_full)
     split = max(int(n * 0.8), n - 36)
-    X_tr, X_te = X[:split], X[split:]
-    y_tr, y_te = y[:split], y[split:]
 
-    rf = RandomForestRegressor(n_estimators=N_EST, max_features="sqrt",
-                               min_samples_leaf=3, random_state=42, n_jobs=-1)
-    rf.fit(X_tr, y_tr)
+    df_tr = df_full.iloc[:split].copy()
+    df_te = df_full.iloc[split:].copy()
 
-    r2_tr = float(round(r2_score(y_tr, rf.predict(X_tr)), 4))
-    r2_te = float(round(r2_score(y_te, rf.predict(X_te)), 4)) if len(X_te) > 0 else None
+    train_cols = ["ds", "y"] + REGRESSORS
 
-    imp = {f: round(float(v), 5)
-           for f, v in zip(FEATURE_COLS, rf.feature_importances_)}
-    top5 = sorted(imp.items(), key=lambda x: -x[1])[:5]
-    print(f"  ✓ RF({N_EST} árvores)  R²_treino={r2_tr}  R²_teste={r2_te}")
-    print(f"  Top importâncias: {top5}")
+    # ── Validação
+    m_val = _make_prophet()
+    m_val.fit(df_tr[train_cols])
 
-    meta = {
-        "features": FEATURE_COLS, "lags": LAGS,
-        "n_estimators": N_EST, "n_samples": n,
-        "n_train": split, "n_test": n - split,
-        "r2_train": r2_tr, "r2_test": r2_te,
-        "feature_importance": imp,
-        "trained_on": (f"{int(df.iloc[0]['year'])}-{int(df.iloc[0]['month']):02d}"
-                       f" a {int(df.iloc[-1]['year'])}-{int(df.iloc[-1]['month']):02d}"),
-    }
-    return rf, meta
+    pred_tr = m_val.predict(df_tr[["ds"] + REGRESSORS])
+    pred_te = m_val.predict(df_te[["ds"] + REGRESSORS])
 
+    def mape(y_true_log, y_pred_log):
+        yt = np.maximum(np.expm1(y_true_log), 1.0)
+        yp = np.maximum(np.expm1(y_pred_log), 0.0)
+        return float(np.mean(np.abs((yt - yp) / yt)) * 100)
 
-# ── 6. Forecast 12 months ──────────────────────────────────────────
+    mape_tr = round(mape(df_tr["y"].values, pred_tr["yhat"].values), 2)
+    mape_te = round(mape(df_te["y"].values, pred_te["yhat"].values), 2)
+    mae_te  = round(float(mean_absolute_error(
+                        np.expm1(df_te["y"].values),
+                        np.maximum(np.expm1(pred_te["yhat"].values), 0))), 1)
 
-def forecast_rf(rf, df, ar_mei_fc, amo_df, pdo_df, steps=12, lags=LAGS):
-    """Roll-forward RF forecast for the next `steps` calendar months."""
-    amo_clim = (amo_df.groupby("month")["amo"].mean().to_dict()
-                if len(amo_df) > 50 else {m: 0.0 for m in range(1, 13)})
-    pdo_clim = (pdo_df.groupby("month")["pdo"].mean().to_dict()
-                if len(pdo_df) > 50 else {m: 0.0 for m in range(1, 13)})
-    mei_clim = df.groupby("month")["mei"].mean().to_dict()
+    print(f"  ✓ Prophet (validação)  MAPE_treino={mape_tr}%  "
+          f"MAPE_teste={mape_te}%  MAE_teste={mae_te:.0f}")
 
-    last_year  = int(df.iloc[-1]["year"])
-    last_month = int(df.iloc[-1]["month"])
+    # ── Retreinar em todos os dados
+    m_full = _make_prophet()
+    m_full.fit(df_full[train_cols])
 
-    mei_buf = list(df["mei"].values[-lags:].astype(float))
-    amo_buf = list(df["amo"].values[-lags:].astype(float))
-    pdo_buf = list(df["pdo"].values[-lags:].astype(float))
+    # ── Previsão futura
+    future = m_full.make_future_dataframe(periods=steps, freq="MS",
+                                          include_history=False)
+    for col in REGRESSORS:
+        future[col] = future_reg_df[col].values[:steps]
+
+    fc = m_full.predict(future)
 
     forecasts = []
-    for step in range(1, steps + 1):
-        total  = last_month + step
-        ny     = last_year + (total - 1) // 12
-        nm     = ((total - 1) % 12) + 1
+    for i, (_, row) in enumerate(fc.iterrows(), 1):
+        pred = max(0, int(round(float(np.expm1(row["yhat"])))))
+        lo   = max(0, int(round(float(np.expm1(row["yhat_lower"])))))
+        hi   = max(0, int(round(float(np.expm1(row["yhat_upper"])))))
+        dt   = pd.Timestamp(row["ds"])
+        forecasts.append({
+            "year":       int(dt.year),
+            "month":      int(dt.month),
+            "step":       i,
+            "focos_pred": pred,
+            "lo":         lo,
+            "hi":         hi,
+        })
+        print(f"  +{i:2d}  {dt.year}-{dt.month:02d}  focos≈{pred:>7,}  [{lo:,} – {hi:,}]")
 
-        if step - 1 < len(ar_mei_fc):
-            fc_mei = float(ar_mei_fc[step - 1]["mei"])
-        else:
-            fc_mei = mei_clim.get(nm, 0.0)
-        fc_amo = float(amo_clim.get(nm, 0.0))
-        fc_pdo = float(pdo_clim.get(nm, 0.0))
-
-        row = {}
-        for lag in range(1, lags + 1):
-            row[f"mei_lag{lag}"] = mei_buf[-lag]
-            row[f"amo_lag{lag}"] = amo_buf[-lag]
-            row[f"pdo_lag{lag}"] = pdo_buf[-lag]
-        row["month_sin"] = float(np.sin(2 * np.pi * nm / 12))
-        row["month_cos"] = float(np.cos(2 * np.pi * nm / 12))
-        row["month"]     = nm
-
-        X = np.array([[row[f] for f in FEATURE_COLS]])
-
-        tree_preds = np.array([t.predict(X)[0] for t in rf.estimators_])
-        mu  = float(np.mean(tree_preds))
-        std = float(np.std(tree_preds))
-
-        pred = max(0, int(round(float(np.expm1(mu)))))
-        lo   = max(0, int(round(float(np.expm1(mu - 1.64 * std)))))  # 90 % CI
-        hi   = max(0, int(round(float(np.expm1(mu + 1.64 * std)))))
-
-        forecasts.append({"year": ny, "month": nm, "step": step,
-                          "focos_pred": pred, "lo": lo, "hi": hi})
-        print(f"  +{step:2d}  {ny}-{nm:02d}  focos≈{pred:>7,}  [{lo:,} – {hi:,}]")
-
-        mei_buf.append(fc_mei); amo_buf.append(fc_amo); pdo_buf.append(fc_pdo)
-
-    return forecasts
+    return mape_tr, mape_te, mae_te, forecasts, split
 
 
-# ── 7. Export ─────────────────────────────────────────────────────
+# ── 7. Construir dataframe de regressores futuros ──────────────────────────────
 
-def export_json(mei_df, amo_df, pdo_df, fire_df, rf_meta, rf_fc):
+def build_future_regressors(df_full, sarima_mei_fc, amo_fc_vals, pdo_fc_vals, steps):
+    """
+    Para o Prophet prever o mês T+k, o regressor lag-1 precisa do valor em T+k-1.
+    - lag-1 do mês T+1 = último valor observado (T)
+    - lag-1 do mês T+k = previsão SARIMA do mês T+k-1  (para k >= 2)
+    """
+    last_mei = float(df_full["mei"].iloc[-1])
+    last_amo = float(df_full["amo"].iloc[-1])
+    last_pdo = float(df_full["pdo"].iloc[-1])
+
+    # MEI futuro vem das previsões SARIMA de mei_data.json
+    mei_vals = [float(f["mei"]) for f in sarima_mei_fc[:steps]]
+    # Preenche com média caso insuficiente
+    if len(mei_vals) < steps:
+        mei_vals += [float(np.mean(mei_vals or [last_mei]))] * (steps - len(mei_vals))
+
+    # Regressores lag-1: shift de 1 período para frente
+    # índice 0 (mês T+1): usa o último observado
+    # índice k (mês T+k+1): usa forecast do passo k
+    mei_lag1 = [last_mei] + list(mei_vals[:steps - 1])
+    amo_lag1 = [last_amo] + list(amo_fc_vals[:steps - 1])
+    pdo_lag1 = [last_pdo] + list(pdo_fc_vals[:steps - 1])
+
+    last_date  = df_full["ds"].max()
+    fut_dates  = pd.date_range(start=last_date + pd.DateOffset(months=1),
+                               periods=steps, freq="MS")
+    return pd.DataFrame({
+        "ds":       fut_dates,
+        "mei_lag1": mei_lag1,
+        "amo_lag1": amo_lag1,
+        "pdo_lag1": pdo_lag1,
+    })
+
+
+# ── 8. Export ──────────────────────────────────────────────────────────────────
+
+def export_json(mei_df, amo_df, pdo_df, fire_df,
+                prophet_meta, prophet_fc):
+    # Série climática para o frontend (AFCI, visualizações)
     cl = (mei_df
           .merge(amo_df if len(amo_df) else
                  pd.DataFrame({"year":[],"month":[],"amo":[]}),
@@ -337,6 +422,7 @@ def export_json(mei_df, amo_df, pdo_df, fire_df, rf_meta, rf_fc):
                  pd.DataFrame({"year":[],"month":[],"pdo":[]}),
                  on=["year","month"], how="left")
           .sort_values(["year","month"]).reset_index(drop=True))
+
     for col in ["amo","pdo"]:
         if col not in cl.columns:
             cl[col] = None
@@ -344,31 +430,37 @@ def export_json(mei_df, amo_df, pdo_df, fire_df, rf_meta, rf_fc):
 
     def to_list(df):
         return [{k: (None if (isinstance(v, float) and np.isnan(v)) else
-                     (int(v) if isinstance(v, (np.integer,)) else
+                     (int(v)   if isinstance(v, (np.integer,)) else
                       (float(round(v, 4)) if isinstance(v, float) else v)))
                  for k, v in row.items()}
                 for row in df.to_dict("records")]
 
     payload = {
         "meta": {
-            "updated_utc": datetime.now(timezone.utc).isoformat(),
-            "pipeline": "YbYrá-BR RF Pipeline — IPAM/UFMA (CNPq 401741/2023-0)",
-            "mei_records": len(mei_df),
-            "fire_records": len(fire_df),
-            "amo_records": len(amo_df),
-            "pdo_records": len(pdo_df),
+            "updated_utc"  : datetime.now(timezone.utc).isoformat(),
+            "pipeline"     : "YbYrá-BR Prophet Pipeline — IPAM/UFMA (CNPq 401741/2023-0)",
+            "model_type"   : "Facebook Prophet + SARIMA (índices oceânicos)",
+            "mei_records"  : len(mei_df),
+            "fire_records" : len(fire_df),
+            "amo_records"  : len(amo_df),
+            "pdo_records"  : len(pdo_df),
         },
-        "climate_series": to_list(cl[["year","month","mei","amo","pdo"]]),
-        "fire_monthly":   to_list(fire_df[["year","month","focos"]]),
-        "rf_model":       rf_meta,
-        "rf_forecast":    rf_fc,
+        "climate_series"  : to_list(cl[["year","month","mei","amo","pdo"]]),
+        "fire_monthly"    : to_list(fire_df[["year","month","focos"]]),
+        # chaves canonicas novas
+        "prophet_model"   : prophet_meta,
+        "prophet_forecast": prophet_fc,
+        # aliases para compatibilidade com frontend antigo em cache
+        "rf_model"        : prophet_meta,
+        "rf_forecast"     : prophet_fc,
     }
+
     DOCS.mkdir(parents=True, exist_ok=True)
     RF_JSON.write_text(json.dumps(payload, ensure_ascii=False, indent=2))
     print(f"  ✓ {RF_JSON}  ({RF_JSON.stat().st_size/1024:.1f} KB)")
 
 
-# ── main ────────────────────────────────────────────────────────
+# ── main ───────────────────────────────────────────────────────────────────────
 
 def main():
     ap = argparse.ArgumentParser()
@@ -378,32 +470,66 @@ def main():
                     help="Meses a prever (default 12)")
     args = ap.parse_args()
 
-    print("\n══════════════════════════════════════════")
-    print("  YbYrá-BR · RF Fire Forecast Pipeline")
+    print("\n══════════════════════════════════════════════════")
+    print("  YbYrá-BR · Prophet Fire Forecast Pipeline")
     print(f"  {datetime.now().strftime('%Y-%m-%d %H:%M')}")
-    print("══════════════════════════════════════════\n")
+    print("══════════════════════════════════════════════════\n")
 
-    print("[1/6] Carregando MEI (mei_data.json)")
-    mei_df, ar_fc = load_mei()
+    print("[1/7] Carregando MEI (mei_data.json  ·  SARIMA)")
+    mei_df, sarima_mei_fc = load_mei()
 
-    print("\n[2/6] AMO")
+    print("\n[2/7] AMO")
     amo_df = fetch_amo(dry_run=args.dry_run)
 
-    print("\n[3/6] PDO")
+    print("\n[3/7] PDO")
     pdo_df = fetch_pdo(dry_run=args.dry_run)
 
-    print("\n[4/6] INPE BDQueimadas")
+    print("\n[4/7] INPE BDQueimadas")
     fire_df = load_inpe(dry_run=args.dry_run)
 
-    print("\n[5/6] Construindo features e treinando Random Forest")
-    train_df = build_features(mei_df, amo_df, pdo_df, fire_df)
-    rf, rf_meta = train_rf(train_df)
+    print("\n[5/7] Construindo dataset + regressores lag-1")
+    df_full = build_dataset(mei_df, amo_df, pdo_df, fire_df)
 
-    print(f"\n[6/6] Previsão {args.steps} meses")
-    rf_fc = forecast_rf(rf, train_df, ar_fc, amo_df, pdo_df, steps=args.steps)
+    print(f"\n[6/7] SARIMA para AMO e PDO ({args.steps} meses)")
+    amo_fc_vals, amo_order, amo_sorder = _sarima_forecast_series(
+        df_full["amo"].values, args.steps, "AMO")
+    pdo_fc_vals, pdo_order, pdo_sorder = _sarima_forecast_series(
+        df_full["pdo"].values, args.steps, "PDO")
 
-    print("\n[7/7] Exportando rf_forecast.json")
-    export_json(mei_df, amo_df, pdo_df, fire_df, rf_meta, rf_fc)
+    future_reg_df = build_future_regressors(
+        df_full, sarima_mei_fc, amo_fc_vals, pdo_fc_vals, args.steps)
+
+    print(f"\n[7/7] Treinando Prophet e prevendo {args.steps} meses")
+    mape_tr, mape_te, mae_te, prophet_fc, n_train = train_and_forecast(
+        df_full, future_reg_df, args.steps)
+
+    trained_on = (f"{int(df_full.iloc[0]['year'])}-{int(df_full.iloc[0]['month']):02d}"
+                  f" a {int(df_full.iloc[-1]['year'])}-{int(df_full.iloc[-1]['month']):02d}")
+
+    prophet_meta = {
+        "model"            : "Facebook Prophet",
+        "features"         : REGRESSORS,
+        "seasonality_mode" : "multiplicative",
+        "interval_width"   : 0.90,
+        "n_samples"        : len(df_full),
+        "n_train"          : n_train,
+        "n_test"           : len(df_full) - n_train,
+        "mape_train"       : mape_tr,
+        "mape_test"        : mape_te,
+        "mae_test"         : mae_te,
+        "trained_on"       : trained_on,
+        "sarima_mei"       : "ver mei_data.json",
+        "sarima_amo"       : {"order": amo_order, "seasonal_order": amo_sorder},
+        "sarima_pdo"       : {"order": pdo_order, "seasonal_order": pdo_sorder},
+        # aliases para compatibilidade
+        "r2_train"         : None,
+        "r2_test"          : None,
+        "lags"             : 1,
+        "n_estimators"     : None,
+    }
+
+    print("\n[8/8] Exportando rf_forecast.json")
+    export_json(mei_df, amo_df, pdo_df, fire_df, prophet_meta, prophet_fc)
 
     print("\n✓ Concluído.\n")
 
