@@ -37,7 +37,7 @@ BISEASONS = ["DJ","JF","FM","MA","AM","MJ","JJ","JA","AS","SO","ON","ND"]
 REGRESSORS = ["mei_lag1", "amo_lag1", "pdo_lag1"]
 
 AMO_URL  = "https://www.ncei.noaa.gov/pub/data/cmb/ersst/v5/index/ersst.v5.amo.dat"
-PDO_URL  = "https://psl.noaa.gov/data/correlation/pdo.data"
+PDO_URL  = "https://www.ncei.noaa.gov/pub/data/cmb/ersst/v5/v6/index/ersst.v6.pdo.dat"
 INPE_URL = ("https://terrabrasilis.dpi.inpe.br/queimadas/situacao-atual/"
             "media/bioma/csv_estatisticas/historico_bioma_amazonia.csv")
 
@@ -305,7 +305,8 @@ def _sarima_forecast_series(series_vals, periods, name=""):
         return np.full(periods, float(np.mean(clean))), None, None
 
     fc    = best_res.get_forecast(steps=periods)
-    vals  = fc.predicted_mean.values
+    pm    = fc.predicted_mean
+    vals  = pm.values if hasattr(pm, "values") else np.array(pm)
     o, so = best_ord
     print(f"  ✓ {name} SARIMA({o[0]},{o[1]},{o[2]})({so[0]},{so[1]},{so[2]},12) "
           f"AIC={round(best_aic, 1)}")
