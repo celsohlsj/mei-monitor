@@ -66,7 +66,7 @@ def fetch_mei(dry_run=False, timeout=20):
             raise FileNotFoundError(f"Cache não encontrado: {CACHE_TXT}")
 
     headers = {
-        "User-Agent": "MEI-Monitor/2.0 (IPAM/UFMA; celsohlsj@gmail.com)",
+        "User-Agent": "MEI-Monitor/2.0 (celsohlsj@gmail.com)",
         "Accept": "text/plain, */*",
         "Referer": "https://psl.noaa.gov/enso/mei/",
     }
@@ -297,7 +297,7 @@ def export_json(df, model, forecasts, stats, val_report):
             "reference"  : "Wolter & Timlin (1993, 1998, 2011)",
             "model_type" : "SARIMA Sazonal",
             "updated_utc": datetime.now(timezone.utc).isoformat(),
-            "pipeline"   : "IPAM/UFMA — Celso H. L. Silva-Junior",
+            "pipeline"   : "YbYrá-BR SARIMA Pipeline",
         },
         "validation"  : val_report,
         "statistics"  : stats,
@@ -321,7 +321,7 @@ def main():
     args = ap.parse_args()
 
     print("\n══════════════════════════════════════")
-    print("  MEI.v2 ENSO Pipeline  ·  IPAM/UFMA")
+    print("  MEI.v2 ENSO Pipeline  ·  YbYrá-BR")
     print(f"  {datetime.now().strftime('%Y-%m-%d %H:%M UTC')}")
     print("══════════════════════════════════════\n")
 

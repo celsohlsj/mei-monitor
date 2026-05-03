@@ -316,7 +316,7 @@ footer{border-top:1px solid var(--wire);padding:26px 24px;
 <script>
 'use strict';
 const MEI_URL="https://psl.noaa.gov/enso/mei/data/meiv2.data";
-const AMO_URL="https://psl.noaa.gov/data/correlation/amon.us.long.data";
+const AMO_URL="https://www.ncei.noaa.gov/pub/data/cmb/ersst/v5/index/ersst.v5.amo.dat";
 const PDO_URL="https://psl.noaa.gov/data/correlation/pdo.data";
 const PROXIES=[
   u=>`https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
@@ -374,12 +374,12 @@ async function tryGet(url){const attempts=[url,...PROXIES.map(p=>p(url))];for(co
 function parseMEI(text){const rows=[];for(const l of text.split("\n")){const s=l.trim();if(!s||!/^\d{4}/.test(s))continue;const p=s.split(/\s+/);const y=parseInt(p[0]);if(y<1979)continue;for(let i=0;i<12;i++){const v=parseFloat(p[i+1]);if(isNaN(v)||v<=-99)continue;rows.push({date:new Date(y,i,1),year:y,month:i+1,mei:+v.toFixed(4)});}}return rows.sort((a,b)=>a.date-b.date);}
 function parseMon(text,key){const rows=[];for(const l of text.split("\n")){const s=l.trim();if(!s||!/^\d{4}/.test(s))continue;const p=s.split(/\s+/);const y=parseInt(p[0]);for(let m=0;m<12;m++){const v=parseFloat(p[m+1]);if(isNaN(v)||Math.abs(v)>90||v<=-99)continue;rows.push({date:new Date(y,m,1),year:y,month:m+1,[key]:+v.toFixed(4)});}}return rows.sort((a,b)=>a.date-b.date);}
 function mergeCl(mei,amo,pdo){const mp={};for(const r of mei){const k=`${r.year}-${r.month}`;mp[k]={...r};}for(const r of amo){const k=`${r.year}-${r.month}`;if(mp[k])mp[k].amo=r.amo;}for(const r of pdo){const k=`${r.year}-${r.month}`;if(mp[k])mp[k].pdo=r.pdo;}return Object.values(mp).filter(r=>r.mei!=null).sort((a,b)=>a.date-b.date);}
-async function fetchClimateOnline(){const btn=document.getElementById("btnFetch");btn.disabled=true;lg("Buscando dados ao vivo do NOAA PSL…");const[mt,at,pt]=await Promise.all([tryGet(MEI_URL),tryGet(AMO_URL),tryGet(PDO_URL)]);if(!mt){lg("⚠ MEI.v2 inacessível. Usando dados pré-computados.","warn");btn.disabled=false;return;}const mei=parseMEI(mt);const amo=at?parseMon(at,"amo"):[];const pdo=pt?parseMon(pt,"pdo"):[];lg(`✓ MEI.v2: ${mei.length}  AMO: ${amo.length}  PDO: ${pdo.length}`,'ok');CLIMATE=mergeCl(mei,amo,pdo);lg(`✓ Combinado: ${CLIMATE.length} meses (ao vivo)`,'ok');const st=document.getElementById("climateStatus");st.className="sbadge sb-ok";st.textContent="Ao vivo";st.style.display="";redrawClimate();btn.disabled=false;}
+async function fetchClimateOnline(){const btn=document.getElementById("btnFetch");btn.disabled=true;lg("Buscando dados ao vivo do NOAA…");const[mt,at,pt]=await Promise.all([tryGet(MEI_URL),tryGet(AMO_URL),tryGet(PDO_URL)]);if(!mt){lg("⚠ MEI.v2 inacessível. Usando dados pré-computados.","warn");btn.disabled=false;return;}const mei=parseMEI(mt);const amo=at?parseMon(at,"amo"):[];const pdo=pt?parseMon(pt,"pdo"):[];lg(`✓ MEI.v2: ${mei.length}  AMO: ${amo.length}  PDO: ${pdo.length}`,'ok');CLIMATE=mergeCl(mei,amo,pdo);lg(`✓ Combinado: ${CLIMATE.length} meses (ao vivo)`,'ok');const st=document.getElementById("climateStatus");st.className="sbadge sb-ok";st.textContent="Ao vivo";st.style.display="";redrawClimate();btn.disabled=false;}
 function redrawClimate(){if(!CLIMATE)return;const sel=document.getElementById("yrSel").value;const now=new Date().getFullYear();const minY=sel==="all"?0:now-parseInt(sel);const data=CLIMATE.filter(d=>d.year>=minY);const labs=data.map(d=>`${d.month.toString().padStart(2,"0")}/${d.year}`);if(CH.cl)CH.cl.destroy();CH.cl=new Chart(document.getElementById("cClimate"),{type:"line",data:{labels:labs,datasets:[{label:"MEI.v2",data:data.map(d=>d.mei),borderColor:C.mei,borderWidth:1.5,pointRadius:0,tension:.25,fill:false},{label:"AMO",data:data.map(d=>d.amo),borderColor:C.amo,borderWidth:1.2,pointRadius:0,tension:.3,fill:false,borderDash:[4,3]},{label:"PDO",data:data.map(d=>d.pdo),borderColor:C.pdo,borderWidth:1.2,pointRadius:0,tension:.3,fill:false,borderDash:[2,3]}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},plugins:{legend:{labels:{color:C.dim,font:{size:9}}},tooltip:{backgroundColor:C.bg,borderColor:C.border,borderWidth:1,titleColor:C.text,bodyColor:C.dim}},scales:{x:{grid:{color:C.border},ticks:{color:C.dim,maxTicksLimit:16,font:{size:8}}},y:{grid:{color:C.border},ticks:{color:C.dim,callback:v=>(v>0?"+":"")+v.toFixed(1)}}}}});}
 function renderRFSection(rfData){
   RF=rfData;
-  const m=rfData.prophet_model||rfData.rf_model||{};
-  const fc=rfData.prophet_forecast||rfData.rf_forecast||[];
+  const m=rfData.prophet_model||{};
+  const fc=rfData.prophet_forecast||[];
   if(!fc||fc.length===0)return;
   document.getElementById("rfNoData").style.display="none";
   document.getElementById("rfContent").style.display="block";
@@ -407,7 +407,7 @@ function renderRFSection(rfData){
 }
 function buildRecentObs(n){if(!INPE)return[];const out=[];for(const y of[...INPE.years].reverse()){for(let m=11;m>=0;m--){const v=INPE.monthly[y]?.[m];if(v!=null&&v>0){out.unshift({year:y,month:m+1,focos:v});if(out.length>=n)return out;}}}return out;}
 function dlCSV(){if(!CLIMATE){alert("Carregue os índices climáticos primeiro.");return;}let rows=["Ano,Mes,Focos_INPE,MEI,AMO,PDO"];for(const r of CLIMATE){const f=INPE?(INPE.monthly[r.year]?.[r.month-1]??""):"";rows.push([r.year,r.month,f,r.mei,r.amo??'',r.pdo??''].join(","));}const b=new Blob([rows.join("\n")],{type:"text/csv"});Object.assign(document.createElement("a"),{href:URL.createObjectURL(b),download:"ybyra_clima.csv"}).click();}
-function dlJSON(){const pm=RF?.prophet_model||RF?.rf_model;const pf=RF?.prophet_forecast||RF?.rf_forecast;const payload={project:"YbYrá-BR",cnpq:"401741/2023-0",updated:new Date().toISOString(),prophet_model:pm,prophet_forecast:pf,climate_series:CLIMATE?CLIMATE.map(r=>({...r,date:r.date.toISOString().slice(0,7)})):[]};const b=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});Object.assign(document.createElement("a"),{href:URL.createObjectURL(b),download:"ybyra_data.json"}).click();}
+function dlJSON(){const pm=RF?.prophet_model;const pf=RF?.prophet_forecast;const payload={project:"YbYrá-BR",cnpq:"401741/2023-0",updated:new Date().toISOString(),prophet_model:pm,prophet_forecast:pf,climate_series:CLIMATE?CLIMATE.map(r=>({...r,date:r.date.toISOString().slice(0,7)})):[]};const b=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});Object.assign(document.createElement("a"),{href:URL.createObjectURL(b),download:"ybyra_data.json"}).click();}
 window.addEventListener("DOMContentLoaded",async()=>{
   document.getElementById("heroDate").textContent=new Date().toLocaleDateString("pt-BR");
   const rfJson=await loadRFJson();
@@ -423,8 +423,9 @@ window.addEventListener("DOMContentLoaded",async()=>{
   }else{
     lg("⚠ Índices climáticos não disponíveis — clique em 'Atualizar ao vivo'.","warn");
   }
-  const hasProphet=(rfJson?.prophet_forecast?.length&&rfJson?.prophet_model)||(rfJson?.rf_forecast?.length&&rfJson?.rf_model);
+  const hasProphet=rfJson?.prophet_forecast?.length&&rfJson?.prophet_model;
   if(hasProphet){renderRFSection(rfJson);}
+  fetchClimateOnline();
 });
 </script>
 </body>

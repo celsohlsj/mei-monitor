@@ -76,7 +76,7 @@ INPE_FALLBACK = """,Janeiro,Fevereiro,Março,Abril,Maio,Junho,Julho,Agosto,Setem
 # ── helpers ────────────────────────────────────────────────────────────────────
 
 def _get(url, timeout=25):
-    hdrs = {"User-Agent": "MEI-Monitor/2.0 (IPAM/UFMA; celsohlsj@gmail.com)"}
+    hdrs = {"User-Agent": "MEI-Monitor/2.0 (celsohlsj@gmail.com)"}
     proxies = [
         f"https://api.allorigins.win/raw?url={requests.utils.quote(url)}",
         f"https://corsproxy.io/?url={requests.utils.quote(url)}",
@@ -438,7 +438,7 @@ def export_json(mei_df, amo_df, pdo_df, fire_df,
     payload = {
         "meta": {
             "updated_utc"  : datetime.now(timezone.utc).isoformat(),
-            "pipeline"     : "YbYrá-BR Prophet Pipeline — IPAM/UFMA (CNPq 401741/2023-0)",
+            "pipeline"     : "YbYrá-BR Prophet Pipeline",
             "model_type"   : "Facebook Prophet + SARIMA (índices oceânicos)",
             "mei_records"  : len(mei_df),
             "fire_records" : len(fire_df),
@@ -447,12 +447,8 @@ def export_json(mei_df, amo_df, pdo_df, fire_df,
         },
         "climate_series"  : to_list(cl[["year","month","mei","amo","pdo"]]),
         "fire_monthly"    : to_list(fire_df[["year","month","focos"]]),
-        # chaves canonicas novas
         "prophet_model"   : prophet_meta,
         "prophet_forecast": prophet_fc,
-        # aliases para compatibilidade com frontend antigo em cache
-        "rf_model"        : prophet_meta,
-        "rf_forecast"     : prophet_fc,
     }
 
     DOCS.mkdir(parents=True, exist_ok=True)
